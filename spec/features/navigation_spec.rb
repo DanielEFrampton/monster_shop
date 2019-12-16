@@ -17,6 +17,12 @@ RSpec.describe 'Site Navigation' do
       end
 
       expect(current_path).to eq('/merchants')
+
+      within 'nav' do
+        click_link 'Treasure Trove'
+      end
+
+      expect(current_path).to eq("/")
     end
 
     it "I can see a cart indicator on all pages" do
