@@ -10,8 +10,8 @@ class UsersController < ApplicationController
       flash[:notice] = "Avast! Ye be registered and logged in!"
       redirect_to '/profile'
     else
-      flash[:notice] = "Scupper That! Ye did not complete all fields!"
-      render "new"
+      flash[:notice] = "Scupper that! Ye be missing required fields!"
+      redirect_to '/register'
     end
   end
 
