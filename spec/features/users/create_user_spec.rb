@@ -1,15 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'Creating a new user' do
+RSpec.describe 'Creating a new user', type: :feature do
   it "should be able to create a new user through registration" do
     visit '/'
 
-    click_on "Register"
+    within(".topnav") do
+      click_on "Register"
+    end
 
     expect(current_path).to eq('/register')
     expect(page).to have_content("New User Registration")
 
-    fill_in :name, with: "Captian Daniel"
+    fill_in :name, with: "Captain Daniel"
     fill_in :address, with: "7 Seas Drive"
     fill_in :city, with: "Port Saint Kitts"
     fill_in :state, with: "Arrrkansas"
