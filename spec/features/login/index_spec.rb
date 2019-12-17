@@ -113,6 +113,7 @@ RSpec.describe 'As a visitor', type: :feature do
       expect(current_path).to eq('/profile')
       expect(page).to have_content("Arr. Ye be already logged in.")
     end
+
     it 'If I am a merchant user, I am redirected to my merchant dashboard page and I see a flash message that tells me I am already logged in' do
       visit '/login'
 
@@ -126,6 +127,7 @@ RSpec.describe 'As a visitor', type: :feature do
       expect(current_path).to eq('/merchant')
       expect(page).to have_content("Arr. Ye be already logged in.")
     end
+    
     it 'If I am an admin user, I am redirected to my admin dashboard page and I see a flash message that tells me I am already logged in' do
       visit '/login'
 

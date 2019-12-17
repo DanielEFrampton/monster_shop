@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    if !session[:user_id].nil?
+      flash[:already_registered] = "Arr. Ye be already logged in."
+      redirect(current_user)
+    end
   end
 
   def create
