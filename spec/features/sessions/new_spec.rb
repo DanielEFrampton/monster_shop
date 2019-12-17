@@ -49,7 +49,7 @@ RSpec.describe 'As a visitor', type: :feature do
       fill_in :email, with: @default_user.email
       fill_in :password, with: "landlubberssuck"
 
-      click_on "Login"
+      click_button "Login"
 
       expect(current_path).to eq('/profile')
     end
@@ -60,7 +60,7 @@ RSpec.describe 'As a visitor', type: :feature do
       fill_in :email, with: @merchant_user.email
       fill_in :password, with: "landlubberssuck"
 
-      click_on "Login"
+      click_button "Login"
 
       expect(current_path).to eq('/merchant')
     end
@@ -71,7 +71,7 @@ RSpec.describe 'As a visitor', type: :feature do
       fill_in :email, with: @admin_user.email
       fill_in :password, with: "landlubberssuck"
 
-      click_on "Login"
+      click_button "Login"
 
       expect(current_path).to eq('/admin')
     end
@@ -84,7 +84,7 @@ RSpec.describe 'As a visitor', type: :feature do
       fill_in :email, with: @default_user.email
       fill_in :password, with: "landflubbersduck"
 
-      click_on 'Login'
+      click_button 'Login'
 
       expect(current_path).to eq('/login')
       expect(page).to have_content('Avast! Thar be problems with the credentials ye input!')
@@ -92,7 +92,7 @@ RSpec.describe 'As a visitor', type: :feature do
       fill_in :email, with: "pirat@thecarriboan.com"
       fill_in :password, with: "landlubberssuck"
 
-      click_on 'Login'
+      click_button 'Login'
 
       expect(current_path).to eq('/login')
       expect(page).to have_content('Avast! Thar be problems with the credentials ye input!')
@@ -106,7 +106,7 @@ RSpec.describe 'As a visitor', type: :feature do
       fill_in :email, with: @default_user.email
       fill_in :password, with: "landlubberssuck"
 
-      click_on 'Login'
+      click_button 'Login'
 
       visit '/login'
 
@@ -120,21 +120,21 @@ RSpec.describe 'As a visitor', type: :feature do
       fill_in :email, with: @merchant_user.email
       fill_in :password, with: "landlubberssuck"
 
-      click_on 'Login'
+      click_button 'Login'
 
       visit '/login'
 
       expect(current_path).to eq('/merchant')
       expect(page).to have_content("Arr. Ye be already logged in.")
     end
-    
+
     it 'If I am an admin user, I am redirected to my admin dashboard page and I see a flash message that tells me I am already logged in' do
       visit '/login'
 
       fill_in :email, with: @admin_user.email
       fill_in :password, with: "landlubberssuck"
 
-      click_on 'Login'
+      click_button 'Login'
 
       visit '/login'
 
