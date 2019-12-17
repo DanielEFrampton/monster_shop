@@ -11,7 +11,7 @@ class User < ApplicationRecord
                         
   has_secure_password
 
-  enum role: %w(default)
+  enum role: %w(default merchant admin)
 
   def duplicate_email?
     # Refactor this to be pure ActiveRecord

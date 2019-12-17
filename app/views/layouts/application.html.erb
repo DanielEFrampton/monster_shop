@@ -17,7 +17,7 @@
       <% if current_user %>
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
         <%= link_to "Profile", "/profile" %>
-        <%= link_to "Logout", "/logout" %>
+        <%= link_to "Logout", "/logout", method: :delete %>
         <div>Logged in as <%= current_user.name %></div>
       <% else %>
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
