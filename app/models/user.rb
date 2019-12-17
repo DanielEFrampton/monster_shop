@@ -8,4 +8,6 @@ class User < ApplicationRecord
                         :password,
                         :password_confirmation
   has_secure_password
+
+  enum role: %w(default)
 end
