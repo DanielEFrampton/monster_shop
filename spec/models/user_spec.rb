@@ -13,7 +13,23 @@ RSpec.describe User, type: :model do
     it {should validate_presence_of :password_confirmation}
   end
 
-  describe 'relationships' do
+  describe 'roles' do
+    it "can be created as a default user" do
+      user = User.create(name: "Pirate Jack",
+                                    address: "123 Ocean Breeze",
+                                    city: "Bootytown",
+                                    state: "Turks & Caicos",
+                                    zip: "13375",
+                                    email: "pirate@thecarribean.com",
+                                    password: "landlubberssuck",
+                                    role: 0)
 
+      expect(user.role).to eq("default")
+      expect(user.default?).to be_truthy
+    end
+  end
+
+
+  describe 'relationships' do
   end
 end
