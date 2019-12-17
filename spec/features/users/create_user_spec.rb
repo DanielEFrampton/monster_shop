@@ -48,7 +48,40 @@ RSpec.describe 'Creating a new user', type: :feature do
     fill_in :password, with: "landlubberssuck"
     fill_in :password_confirmation, with: "landlubberssuck"
 
+    click_on "Submit User Info"
+
     expect(current_path).to eq('/register')
     expect(page).to have_content("Scupper that! Ye be missing required fields!")
+  end
+
+  it 'displays flash message and returns to form with completed fields filled if email is duplicate' do
+    visit '/register'
+
+    fill_in :name, with: "Captain Daniel"
+    fill_in :address, with: "7 Seas Drive"
+    fill_in :city, with: "Port Saint Kitts"
+    fill_in :state, with: "Arrrkansas"
+    fill_in :zip, with: "13375"
+    fill_in :email, with: "parrotcollector@avast.net"
+    fill_in :password, with: "landlubberssuck"
+    fill_in :password_confirmation, with: "landlubberssuck"
+
+    click_on "Submit User Info"
+
+    visit '/register'
+
+    fill_in :name, with: "Different Daniel"
+    fill_in :address, with: "7 Seas Drive"
+    fill_in :city, with: "Port Saint Kitts"
+    fill_in :state, with: "Arrrkansas"
+    fill_in :zip, with: "13375"
+    fill_in :email, with: "parrotcollector@avast.net"
+    fill_in :password, with: "landlubberssuck"
+    fill_in :password_confirmation, with: "landlubberssuck"
+
+    click_on "Submit User Info"
+
+    expect(current_path).to eq('/register')
+    expect(page).to have_content("Scupper that! Yer email already exists in system!")
   end
 end
