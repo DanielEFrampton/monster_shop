@@ -32,4 +32,38 @@ RSpec.describe User, type: :model do
 
   describe 'relationships' do
   end
+
+  describe 'instance methods' do
+    describe 'duplicate_email?' do
+      it 'returns true if email already exists in system' do
+        user_1 = User.create!(name: "Captain Daniel",
+                              address: "7 Seas Drive",
+                              city: "Port Saint Kitts",
+                              state: "Arrrkansas",
+                              zip: "13375",
+                              email: "parrotcollector@avast.net",
+                              password: "landlubberssuck",
+                              password_confirmation: "landlubberssuck")
+        user_2 = User.new(name: "Different Daniel",
+                              address: "7 Seas Drive",
+                              city: "Port Saint Kitts",
+                              state: "Arrrkansas",
+                              zip: "13375",
+                              email: "parrotcollector@avast.net",
+                              password: "landlubberssuck",
+                              password_confirmation: "landlubberssuck")
+        user_3 = User.new(name: "Yet Another Daniel",
+                              address: "7 Seas Drive",
+                              city: "Port Saint Kitts",
+                              state: "Arrrkansas",
+                              zip: "13375",
+                              email: "nottheoriginaldaniel@avast.net",
+                              password: "landlubberssuck",
+                              password_confirmation: "landlubberssuck")
+                              
+        expect(user_2.duplicate_email?).to eq(true)
+        expect(user_3.duplicate_email?).to eq(false)
+      end
+    end
+  end
 end

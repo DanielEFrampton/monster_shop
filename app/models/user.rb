@@ -12,4 +12,9 @@ class User < ApplicationRecord
   has_secure_password
 
   enum role: %w(default)
+
+  def duplicate_email?
+    # Refactor this to be pure ActiveRecord
+    User.pluck(:email).include?(email)
+  end
 end
