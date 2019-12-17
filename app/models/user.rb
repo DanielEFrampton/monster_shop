@@ -8,4 +8,9 @@ class User < ApplicationRecord
                         :password,
                         :password_confirmation
   has_secure_password
+
+  def duplicate_email?
+    # Refactor this to be pure ActiveRecord
+    User.pluck(:email).include?(email)
+  end
 end
