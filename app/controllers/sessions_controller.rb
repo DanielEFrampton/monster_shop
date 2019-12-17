@@ -13,6 +13,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session.delete(:user_id)
+    session.delete(:cart)
+    flash[:logout] = 'Ye done walked the plank! Er, that is, ye logged out.'
+    redirect_to '/'
+  end
+
 private
 
   def login_attempt(params)
