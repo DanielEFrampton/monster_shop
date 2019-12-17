@@ -54,7 +54,7 @@ RSpec.describe 'As a visitor', type: :feature do
       expect(current_path).to eq('/profile')
     end
 
-    xit 'If I am a merchant user, I am redirected to my merchant dashboard page and I see a flash message that I am logged in' do
+    it 'If I am a merchant user, I am redirected to my merchant dashboard page and I see a flash message that I am logged in' do
       visit '/login'
 
       fill_in :email, with: @merchant_user.email
@@ -65,7 +65,7 @@ RSpec.describe 'As a visitor', type: :feature do
       expect(current_path).to eq('/merchant')
     end
 
-    xit 'If I am an admin user, I am redirected to my admin dashboard page and I see a flash message that I am logged in' do
+    it 'If I am an admin user, I am redirected to my admin dashboard page and I see a flash message that I am logged in' do
       visit '/login'
 
       fill_in :email, with: @admin_user.email
