@@ -9,5 +9,5 @@ class User < ApplicationRecord
                         :password_confirmation
   has_secure_password
 
-  enum role: %w(default)
+  enum role: %w(default merchant admin)
 end
