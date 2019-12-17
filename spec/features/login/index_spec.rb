@@ -76,4 +76,26 @@ RSpec.describe 'As a visitor', type: :feature do
       expect(current_path).to eq('/admin')
     end
   end
+
+  describe 'when I submit invalid information' do
+    it 'Then I am redirected to the login page and see non-specific flash message that credentials were incorrect' do
+      visit '/login'
+
+      fill_in :email, with: @default_user.email
+      fill_in :password, with: "landflubbersduck"
+
+      click_on 'Login'
+
+      expect(current_path).to eq('/login')
+      expect(page).to have_content('Avast! Thar be problems with the credentials ye input!')
+
+      fill_in :email, with: "pirat@thecarriboan.com"
+      fill_in :password, with: "landlubberssuck"
+
+      click_on 'Login'
+
+      expect(current_path).to eq('/login')
+      expect(page).to have_content('Avast! Thar be problems with the credentials ye input!')
+    end
+  end
 end
