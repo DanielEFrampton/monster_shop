@@ -43,11 +43,11 @@ RSpec.describe 'As a visitor', type: :feature do
   end
 
   describe 'When I submit valid information' do
-    xit 'If I am a regular user, I am redirected to my profile page and I see a flash message that I am logged in' do
+    it 'If I am a regular user, I am redirected to my profile page and I see a flash message that I am logged in' do
       visit '/login'
 
       fill_in :email, with: @default_user.email
-      fill_in :email, with: "landlubberssuck"
+      fill_in :password, with: "landlubberssuck"
 
       click_on "Login"
 
@@ -58,7 +58,7 @@ RSpec.describe 'As a visitor', type: :feature do
       visit '/login'
 
       fill_in :email, with: @merchant_user.email
-      fill_in :email, with: "landlubberssuck"
+      fill_in :password, with: "landlubberssuck"
 
       click_on "Login"
 
@@ -69,7 +69,7 @@ RSpec.describe 'As a visitor', type: :feature do
       visit '/login'
 
       fill_in :email, with: @admin_user.email
-      fill_in :email, with: "landlubberssuck"
+      fill_in :password, with: "landlubberssuck"
 
       click_on "Login"
 
