@@ -50,6 +50,8 @@ RSpec.describe 'As a registered user, merchant, or admin', type: :feature do
       fill_in :email, with: @default_user.email
       fill_in :password, with: "landlubberssuck"
 
+      click_button 'Login'
+
       click_on 'Logout'
 
       expect(current_path).to eq('/')
@@ -68,6 +70,8 @@ RSpec.describe 'As a registered user, merchant, or admin', type: :feature do
       fill_in :email, with: @merchant_user.email
       fill_in :password, with: "landlubberssuck"
 
+      click_button 'Login'
+
       click_on 'Logout'
 
       expect(current_path).to eq('/')
@@ -85,6 +89,8 @@ RSpec.describe 'As a registered user, merchant, or admin', type: :feature do
 
       fill_in :email, with: @admin_user.email
       fill_in :password, with: "landlubberssuck"
+
+      click_button 'Login'
 
       click_on 'Logout'
 
