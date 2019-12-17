@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
+
   validates_presence_of :name,
                         :address,
                         :city,
@@ -7,7 +8,10 @@ class User < ApplicationRecord
                         :zip,
                         :password,
                         :password_confirmation
+                        
   has_secure_password
+
+  enum role: %w(default)
 
   def duplicate_email?
     # Refactor this to be pure ActiveRecord
