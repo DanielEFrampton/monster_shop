@@ -7,7 +7,7 @@
 <section id='most-popular-items'>
   <h2>Most Popular Items</h2>
   <ul>
-    <%= @items.most_popular(5).each do |item| %>
+    <% @items.most_popular(5).each do |item| %>
       <li><%= item.name %> (Quantity Purchased: <%= item.quantity_ordered %>)</li>
     <% end %>
   </ul>
@@ -15,7 +15,7 @@
 <section id='least-popular-items'>
   <h2>Least Popular Items</h2>
   <ul>
-    <%= @items.least_popular(5).each do |item| %>
+    <% @items.least_popular(5).each do |item| %>
       <li><%= item.name %> (Quantity Purchased: <%= item.quantity_ordered %>)</li>
     <% end %>
   </ul>
