@@ -1,0 +1,9 @@
+<h1>All orders for <%= "#{@user.name}" %>: </h1>
+
+<% if @orders != [] %>
+  <% @orders.each do |order| %>
+    <p><%= order.name %></p>
+  <% end %>
+<% else %>
+  <p>No orders at this time</p>
+<% end %>
