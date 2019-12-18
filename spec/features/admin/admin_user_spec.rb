@@ -14,7 +14,7 @@ RSpec.describe "a admin user" do
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin_user)
 
-    visit "/merchants"
+    visit "/"
 
     within 'nav' do
       expect(page).to have_link("Profile")
