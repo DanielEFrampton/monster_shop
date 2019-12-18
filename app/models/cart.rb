@@ -31,10 +31,10 @@ class Cart
       Item.find(item_id).price * quantity
     end
   end
-  #
-  # def add_quantity(item_id)
-  #   @contents[item_id] += 1
-  # end
+
+  def add_quantity(item_id)
+    @contents[item_id] += 1
+  end
   #
   # def subtract_quantity(item_id)
   #   @contents[item_id] -= 1
