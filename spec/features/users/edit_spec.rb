@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe 'As a user editing my profile', type: :feature do
 
   it 'Should update user information' do
-    it 'should show me all of my user information' do
       default_user = User.create(name: "Pirate Jack",
                                  address: "123 Ocean Breeze",
                                     city: "Bootytown",
@@ -45,6 +44,5 @@ RSpec.describe 'As a user editing my profile', type: :feature do
       expect(page).to have_content("13375")
       expect(page).to have_content(default_user.email)
     end
-  end
 
 end
