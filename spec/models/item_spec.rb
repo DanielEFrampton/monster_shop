@@ -61,6 +61,14 @@ describe Item, type: :model do
       @review_3 = @chain.reviews.create(title: "Meh place", content: "They have meh bike stuff and I probably won't come back", rating: 1)
       @review_4 = @chain.reviews.create(title: "Not too impressed", content: "v basic bike shop", rating: 2)
       @review_5 = @chain.reviews.create(title: "Okay place :/", content: "Brian's cool and all but just an okay selection of items", rating: 3)
+      @item_order_1 = create(:item_order, quantity: 11)
+      @item_order_2 = create(:item_order, quantity: 6)
+    end
+
+    it 'return total number ordered of item' do
+      expect(@item_order_1.item.quantity_ordered).to eq(11)
+      expect(@item_order_2.item.quantity_ordered).to eq(6)
+      expect(@chain.quantity_ordered).to eq(0)
     end
 
     it "calculate average review" do
