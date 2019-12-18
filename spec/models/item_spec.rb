@@ -38,7 +38,7 @@ describe Item, type: :model do
                                         @item_order_3.item.id,
                                         @item_order_4.item.id,
                                         @item_order_5.item.id])
-      expect(Item.most_popular).to eq(expected_association)
+      expect(Item.most_popular(5)).to eq(expected_association)
     end
 
     it 'return number of least ordered items sorted ascending' do
@@ -47,7 +47,7 @@ describe Item, type: :model do
                                         @item_order_9.item.id,
                                         @item_order_8.item.id,
                                         @item_order_7.item.id])
-      expect(Item.least_popular).to eq(expected_association)
+      expect(Item.least_popular(5)).to eq(expected_association)
     end
   end
 
