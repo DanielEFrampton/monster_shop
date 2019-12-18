@@ -153,4 +153,36 @@ RSpec.describe 'Cart Show Page', type: :feature do
       end
     end
   end
+
+  describe 'As a registered user' do
+    describe 'When I add items to my cart and I visit my cart' do
+      before(:each) do
+        @user = create(:user, role: 0)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+        @item_1 = create(:item)
+        @item_2 = create(:item)
+        visit "/items/#{@item_1.id}"
+        click_button('Add To Cart')
+        visit "/items/#{@item_2.id}"
+        click_button('Add To Cart')
+        visit '/cart'
+      end
+
+      it 'I see a button or link indicating that I can check out' do
+        within "#cart-controls" do
+          expect(page).to have_link('Checkout')
+        end
+      end
+
+      describe 'And I click the button or link to check out' do
+        it 'I am taken to my orders page, see flash message, see order listed, cart is empty' do
+          click_on('Checkout')
+
+          expect(current_path).to eq('/profile/orders')
+
+          expect(page).to have_content('Order ho! Ye successfully placed yer order. Make way in yer hold for loot!')
+        end
+      end
+    end
+  end
 end
