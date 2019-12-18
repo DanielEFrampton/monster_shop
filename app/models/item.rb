@@ -9,9 +9,21 @@ class Item <ApplicationRecord
                         :price,
                         :image,
                         :inventory
-  validates_inclusion_of :active?, :in => [true, false]
   validates_numericality_of :price, greater_than: 0
 
+  def self.most_popular(num)
+    joins(:item_orders)
+    .group(:id)
+    .order('SUM(item_orders.quantity) DESC')
+    .limit(num)
+  end
+
+  def self.least_popular(num)
+    joins(:item_orders)
+    .group(:id)
+    .order('SUM(item_orders.quantity)')
+    .limit(num)
+  end
 
   def average_review
     reviews.average(:rating)
@@ -25,4 +37,7 @@ class Item <ApplicationRecord
     item_orders.empty?
   end
 
+  def quantity_ordered
+    item_orders.sum(:quantity)
+  end
 end

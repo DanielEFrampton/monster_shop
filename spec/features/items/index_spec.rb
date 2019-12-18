@@ -58,6 +58,80 @@ RSpec.describe "Items Index Page" do
       end
     end
 
+
+    describe 'I see an area with statistics:' do
+      before(:each) do
+        @user_1 = create(:user)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+        @item_order_1 = create(:item_order, quantity: 11)
+        @item_order_2 = create(:item_order, quantity: 10)
+        @item_order_3 = create(:item_order, quantity: 9)
+        @item_order_4 = create(:item_order, quantity: 8)
+        @item_order_5 = create(:item_order, quantity: 7)
+        @item_order_6 = create(:item_order, quantity: 6)
+        @item_order_7 = create(:item_order, quantity: 5)
+        @item_order_8 = create(:item_order, quantity: 4)
+        @item_order_9 = create(:item_order, quantity: 3)
+        @item_order_10 = create(:item_order, quantity: 2)
+        @item_order_11 = create(:item_order, quantity: 1)
+      end
+
+      it 'the top 5 most popular items by quantity purchased, plus the quantity bought' do
+        visit '/items'
+
+        first = "#{@item_order_1.item.name} (Quantity Purchased: #{@item_order_1.quantity})"
+        second = "#{@item_order_2.item.name} (Quantity Purchased: #{@item_order_2.quantity})"
+        third = "#{@item_order_3.item.name} (Quantity Purchased: #{@item_order_3.quantity})"
+        fourth = "#{@item_order_4.item.name} (Quantity Purchased: #{@item_order_4.quantity})"
+        fifth = "#{@item_order_5.item.name} (Quantity Purchased: #{@item_order_5.quantity})"
+
+        within '#most-popular-items' do
+          expect(page).to have_content(first)
+          expect(page).to have_content(second)
+          expect(page).to have_content(third)
+          expect(page).to have_content(fourth)
+          expect(page).to have_content(fifth)
+          expect(page.body.index(first)).to be < page.body.index(second)
+          expect(page.body.index(first)).to be < page.body.index(third)
+          expect(page.body.index(first)).to be < page.body.index(fourth)
+          expect(page.body.index(first)).to be < page.body.index(fifth)
+          expect(page.body.index(second)).to be < page.body.index(third)
+          expect(page.body.index(second)).to be < page.body.index(fourth)
+          expect(page.body.index(second)).to be < page.body.index(fifth)
+          expect(page.body.index(third)).to be < page.body.index(fourth)
+          expect(page.body.index(third)).to be < page.body.index(fifth)
+          expect(page.body.index(fourth)).to be < page.body.index(fifth)
+        end
+      end
+
+      it 'the bottom 5 least popular items, plus the quantity bought' do
+        visit '/items'
+
+        first = "#{@item_order_11.item.name} (Quantity Purchased: #{@item_order_11.quantity})"
+        second = "#{@item_order_10.item.name} (Quantity Purchased: #{@item_order_10.quantity})"
+        third = "#{@item_order_9.item.name} (Quantity Purchased: #{@item_order_9.quantity})"
+        fourth = "#{@item_order_8.item.name} (Quantity Purchased: #{@item_order_8.quantity})"
+        fifth = "#{@item_order_7.item.name} (Quantity Purchased: #{@item_order_7.quantity})"
+
+        within '#least-popular-items' do
+          expect(page).to have_content(first)
+          expect(page).to have_content(second)
+          expect(page).to have_content(third)
+          expect(page).to have_content(fourth)
+          expect(page).to have_content(fifth)
+          expect(page.body.index(first)).to be < page.body.index(second)
+          expect(page.body.index(first)).to be < page.body.index(third)
+          expect(page.body.index(first)).to be < page.body.index(fourth)
+          expect(page.body.index(first)).to be < page.body.index(fifth)
+          expect(page.body.index(second)).to be < page.body.index(third)
+          expect(page.body.index(second)).to be < page.body.index(fourth)
+          expect(page.body.index(second)).to be < page.body.index(fifth)
+          expect(page.body.index(third)).to be < page.body.index(fourth)
+          expect(page.body.index(third)).to be < page.body.index(fifth)
+          expect(page.body.index(fourth)).to be < page.body.index(fifth)
+        end
+      end
+
     it "Should take me to item show page when image clicked" do
 
       visit '/items'
@@ -67,6 +141,7 @@ RSpec.describe "Items Index Page" do
       end
 
       expect(current_path).to eq("/items/#{@tire.id}")
+
     end
   end
 end

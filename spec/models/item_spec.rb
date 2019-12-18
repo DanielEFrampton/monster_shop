@@ -7,7 +7,6 @@ describe Item, type: :model do
     it { should validate_presence_of :price }
     it { should validate_presence_of :image }
     it { should validate_presence_of :inventory }
-    it { should validate_inclusion_of(:active?).in_array([true,false]) }
   end
 
   describe "relationships" do
@@ -15,6 +14,40 @@ describe Item, type: :model do
     it {should have_many :reviews}
     it {should have_many :item_orders}
     it {should have_many(:orders).through(:item_orders)}
+  end
+
+  describe 'class methods' do
+    before(:each) do
+      @item_order_1 = create(:item_order, quantity: 11)
+      @item_order_2 = create(:item_order, quantity: 10)
+      @item_order_3 = create(:item_order, quantity: 9)
+      @item_order_4 = create(:item_order, quantity: 8)
+      @item_order_5 = create(:item_order, quantity: 7)
+      @item_order_6 = create(:item_order, quantity: 6)
+      @item_order_7 = create(:item_order, quantity: 5)
+      @item_order_8 = create(:item_order, quantity: 4)
+      @item_order_9 = create(:item_order, quantity: 3)
+      @item_order_10 = create(:item_order, quantity: 2)
+      @item_order_11 = create(:item_order, quantity: 1)
+    end
+
+    it 'return number of most ordered items sorted descending' do
+      expected_association = Item.find([@item_order_1.item.id,
+                                        @item_order_2.item.id,
+                                        @item_order_3.item.id,
+                                        @item_order_4.item.id,
+                                        @item_order_5.item.id])
+      expect(Item.most_popular(5)).to eq(expected_association)
+    end
+
+    it 'return number of least ordered items sorted ascending' do
+      expected_association = Item.find([@item_order_11.item.id,
+                                        @item_order_10.item.id,
+                                        @item_order_9.item.id,
+                                        @item_order_8.item.id,
+                                        @item_order_7.item.id])
+      expect(Item.least_popular(5)).to eq(expected_association)
+    end
   end
 
   describe "instance methods" do
@@ -27,6 +60,14 @@ describe Item, type: :model do
       @review_3 = @chain.reviews.create(title: "Meh place", content: "They have meh bike stuff and I probably won't come back", rating: 1)
       @review_4 = @chain.reviews.create(title: "Not too impressed", content: "v basic bike shop", rating: 2)
       @review_5 = @chain.reviews.create(title: "Okay place :/", content: "Brian's cool and all but just an okay selection of items", rating: 3)
+      @item_order_1 = create(:item_order, quantity: 11)
+      @item_order_2 = create(:item_order, quantity: 6)
+    end
+
+    it 'return total number ordered of item' do
+      expect(@item_order_1.item.quantity_ordered).to eq(11)
+      expect(@item_order_2.item.quantity_ordered).to eq(6)
+      expect(@chain.quantity_ordered).to eq(0)
     end
 
     it "calculate average review" do
