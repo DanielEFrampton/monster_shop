@@ -132,6 +132,7 @@ RSpec.describe "Items Index Page" do
       end
 
       it "Should take me to item show page when image clicked" do
+
         visit '/items'
 
         within "#item-#{@tire.id}" do

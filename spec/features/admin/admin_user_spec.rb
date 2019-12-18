@@ -29,4 +29,26 @@ RSpec.describe "a admin user" do
 
     expect(page).to have_content("Logged in as #{admin_user.name}")
   end
+
+  it "cannot see /admin" do
+
+    admin_user = User.create(name: "Pirate Jack",
+                               address: "123 Ocean Breeze",
+                                  city: "Bootytown",
+                                  state: "Turks & Caicos",
+                                  zip: "13375",
+                                  email: "pirate@thecarribean.com",
+                                  password: "landlubberssuck",
+                                  role: 2)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin_user)
+
+    visit "/merchant"
+
+    expect(page).to have_content("404")
+
+    visit "/cart"
+
+    expect(page).to have_content("404")
+  end
 end
