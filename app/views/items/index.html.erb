@@ -4,6 +4,22 @@
 <% else %>
   <h1>All Items</h1>
 <% end %>
+<section id='most-popular-items'>
+  <h2>Most Popular Items</h2>
+  <ul>
+    <%= @items.most_popular(5).each do |item| %>
+      <li><%= item.name %> (Quantity Purchased: <%= item.quantity_ordered %>)</li>
+    <% end %>
+  </ul>
+</section>
+<section id='least-popular-items'>
+  <h2>Least Popular Items</h2>
+  <ul>
+    <%= @items.least_popular(5).each do |item| %>
+      <li><%= item.name %> (Quantity Purchased: <%= item.quantity_ordered %>)</li>
+    <% end %>
+  </ul>
+</section>
 <section class="grid-container">
   <% @items.each do |item| %>
     <section class = "grid-item" id= 'item-<%=item.id%>'>
