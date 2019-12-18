@@ -17,6 +17,40 @@ describe Item, type: :model do
     it {should have_many(:orders).through(:item_orders)}
   end
 
+  describe 'class methods' do
+    before(:each) do
+      @item_order_1 = create(:item_order, quantity: 11)
+      @item_order_2 = create(:item_order, quantity: 10)
+      @item_order_3 = create(:item_order, quantity: 9)
+      @item_order_4 = create(:item_order, quantity: 8)
+      @item_order_5 = create(:item_order, quantity: 7)
+      @item_order_6 = create(:item_order, quantity: 6)
+      @item_order_7 = create(:item_order, quantity: 5)
+      @item_order_8 = create(:item_order, quantity: 4)
+      @item_order_9 = create(:item_order, quantity: 3)
+      @item_order_10 = create(:item_order, quantity: 2)
+      @item_order_11 = create(:item_order, quantity: 1)
+    end
+
+    it 'return number of most ordered items sorted descending' do
+      expected_association = Item.find([@item_order_1.item.id,
+                                        @item_order_2.item.id,
+                                        @item_order_3.item.id,
+                                        @item_order_4.item.id,
+                                        @item_order_5.item.id])
+      expect(Item.most_popular).to eq(expected_association)
+    end
+
+    it 'return number of least ordered items sorted ascending' do
+      expected_association = Item.find([@item_order_11.item.id,
+                                        @item_order_10.item.id,
+                                        @item_order_9.item.id,
+                                        @item_order_8.item.id,
+                                        @item_order_7.item.id])
+      expect(Item.least_popular).to eq(expected_association)
+    end
+  end
+
   describe "instance methods" do
     before(:each) do
       @bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
