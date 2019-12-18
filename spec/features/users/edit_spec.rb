@@ -19,7 +19,7 @@ RSpec.describe 'As a user editing my profile', type: :feature do
       expect(page).to_not have_content("7 Seas Drive")
       expect(page).to_not have_content("Port Saint Kitts")
       expect(page).to_not have_content("Arrrkansas")
-      expect(page).to_not have_content("13375")
+      expect(page).to_not have_content("13376")
 
       click_link "Update Profile"
 
