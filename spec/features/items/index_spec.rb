@@ -75,8 +75,49 @@ RSpec.describe "Items Index Page" do
       end
 
       it 'the top 5 most popular items by quantity purchased, plus the quantity bought' do
+        visit '/items'
+
+        first = "#{@item_order_1.item.name} (Quantity Purchased: #{@item_order_1.quantity})"
+        second = "#{@item_order_2.item.name} (Quantity Purchased: #{@item_order_2.quantity})"
+        third = "#{@item_order_3.item.name} (Quantity Purchased: #{@item_order_3.quantity})"
+        fourth = "#{@item_order_4.item.name} (Quantity Purchased: #{@item_order_4.quantity})"
+        fifth = "#{@item_order_5.item.name} (Quantity Purchased: #{@item_order_5.quantity})"
+
+        within '#most-popular-items' do
+          expect(page.body.index(first)).to be < page.body.index(second)
+          expect(page.body.index(first)).to be < page.body.index(third)
+          expect(page.body.index(first)).to be < page.body.index(fourth)
+          expect(page.body.index(first)).to be < page.body.index(fifth)
+          expect(page.body.index(second)).to be < page.body.index(third)
+          expect(page.body.index(second)).to be < page.body.index(fourth)
+          expect(page.body.index(second)).to be < page.body.index(fifth)
+          expect(page.body.index(third)).to be < page.body.index(fourth)
+          expect(page.body.index(third)).to be < page.body.index(fifth)
+          expect(page.body.index(fourth)).to be < page.body.index(fifth)
+        end
       end
+
       it 'the bottom 5 least popular items, plus the quantity bought' do
+        visit '/items'
+
+        first = "#{@item_order_11.item.name} (Quantity Purchased: #{@item_order_11.quantity})"
+        second = "#{@item_order_10.item.name} (Quantity Purchased: #{@item_order_10.quantity})"
+        third = "#{@item_order_9.item.name} (Quantity Purchased: #{@item_order_9.quantity})"
+        fourth = "#{@item_order_8.item.name} (Quantity Purchased: #{@item_order_8.quantity})"
+        fifth = "#{@item_order_7.item.name} (Quantity Purchased: #{@item_order_7.quantity})"
+
+        within '#most-popular-items' do
+          expect(page.body.index(first)).to be < page.body.index(second)
+          expect(page.body.index(first)).to be < page.body.index(third)
+          expect(page.body.index(first)).to be < page.body.index(fourth)
+          expect(page.body.index(first)).to be < page.body.index(fifth)
+          expect(page.body.index(second)).to be < page.body.index(third)
+          expect(page.body.index(second)).to be < page.body.index(fourth)
+          expect(page.body.index(second)).to be < page.body.index(fifth)
+          expect(page.body.index(third)).to be < page.body.index(fourth)
+          expect(page.body.index(third)).to be < page.body.index(fifth)
+          expect(page.body.index(fourth)).to be < page.body.index(fifth)
+        end
       end
     end
   end
