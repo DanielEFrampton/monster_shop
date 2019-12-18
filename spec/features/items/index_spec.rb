@@ -58,7 +58,6 @@ RSpec.describe "Items Index Page" do
       end
     end
 
-
     describe 'I see an area with statistics:' do
       before(:each) do
         @user_1 = create(:user)
@@ -132,16 +131,15 @@ RSpec.describe "Items Index Page" do
         end
       end
 
-    it "Should take me to item show page when image clicked" do
+      it "Should take me to item show page when image clicked" do
+        visit '/items'
 
-      visit '/items'
+        within "#item-#{@tire.id}" do
+          find("#img-#{@tire.id}").click
+        end
 
-      within "#item-#{@tire.id}" do
-        find("#img-#{@tire.id}").click
+        expect(current_path).to eq("/items/#{@tire.id}")
       end
-
-      expect(current_path).to eq("/items/#{@tire.id}")
-
     end
   end
 end

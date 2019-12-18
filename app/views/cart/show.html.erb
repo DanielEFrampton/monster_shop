@@ -31,9 +31,9 @@
       <td>
         <span id="cart-item-<%=item.id%>-quantity">
           <p>
-            <%= button_tag '-'%>
+            <%= link_to '-', "/cart?increment_decrement=decrement&item_id=#{item.id}", method: :patch %>
             <%= quantity %>
-            <%= button_tag '+' %>
+            <%= link_to '+', "/cart?increment_decrement=increment&item_id=#{item.id}", method: :patch %>
           </p>
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
         </span>
