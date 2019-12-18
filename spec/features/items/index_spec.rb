@@ -60,6 +60,8 @@ RSpec.describe "Items Index Page" do
 
     describe 'I see an area with statistics:' do
       before(:each) do
+        @user_1 = create(:user)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
         @item_order_1 = create(:item_order, quantity: 11)
         @item_order_2 = create(:item_order, quantity: 10)
         @item_order_3 = create(:item_order, quantity: 9)
