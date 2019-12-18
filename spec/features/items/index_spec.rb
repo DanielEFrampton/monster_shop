@@ -101,7 +101,7 @@ RSpec.describe "Items Index Page" do
         end
       end
 
-      xit 'the bottom 5 least popular items, plus the quantity bought' do
+      it 'the bottom 5 least popular items, plus the quantity bought' do
         visit '/items'
 
         first = "#{@item_order_11.item.name} (Quantity Purchased: #{@item_order_11.quantity})"
@@ -110,7 +110,7 @@ RSpec.describe "Items Index Page" do
         fourth = "#{@item_order_8.item.name} (Quantity Purchased: #{@item_order_8.quantity})"
         fifth = "#{@item_order_7.item.name} (Quantity Purchased: #{@item_order_7.quantity})"
 
-        within '#most-popular-items' do
+        within '#least-popular-items' do
           expect(page).to have_content(first)
           expect(page).to have_content(second)
           expect(page).to have_content(third)
