@@ -29,10 +29,14 @@
         <p><%=number_to_currency(item.price)%></p>
       </td>
       <td>
-        <center>
-          <p><%=quantity%></p>
+        <span id="cart-item-<%=item.id%>-quantity">
+          <p>
+            <%= button_tag '-'%>
+            <%= quantity %>
+            <%= button_tag '+' %>
+          </p>
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
-        </center>
+        </span>
         </td>
       <td>
         <p><%=number_to_currency(cart.subtotal(item))%></p>
