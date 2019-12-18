@@ -58,7 +58,6 @@ RSpec.describe "Items Index Page" do
       end
     end
 
-
     describe 'I see an area with statistics:' do
       before(:each) do
         @user_1 = create(:user)
