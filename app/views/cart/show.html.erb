@@ -47,6 +47,10 @@
 <section id="cart-controls">
   <p>Total: <%= number_to_currency(cart.total) %></p>
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
+  <% if !current_user %>
+    <p>Ye scurvy rascal! Surely ye must <%= link_to 'register', '/register' %> or <%= link_to 'log in', '/login' %> to finish the checkout process!
+    </p>
+  <% end %>
   <p><%= link_to "Checkout", "/orders/new", method: :get %></p>
 </section>
 <% else %>
