@@ -85,6 +85,33 @@ RSpec.describe 'Cart show' do
           expect(page).to have_content(@tire.inventory)
         end
       end
+
+      it 'Next to each item in my cart I see a button or link to decrement the count of items I want to purchase' do
+        visit "/items/#{@pencil.id}"
+        click_on "Add To Cart"
+
+        visit '/cart'
+
+        within "#cart-item-#{@pencil.id}-quantity" do
+          expect(page).to have_content("2")
+          click_link '-'
+        end
+
+        within "#cart-item-#{@pencil.id}-quantity" do
+          expect(page).to have_content("1")
+        end
+      end
+
+      it 'If I decrement the count to 0 the item is immediately removed from my cart' do
+        visit '/cart'
+
+        within "#cart-item-#{@pencil.id}-quantity" do
+          expect(page).to have_content("1")
+          click_link "-"
+        end
+
+        expect(page).not_to have_css("#cart-item-#{@pencil.id}")
+      end
     end
   end
 
