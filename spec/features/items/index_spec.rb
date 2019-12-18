@@ -57,5 +57,27 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_css("img[src*='#{@dog_bone.image}']")
       end
     end
+
+    describe 'I see an area with statistics:' do
+      before(:each) do
+        @user_1 = create(:user)
+        @item_order_1 = create(:item_order, quantity: 11)
+        @item_order_2 = create(:item_order, quantity: 10)
+        @item_order_3 = create(:item_order, quantity: 9)
+        @item_order_4 = create(:item_order, quantity: 8)
+        @item_order_5 = create(:item_order, quantity: 7)
+        @item_order_6 = create(:item_order, quantity: 6)
+        @item_order_7 = create(:item_order, quantity: 5)
+        @item_order_8 = create(:item_order, quantity: 4)
+        @item_order_9 = create(:item_order, quantity: 3)
+        @item_order_10 = create(:item_order, quantity: 2)
+        @item_order_11 = create(:item_order, quantity: 1)
+      end
+
+      it 'the top 5 most popular items by quantity purchased, plus the quantity bought' do
+      end
+      it 'the bottom 5 least popular items, plus the quantity bought' do
+      end
+    end
   end
 end
