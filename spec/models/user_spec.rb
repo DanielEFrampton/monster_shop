@@ -31,6 +31,7 @@ RSpec.describe User, type: :model do
 
 
   describe 'relationships' do
+    it {should have_many :orders}
   end
 
   describe 'instance methods' do
@@ -60,7 +61,7 @@ RSpec.describe User, type: :model do
                               email: "nottheoriginaldaniel@avast.net",
                               password: "landlubberssuck",
                               password_confirmation: "landlubberssuck")
-                              
+
         expect(user_2.duplicate_email?).to eq(true)
         expect(user_3.duplicate_email?).to eq(false)
       end

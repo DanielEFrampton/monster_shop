@@ -8,8 +8,10 @@ class User < ApplicationRecord
                         :zip,
                         :password,
                         :password_confirmation
-                        
+
   has_secure_password
+
+  has_many :orders
 
   enum role: %w(default merchant admin)
 
