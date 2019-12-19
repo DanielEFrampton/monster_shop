@@ -26,7 +26,7 @@ describe ItemOrder, type: :model do
   end
 
   describe 'after_update' do
-    describe 'set_order_packaged' do
+    describe 'change_order_to_packaged' do
       it 'changes status of associated order to packaged if all item_orders fulfilled' do
         merchant_1 = create(:merchant)
         item_1 = create(:item, merchant: merchant_1)
