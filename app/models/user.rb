@@ -9,8 +9,8 @@ class User < ApplicationRecord
                         :password,
                         :password_confirmation
                         
+  has_many :orders
   has_secure_password
-
   enum role: %w(default merchant admin)
 
   def duplicate_email?

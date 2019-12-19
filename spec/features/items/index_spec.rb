@@ -10,6 +10,8 @@ RSpec.describe "Items Index Page" do
 
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
       @dog_bone = @brian.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
+
+      @disabled_item = create(:item, merchant: @meg, disabled: true)
     end
 
     it "all items or merchant names are links" do
@@ -23,7 +25,7 @@ RSpec.describe "Items Index Page" do
       expect(page).to have_link(@dog_bone.merchant.name)
     end
 
-    it "I can see a list of all of the items "do
+    it "I can see a list of all of the enabled items but not disabled items" do
 
       visit '/items'
 
@@ -56,6 +58,8 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_link(@brian.name)
         expect(page).to have_css("img[src*='#{@dog_bone.image}']")
       end
+
+      expect(page).not_to have_css("#item-#{@disabled_item.id}")
     end
 
     describe 'I see an area with statistics:' do
