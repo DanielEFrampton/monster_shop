@@ -13,5 +13,6 @@ FactoryBot.define do
     password { "landlubberssuck" }
     password_confirmation { "landlubberssuck" }
     role { 0 }
+    merchant_id { nil }
   end
 end

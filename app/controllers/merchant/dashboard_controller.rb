@@ -1,6 +1,6 @@
 class Merchant::DashboardController < Merchant::BaseController
 
   def index
-    @merchant = User.find(current_user.id)
+    @merchant = Merchant.find(current_user.merchant_id)
   end
 end
