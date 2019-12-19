@@ -2,6 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'Cart Show Page', type: :feature do
   describe 'As a visitor' do
+    describe 'When I have not added items to my cart' do
+      it 'I see empty message and do not see a checkout button' do
+        visit '/cart'
+
+        expect(page).to have_content('Cart is currently empty')
+        expect(page).not_to have_link('Checkout')
+      end
+    end
     describe 'When I have added items to my cart' do
       describe 'and visit my cart path' do
         before(:each) do
