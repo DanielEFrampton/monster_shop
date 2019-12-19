@@ -2,8 +2,14 @@
 
 <% if @orders != [] %>
   <% @orders.each do |order| %>
-    <p><%= order.id %></p>
+    <p><%= order.name %>: <%= link_to "#{order.id}" %></p>
+    <p><%= order.created_at %></p>
+    <p><%= order.updated_at %></p>
+    <p><%= order.status %></p>
+    <p><%= order.total_quantity %></p>
+    <p><%= order.grandtotal %></p>
   <% end %>
+  <br>
 <% else %>
   <p>No orders at this time</p>
 <% end %>
