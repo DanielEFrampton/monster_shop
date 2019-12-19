@@ -51,7 +51,7 @@
     <p>Ye scurvy rascal! Surely ye must <%= link_to 'register', '/register' %> or <%= link_to 'log in', '/login' %> to finish the checkout process!
     </p>
   <% else %>
-    <p><%= link_to "Checkout", "/users/#{current_user.id}/orders", method: :post %></p>
+    <p><%= link_to "Checkout", "/orders/new" %></p>
   <% end %>
 </section>
 <% else %>
