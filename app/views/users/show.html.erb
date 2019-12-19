@@ -3,4 +3,6 @@
   <p>E-mail: <%= current_user.email%></p>
   <p><%= "Address: #{current_user.address} #{current_user.city}, #{current_user.state} #{current_user.zip}"%></p>
   <%= link_to "Update Profile", "/profile/#{current_user.id}/edit" %>
+  <br>
+  <p><%= link_to 'Orders', "/profile/orders" %></p>
 </section>
