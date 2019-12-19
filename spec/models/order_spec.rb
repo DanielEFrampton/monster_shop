@@ -15,6 +15,36 @@ describe Order, type: :model do
     it {should belong_to :user}
   end
 
+  describe 'statuses' do
+    it 'can be pending' do
+      order = create(:order, status: 0)
+
+      expect(order.status).to eq('pending')
+      expect(order.pending?).to be_truthy
+    end
+
+    it 'can be packaged' do
+      order = create(:order, status: 1)
+
+      expect(order.status).to eq('packaged')
+      expect(order.packaged?).to be_truthy
+    end
+
+    it 'can be shipped' do
+      order = create(:order, status: 2)
+
+      expect(order.status).to eq('shipped')
+      expect(order.shipped?).to be_truthy
+    end
+
+    it 'can be cancelled' do
+      order = create(:order, status: 3)
+
+      expect(order.status).to eq('cancelled')
+      expect(order.cancelled?).to be_truthy
+    end
+  end
+
   describe 'instance methods' do
     before :each do
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
