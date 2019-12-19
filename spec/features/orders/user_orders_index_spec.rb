@@ -31,7 +31,7 @@ RSpec.describe "As a User" do
       expect(page).to have_content(@order_1.created_at)
       expect(page).to have_content(@order_1.updated_at)
       expect(page).to have_content(@order_1.status)
-      expect(page).to have_content(@order_1.items.length)
+      expect(page).to have_content(@order_1.total_quantity)
       expect(page).to have_content(@order_1.grandtotal)
     end
   end
