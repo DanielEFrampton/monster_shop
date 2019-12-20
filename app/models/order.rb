@@ -9,11 +9,26 @@ class Order <ApplicationRecord
 
   enum status: %w(pending packaged shipped cancelled)
 
+  after_update :change_order_to_unfulfilled
+
   def grandtotal
     item_orders.sum('price * quantity')
   end
 
   def total_quantity
     item_orders.sum('quantity')
+  end
+
+  # def cancel
+  #   self.status = 3
+  #   self.save
+  # end
+
+  def change_order_to_unfulfilled
+    if self.cancelled?
+      item_orders.each do |item_order|
+        item_order.update!(fulfilled: false)
+      end
+    end
   end
 end
