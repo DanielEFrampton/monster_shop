@@ -97,8 +97,13 @@ RSpec.describe 'As an admin user', type: :feature do
         end
       end
 
-      xit 'And the user can no longer "cancel" the order' do
-        # Need to address in user story 30 where functionality to cancel is implemented
+      it 'And the user can no longer "cancel" the order' do
+        order_4 = create(:order, user: @user_1, status: 2)
+
+        expect(order_4.status).to eq("shipped")
+
+        visit "profile/orders/#{order_4.id}"
+        expect(page).to_not have_link('Cancel Order')
       end
     end
   end

@@ -19,11 +19,6 @@ class Order <ApplicationRecord
     item_orders.sum('quantity')
   end
 
-  # def cancel
-  #   self.status = 3
-  #   self.save
-  # end
-
   def change_order_to_unfulfilled
     if self.cancelled?
       item_orders.each do |item_order|
