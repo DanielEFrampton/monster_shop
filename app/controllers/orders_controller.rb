@@ -39,11 +39,17 @@ class OrdersController <ApplicationController
     if order.save
       if order.cancelled?
         flash[:notice] = "Your Order has been Cancelled"
+        redirect_to "/profile"
+      elsif current_user.admin?
+        redirect_to "/admin"
+      elsif current_user.merchant?
+        redirect_to "/merchant"
+      elsif current_user.default?
+        redirect_to "/profile"
+      else
+        flash[:error] = order.errors.full_messages.to_sentence
       end
-    else
-      flash[:error] = order.errors.full_messages.to_sentence
     end
-    redirect_to "/#{params[:from]}"
   end
 
   private
