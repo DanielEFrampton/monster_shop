@@ -59,3 +59,6 @@
 <section id="dateupdated">
   <p><%= @order.updated_at %></p>
 </section>
+<% unless @order.shipped? %>
+  <p><%= link_to 'Cancel Order', "/orders/#{@order.id}?status=3", method: :patch %> </p>
+<% end %>

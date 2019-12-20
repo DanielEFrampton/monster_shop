@@ -6,6 +6,8 @@ class ItemOrder <ApplicationRecord
 
   after_update :change_order_to_packaged
 
+  after_save :change_to_unfulfilled, if: :saved_change_to_fulfilled?
+
   def subtotal
     price * quantity
   end
@@ -13,6 +15,12 @@ class ItemOrder <ApplicationRecord
   def change_order_to_packaged
     if order.item_orders.where(fulfilled: false).empty?
       order.packaged!
+    end
+  end
+
+  def change_to_unfulfilled
+    if self.fulfilled?
+      item.update(inventory: (item.inventory + quantity))
     end
   end
 end

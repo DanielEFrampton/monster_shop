@@ -36,10 +36,20 @@ class OrdersController <ApplicationController
   def update
     order = Order.find(params[:id])
     order.update(update_params)
-    unless order.save
-      flash[:error] = order.errors.full_messages.to_sentence
+    if order.save
+      if order.cancelled?
+        flash[:notice] = "Your Order has been Cancelled"
+        redirect_to "/profile"
+      elsif current_user.admin?
+        redirect_to "/admin"
+      elsif current_user.merchant?
+        redirect_to "/merchant"
+      elsif current_user.default?
+        redirect_to "/profile"
+      else
+        flash[:error] = order.errors.full_messages.to_sentence
+      end
     end
-    redirect_to '/admin'
   end
 
   private
