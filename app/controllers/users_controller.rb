@@ -38,6 +38,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_password
+    user = current_user
+    user.update(user_params)
+    if user.save
+      flash[:notice] = "Your password has been updated."
+    else
+      flash[:notice] = "Scupper that! Ye be missing required fields!"
+    end
+    redirect_to '/profile'
+  end
+
+  def edit_password
+  end
+
 private
 
   def user_params
