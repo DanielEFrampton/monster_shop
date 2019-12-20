@@ -25,4 +25,35 @@ describe ItemOrder, type: :model do
     end
   end
 
+  describe 'after_update' do
+    describe 'change_order_to_packaged' do
+      it 'changes status of associated order to packaged if all item_orders fulfilled' do
+        merchant_1 = create(:merchant)
+        item_1 = create(:item, merchant: merchant_1)
+        item_2 = create(:item, merchant: merchant_1)
+
+        merchant_2 = create(:merchant)
+        item_3 = create(:item, merchant: merchant_2)
+
+        user_1 = create(:user)
+        order_1 = create(:order, user: user_1)
+        item_order_1 = order_1.item_orders.create!(item: item_1, order: order_1, price: item_1.price, quantity: 2)
+        item_order_2 = order_1.item_orders.create!(item: item_2, order: order_1, price: item_2.price, quantity: 1)
+
+        user_2 = create(:user)
+        order_2 = create(:order, user: user_2)
+        item_order_3 = order_2.item_orders.create!(item: item_2, price: item_2.price, quantity: 1)
+
+        expect(order_1.status).to eq('pending')
+        item_order_1.update(fulfilled: true)
+        expect(order_1.status).to eq('pending')
+        item_order_2.update(fulfilled: true)
+        expect(order_1.status).to eq('packaged')
+
+        expect(order_2.status).to eq('pending')
+        item_order_3.update(fulfilled: true)
+        expect(order_2.status).to eq('packaged')
+      end
+    end
+  end
 end

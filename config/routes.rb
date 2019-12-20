@@ -33,12 +33,15 @@ Rails.application.routes.draw do
 
   get "/orders/new", to: "orders#new"
   post "/users/:id/orders", to: "orders#create"
-  get "/orders/:id", to: "orders#show"
+  get "/profile/orders/:order_id", to: "orders#show"
+  patch "/orders/:id", to: 'orders#update'
   get '/profile/orders', to: 'orders#index'
 
   get "/register", to: "users#new"
   post "/register", to: "users#create"
   get "/profile", to: "users#show"
+  get "/profile/edit", to: "users#edit"
+  patch "/profile", to: "users#update"
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
