@@ -50,15 +50,45 @@ RSpec.describe 'As an admin user', type: :feature do
 
       visit '/admin'
 
-      # should be: order_2, order_1, order_3, order_4
-      expect(page.body.index(@order_2.id.to_s)).to be < page.body.index(@order_1.id.to_s)
-      expect(page.body.index(@order_2.id.to_s)).to be < page.body.index(@order_3.id.to_s)
-      expect(page.body.index(@order_2.id.to_s)).to be < page.body.index(@order_4.id.to_s)
+      within "#all-orders" do
+        expect(page.find('tr:nth-of-type(2)')).to have_content(@order_2.id)
+        expect(page.find('tr:nth-of-type(3)')).to have_content(@order_1.id)
+        expect(page.find('tr:nth-of-type(4)')).to have_content(@order_3.id)
+        expect(page.find('tr:nth-of-type(5)')).to have_content(@order_4.id)
+      end
+    end
 
-      expect(page.body.index(@order_1.id.to_s)).to be < page.body.index(@order_3.id.to_s)
-      expect(page.body.index(@order_1.id.to_s)).to be < page.body.index(@order_4.id.to_s)
+    it 'I see any "packaged" orders, next to which I see a button to "ship" the order' do
+      visit '/admin'
 
-      expect(page.body.index(@order_3.id.to_s)).to be < page.body.index(@order_4.id.to_s)
+      within '#packaged-orders' do
+        expect(page).to have_content(@order_1.id)
+        expect(page).to have_button('Ship', count: 1)
+      end
+    end
+
+    describe 'When I click the ship button for an order' do
+      it 'the status of that order changes to "shipped"' do
+        visit '/admin'
+
+        click_on 'Ship'
+
+        expect(current_path).to eq('/admin')
+
+        within "#order-#{@order_1.id}" do
+          expect(page).to have_content('shipped')
+          expect(page).not_to have_content('packaged')
+        end
+
+        within '#packaged-orders' do
+          expect(page).not_to have_content(@order_1.id)
+          expect(page).not_to have_button('Ship')
+        end
+      end
+
+      xit 'And the user can no longer "cancel" the order' do
+        # Need to address in user story 30 where functionality to cancel is implemented
+      end
     end
   end
 end
