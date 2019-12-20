@@ -1,6 +1,6 @@
 <h1>Admin Dashboard</h1>
 
-<% if @orders.packaged %>
+<% unless @orders.packaged.empty? %>
   <h2>Packaged Orders Ready to Ship</h2>
   <table id="packaged-orders">
     <tr>
