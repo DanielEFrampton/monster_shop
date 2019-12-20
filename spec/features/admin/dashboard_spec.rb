@@ -69,20 +69,31 @@ RSpec.describe 'As an admin user', type: :feature do
 
     describe 'When I click the ship button for an order' do
       it 'the status of that order changes to "shipped"' do
+        order_3 = create(:order, user: @user_1, status: 1)
+        order_3.item_orders.create!(item: @item_1, order: order_3, price: @item_1.price, quantity: 2)
+        order_3.item_orders.create!(item: @item_2, order: order_3, price: @item_2.price, quantity: 1)
+
         visit '/admin'
 
-        click_on 'Ship'
+        within "#packaged-order-#{@order_1.id}" do
+          click_on 'Ship'
+        end
 
         expect(current_path).to eq('/admin')
-
+        expect(page).not_to have_selector("#packaged-order-#{@order_1.id}")
         within "#order-#{@order_1.id}" do
           expect(page).to have_content('shipped')
           expect(page).not_to have_content('packaged')
         end
 
-        within '#packaged-orders' do
-          expect(page).not_to have_content(@order_1.id)
-          expect(page).not_to have_button('Ship')
+        within "#packaged-order-#{order_3.id}" do
+          click_on 'Ship'
+        end
+
+        expect(page).not_to have_selector('#packaged-orders')
+        within "#order-#{order_3.id}" do
+          expect(page).to have_content('shipped')
+          expect(page).not_to have_content('packaged')
         end
       end
 
