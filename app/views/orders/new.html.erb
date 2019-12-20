@@ -22,7 +22,7 @@
 <h3 align = "right">Total: <%= number_to_currency(cart.total)%></h3>
 <center>
   <h2>Shipping Info:</h2>
-  <%= form_tag "/orders", method: :create do %>
+  <%= form_tag "/users/#{current_user.id}/orders", method: :post do %>
     <%= label_tag :name %>
     <%= text_field_tag :name %>
 

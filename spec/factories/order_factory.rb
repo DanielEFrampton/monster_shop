@@ -5,5 +5,6 @@ FactoryBot.define do
     city { "Bootytown" }
     state { "Turks & Caicos" }
     zip { "13375" }
+    user
   end
 end

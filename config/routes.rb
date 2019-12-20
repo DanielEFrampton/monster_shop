@@ -21,7 +21,6 @@ Rails.application.routes.draw do
 
   get "/items/:item_id/reviews/new", to: "reviews#new"
   post "/items/:item_id/reviews", to: "reviews#create"
-
   get "/reviews/:id/edit", to: "reviews#edit"
   patch "/reviews/:id", to: "reviews#update"
   delete "/reviews/:id", to: "reviews#destroy"
@@ -33,8 +32,10 @@ Rails.application.routes.draw do
   delete "/cart/:item_id", to: "cart#remove_item"
 
   get "/orders/new", to: "orders#new"
-  post "/orders", to: "orders#create"
-  get "/orders/:id", to: "orders#show"
+  post "/users/:id/orders", to: "orders#create"
+  get "/profile/orders/:order_id", to: "orders#show"
+  patch "/orders/:id", to: 'orders#update'
+  get '/profile/orders', to: 'orders#index'
 
   get "/register", to: "users#new"
   post "/register", to: "users#create"
