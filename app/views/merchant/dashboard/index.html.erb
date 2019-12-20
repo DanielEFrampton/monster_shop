@@ -28,5 +28,9 @@ Merchant Dashboard
           <td><%= number_to_currency(order.grand_total_for_merchant(@merchant.id)) %></td>
         </tr>
         <% end %>
-    </section>
+        </table>
+  </section><br>
+
+  <%= link_to "View My Items", "/merchant/items" %>
+
 <% end %>
