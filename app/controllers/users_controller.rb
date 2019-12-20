@@ -23,6 +23,21 @@ class UsersController < ApplicationController
     render file: "/public/404" unless current_user
   end
 
+  def edit
+  end
+
+  def update
+    user = current_user
+    user.update(user_params)
+    if user.save
+      flash[:notice] = "Your information has been updated."
+      render :show
+    else
+      flash[:notice] = "Scupper that! Ye be missing required fields!"
+      redirect_to '/profile'
+    end
+  end
+
 private
 
   def user_params
