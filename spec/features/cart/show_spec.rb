@@ -183,12 +183,10 @@ RSpec.describe 'Cart Show Page', type: :feature do
       end
 
       describe 'And I click the button or link to check out' do
-        it 'I am taken to my orders page, see flash message, see order listed, cart is empty' do
+        it 'I am taken to the new order creation form' do
           click_on('Checkout')
 
-          expect(current_path).to eq('/profile/orders')
-
-          expect(page).to have_content('Order ho! Ye successfully placed yer order. Make way in yer hold for loot!')
+          expect(current_path).to eq('/orders/new')
         end
       end
     end

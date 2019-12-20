@@ -3,7 +3,6 @@
 <% if @orders != [] %>
   <% @orders.each do |order| %>
     <p><%= order.name %>: <%= link_to "#{order.id}" %></p>
-    <p><%= link_to "#{order.id}" %></p>
     <p><%= order.created_at %></p>
     <p><%= order.updated_at %></p>
     <p><%= order.status %></p>
