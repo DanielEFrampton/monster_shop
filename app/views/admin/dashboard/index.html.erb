@@ -1,17 +1,41 @@
-Admin Dashboard
+<h1>Admin Dashboard</h1>
 
-<% unless @orders.empty? %>
-  <table>
+<% unless @orders.packaged.empty? %>
+  <h2>Packaged Orders Ready to Ship</h2>
+  <table id="packaged-orders">
     <tr>
       <th>Order ID</th>
       <th>Date</th>
       <th>User</th>
+      <th>Action</th>
     </tr>
-  <% @orders.each do |order| %>
-    <tr id="order-<%= order.id %>">
-      <td><%= order.id %></td>
-      <td><%= order.created_at %></td>
-      <td><%= link_to order.user.name, "/admin/users/#{order.user.id}" %></td>
+    <% @orders.packaged.each do |order| %>
+      <tr id="packaged-order-<%= order.id %>">
+        <td><%= order.id %></td>
+        <td><%= order.created_at %></td>
+        <td><%= link_to order.user.name, "/admin/users/#{order.user.id}" %></td>
+        <td><%= button_to 'Ship', "/orders/#{order.id}?status=2", method: :patch %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% unless @orders.empty? %>
+  <h2>All Orders</h2>
+  <table id="all-orders">
+    <tr>
+      <th>Order ID</th>
+      <th>Date</th>
+      <th>User</th>
+      <th>Status</th>
     </tr>
-  <% end %>
+    <% @orders.each do |order| %>
+      <tr id="order-<%= order.id %>">
+        <td><%= order.id %></td>
+        <td><%= order.created_at %></td>
+        <td><%= link_to order.user.name, "/admin/users/#{order.user.id}" %></td>
+        <td><%= order.status %></td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
