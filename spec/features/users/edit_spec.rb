@@ -31,8 +31,6 @@ RSpec.describe 'As a user editing my profile', type: :feature do
       fill_in :city, with: "Port Saint Kitts"
       fill_in :state, with: "Arrrkansas"
       fill_in :zip, with: "13376"
-      fill_in :password, with: "landlubberssuck"
-      fill_in :password_confirmation, with: "landlubberssuck"
 
       click_on "Update Info"
 
