@@ -49,4 +49,26 @@ RSpec.describe 'As a logged in user editing password' do
     end
   end
 
+  describe 'when I fail to fill in the same password in both fields' do
+    it 'should show flash message and return to form if info is missing' do
+      user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      
+      visit '/profile/edit_password'
+
+      fill_in :password, with: 'newpassword'
+      fill_in :password_confirmation, with: ''
+
+      click_on "Update Info"
+
+      expect(current_path).to eq('/profile/edit_password')
+      expect(page).to have_content("Scupper that! Ye should fill both fields with the same password!")
+
+      fill_in :password, with: 'newpassword'
+      fill_in :password_confirmation, with: 'newpurseword'
+
+      expect(current_path).to eq('/profile/edit_password')
+      expect(page).to have_content("Scupper that! Ye should fill both fields with the same password!")
+    end
+  end
 end
