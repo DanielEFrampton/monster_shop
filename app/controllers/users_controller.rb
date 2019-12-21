@@ -32,6 +32,9 @@ class UsersController < ApplicationController
     if user.save
       flash[:notice] = "Your information has been updated."
       render :show
+    elsif user.errors.full_messages == ["Email has already been taken"]
+      flash[:notice] = "Scupper that! That email do be in use by another scallywag!"
+      redirect_to '/profile/edit'
     else
       flash[:notice] = "Scupper that! Ye be missing required fields!"
       redirect_to '/profile/edit'
