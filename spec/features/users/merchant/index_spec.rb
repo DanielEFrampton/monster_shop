@@ -65,5 +65,12 @@ RSpec.describe 'the merchant dashboard' do
        expect(page).to_not have_link(@order_2.id)
       end
     end
+
+    it "can see a link to view merchant's items" do
+
+      visit '/merchant'
+
+      expect(page).to have_link "View My Items"
+    end
   end
 end
