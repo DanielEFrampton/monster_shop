@@ -42,12 +42,6 @@ class OrdersController <ApplicationController
         redirect_to "/profile"
       elsif current_user.admin?
         redirect_to "/admin"
-      elsif current_user.merchant?
-        redirect_to "/merchant"
-      elsif current_user.default?
-        redirect_to "/profile"
-      else
-        flash[:error] = order.errors.full_messages.to_sentence
       end
     end
   end
