@@ -11,6 +11,7 @@ RSpec.describe 'As a user editing my profile', type: :feature do
                                 password: "landlubberssuck",
                                 password_confirmation: "landlubberssuck",
                                 role: 0)
+    @fake_user = create(:user, email: 'fake@faketown.com')
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@default_user)
   end
 
@@ -62,5 +63,15 @@ RSpec.describe 'As a user editing my profile', type: :feature do
 
     expect(current_path).to eq('/profile/edit')
     expect(page).to have_content("Scupper that! Ye be missing required fields!")
+  end
+
+  it 'should show flash message and return to form if new email already exists' do
+    visit '/profile/edit'
+
+    fill_in :email, with: 'fake@faketown.com'
+
+    click_on "Update Info"
+    expect(current_path).to eq('/profile/edit')
+    expect(page).to have_content("Scupper that! That email do be in use by another scallywag!")
   end
 end
