@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       render :show
     else
       flash[:notice] = "Scupper that! Ye be missing required fields!"
-      redirect_to '/profile'
+      redirect_to '/profile/edit'
     end
   end
 
@@ -43,10 +43,11 @@ class UsersController < ApplicationController
     user.update(user_params)
     if user.save
       flash[:notice] = "Your password has been updated."
+      redirect_to '/profile'
     else
-      flash[:notice] = "Scupper that! Ye be missing required fields!"
+      flash[:notice] = "Scupper that! Ye should fill both fields with the same password!"
+      redirect_to '/profile/edit_password'
     end
-    redirect_to '/profile'
   end
 
   def edit_password
