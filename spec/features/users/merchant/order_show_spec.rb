@@ -22,7 +22,7 @@ RSpec.describe 'As a merchant', type: :feature do
     @item_4 = create(:item, merchant_id: @merchant.id)
     @item_5 = create(:item, merchant_id: @merchant.id)
     @item_6 = create(:item, merchant_id: @merchant.id)
-    @item_7 = create(:item, merchant_id: @merchant.id)
+    @item_7 = create(:item, name: 'Used Pirate Hat', merchant_id: @merchant.id)
     @item_8 = create(:item, merchant_id: @merchant_2.id)
 
     @order_1 = create(:order)
@@ -38,7 +38,7 @@ RSpec.describe 'As a merchant', type: :feature do
     @item_order_3 = ItemOrder.create!(price: 1, quantity: 1, item: @item_3, order: @order_3)
     @item_order_4 = ItemOrder.create!(price: 1, quantity: 1, item: @item_4, order: @order_4)
     @item_order_5 = ItemOrder.create!(price: 1, quantity: 1, item: @item_5, order: @order_5)
-    @item_order_6 = ItemOrder.create!(price: 1, quantity: 1, item: @item_6, order: @order_6)
+    @item_order_6 = ItemOrder.create!(price: 1, quantity: 1, item: @item_7, order: @order_6)
     @item_order_7 = ItemOrder.create!(price: 1, quantity: 1, item: @item_7, order: @order_7)
     @item_order_8 = ItemOrder.create!(price: 1, quantity: 1, item: @item_8, order: @order_7)
   end
@@ -51,19 +51,19 @@ RSpec.describe 'As a merchant', type: :feature do
     end
 
     it "I see the customer's name and address" do
-      expect(page).to have_content("Name: #{@order_7.name}")
+      expect(page).to have_content("Customer Name: #{@order_7.name}")
       expect(page).to have_content("Address: #{@order_7.address} #{@order_7.city}, #{@order_7.state} #{@order_7.zip}")
     end
 
-    xit 'I only see the items in the order that are being purchased from my merchant' do
+    it 'I only see the items in the order that are being purchased from my merchant' do
       expect(page).to have_content(@item_7.name)
     end
 
-    xit 'I do not see any items in the order being purchased from other merchants' do
+    it 'I do not see any items in the order being purchased from other merchants' do
       expect(page).to_not have_content(@item_8.name)
     end
 
-    xit 'For each item, I see the name which links to merchant item show page, image, price, quantity' do
+    it 'For each item, I see the name which links to merchant item show page, image, price, quantity' do
       expect(page).to have_link(@item_7.name, href: "/merchant/items/#{@item_7.id}")
       expect(page).to have_css("img[src*='#{@item_7.image}']")
       expect(page).to have_content("Price: $#{@item_7.price}.00")
