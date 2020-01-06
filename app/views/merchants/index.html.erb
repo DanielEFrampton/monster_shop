@@ -2,8 +2,11 @@
 <p align="center"><%= link_to "New Merchant", "/merchants/new" %></p>
 <section class = "grid-container">
   <% @merchants.each do |merchant|%>
-    <section class = "grid-item">
+    <section class = "grid-item" id="merchant-<%= merchant.id %>">
       <h2><%=link_to merchant.name, "/merchants/#{merchant.id}"%></h2>
+      <% if current_admin? && !merchant.disabled %>
+        <%= button_to 'Disable', "/merchants/#{merchant.id}/disable", method: :patch %>
+      <% end %>
     </section>
   <% end %>
 </section>
