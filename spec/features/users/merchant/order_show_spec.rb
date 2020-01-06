@@ -82,21 +82,21 @@ RSpec.describe 'As a merchant', type: :feature do
           click_on 'Fulfill Order'
         end
 
-        xit 'I am returned to the order show page' do
+        it 'I am returned to the order show page' do
           expect(current_path).to eq("/merchant/orders/#{@order_7.id}")
         end
 
-        xit 'I see the item is now fulfilled' do
+        it 'I see the item is now fulfilled' do
           within "#item-#{@item_7.id}" do
             expect(page).to have_content("Order Fulfilled")
           end
         end
 
-        xit 'I also see a flash message indicating that I have fulfilled that item' do
+        it 'I also see a flash message indicating that I have fulfilled that item' do
           expect(page).to have_content("Yarrrgh. I guess I'll split me booty wid ye. Yer order be fulfilled.")
         end
 
-        xit "the item's inventory quantity is permanently reduced by the user's desired quantity" do
+        it "the item's inventory quantity is permanently reduced by the user's desired quantity" do
           visit "/items/#{@item_7.id}"
 
           expect(page).to have_content("Inventory: 4999")
