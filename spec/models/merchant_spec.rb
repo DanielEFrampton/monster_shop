@@ -66,5 +66,10 @@ describe Merchant, type: :model do
 
       expect(@meg.pending_orders.sort).to eq([order_2, order_3])
     end
+
+    # it "disable_items" do
+    #   @meg.disable_items
+    #   expect(@tire.disabled).to eq(true)
+    # end
   end
 end

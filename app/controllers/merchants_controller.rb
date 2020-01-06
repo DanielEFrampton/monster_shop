@@ -42,6 +42,7 @@ class MerchantsController < ApplicationController
   def update_disabled
     @merchant = Merchant.find(params[:id])
     @merchant.toggle(:disabled).save
+    @merchant.items.update_all(disabled: true)
     flash[:notice] = 'This merchant has walked the plank.'
     redirect_to "/merchants"
   end

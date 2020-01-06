@@ -6,6 +6,9 @@ RSpec.describe 'Admin merchant index page' do
     @merchant_2 = create(:merchant, name: 'Funny Pirate Name 2')
     @merchant_3 = create(:merchant, name: 'Funny Pirate Name 3', disabled: true)
 
+    @tire = @merchant_2.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+    @pull_toy = @merchant_2.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
+
     @admin = create(:user, role: 2)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
@@ -40,6 +43,16 @@ RSpec.describe 'Admin merchant index page' do
 
       within "#merchant-#{@merchant_1.id}" do
         expect(page).to_not have_button('Disable')
+      end
+    end
+
+    it "When i click disable on a merchant all items are also disabled" do
+      visit '/merchants'
+
+      within "#merchant-#{@merchant_2.id}" do
+        click_button('Disable')
+        expect(@tire.disabled).to eq(true)
+        expect(@pull_toy.disabled).to eq(true)
       end
     end
   end
