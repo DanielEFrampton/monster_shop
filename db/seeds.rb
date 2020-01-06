@@ -20,6 +20,16 @@ admin = User.create(name: "Captain Redbeard",
   password_confirmation: "admin",
   role: 2)
 
+merchant = User.create(name: "Admiral Redbeard",
+  address: "123 Ocean Breeze",
+  city: "Bootytown",
+  state: "Turks & Caicos",
+  zip: "13375",
+  email: 'merchant@treasuretrove.com',
+  password: "merchant",
+  password_confirmation: "merchant",
+  role: 1)
+
 #merchants
 bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
