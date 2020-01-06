@@ -11,6 +11,11 @@
         <%= image_tag item_order.item.image %>
         <p>Price: <%= number_to_currency(item_order.item.price) %></p>
         <p>Quantity: <%= item_order.quantity %></p>
+        <% if !item_order.fulfilled %>
+          <%= button_to 'Fulfill Order', "/item_orders/#{item_order.id}", method: :patch %>
+        <% else %>
+          <p>Order Fulfilled</p>
+        <% end %>
       </section>
     <% end %>
   <% end %>
