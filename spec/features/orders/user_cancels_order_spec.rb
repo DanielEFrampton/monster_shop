@@ -16,6 +16,8 @@ RSpec.describe "As a user" do
       @order.item_orders.create!(item: @tire, price: @tire.price, quantity: 2, fulfilled: true)
       @order.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
 
+      @order_2 = @user.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, status: 2)
+
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
       visit "/profile/orders/#{@order.id}"
@@ -36,6 +38,12 @@ RSpec.describe "As a user" do
 
       visit "/profile/orders/#{@order.id}"
       expect(page).to have_content('cancelled')
+    end
+
+    it "i cannot cancel order if shipped" do
+      visit "/profile/orders/#{@order_2.id}"
+
+      expect(page).to_not have_button('Cancel Order')
     end
   end
 end
