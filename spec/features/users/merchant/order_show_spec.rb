@@ -25,7 +25,7 @@ RSpec.describe 'As a merchant', type: :feature do
     @item_7 = create(:item, name: 'Used Pirate Hat', merchant_id: @merchant.id)
     @item_8 = create(:item, merchant_id: @merchant_2.id)
 
-    @order_1 = create(:order)
+    @order_1 = create(:order, status: 2)
     @order_2 = create(:order)
     @order_3 = create(:order)
     @order_4 = create(:order)
@@ -34,7 +34,7 @@ RSpec.describe 'As a merchant', type: :feature do
     @order_7 = create(:order)
 
     @item_order_1 = ItemOrder.create!(price: 1, quantity: 1, item: @item_1, order: @order_1)
-    @item_order_2 = ItemOrder.create!(price: 1, quantity: 1, item: @item_2, order: @order_2)
+    @item_order_2 = ItemOrder.create!(price: 1, quantity: 5001, item: @item_2, order: @order_2)
     @item_order_3 = ItemOrder.create!(price: 1, quantity: 1, item: @item_3, order: @order_3)
     @item_order_4 = ItemOrder.create!(price: 1, quantity: 1, item: @item_4, order: @order_4)
     @item_order_5 = ItemOrder.create!(price: 1, quantity: 1, item: @item_5, order: @order_5)
@@ -68,6 +68,67 @@ RSpec.describe 'As a merchant', type: :feature do
       expect(page).to have_css("img[src*='#{@item_7.image}']")
       expect(page).to have_content("Price: $#{@item_7.price}.00")
       expect(page).to have_content("Quantity: #{@item_order_7.quantity}")
+    end
+
+    describe 'For each item of mine in the order, if quantity is equal to or less than inventory quantity and not fulfilled' do
+      it 'Then I see a button or link to "fulfill" that item' do
+        within "#item-#{@item_7.id}" do
+          expect(page).to have_button('Fulfill Order')
+        end
+      end
+
+      describe 'When I click on that link or button' do
+        before(:each) do
+          click_on 'Fulfill Order'
+        end
+
+        xit 'I am returned to the order show page' do
+          expect(current_path).to eq("/merchant/orders/#{@order_7.id}")
+        end
+
+        xit 'I see the item is now fulfilled' do
+          within "#item-#{@item_7.id}" do
+            expect(page).to have_content("Order Fulfilled")
+          end
+        end
+
+        xit 'I also see a flash message indicating that I have fulfilled that item' do
+          expect(page).to have_content("Yarrrgh. I guess I'll split me booty wid ye. Yer order be fulfilled.")
+        end
+
+        xit "the item's inventory quantity is permanently reduced by the user's desired quantity" do
+          visit "/items/#{@item_7.id}"
+
+          expect(page).to have_content("Inventory: 4999")
+        end
+      end
+
+      xit "If I have already fulfilled this item I see text indicating such" do
+        visit "/merchant/orders/#{@order_1.id}"
+
+        within "#item-#{@item_1.id}" do
+          expect(page).to have_content("Order Fulfilled")
+          expect(page).to_not have_button("Fulfill Order")
+        end
+      end
+    end
+
+    describe "If the user's desired quantity is greater than my current inventory quantity for that item" do
+      before(:each) do
+        visit "/merchant/orders/#{@order_2.id}"
+      end
+
+      xit 'Then I do not see a "fulfill" button or link' do
+        within "#item-#{@item_2.id}" do
+          expect(page).to_not have_button("Fulfill Order")
+        end
+      end
+
+      xit 'Instead I see a notice next to the item indicating I cannot fulfill this item' do
+        within "#item-#{@item_2.id}" do
+          expect(page).to have_content("Insufficient Inventory - Cannot Fulfill")
+        end
+      end
     end
   end
 end
