@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "/merchants", to: "merchants#create"
   get "/merchants/:id/edit", to: "merchants#edit"
   patch "/merchants/:id", to: "merchants#update"
+  patch "/merchants/:id/disable", to: "merchants#update_disabled"
   delete "/merchants/:id", to: "merchants#destroy"
 
   get "/items", to: "items#index"
