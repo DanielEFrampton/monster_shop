@@ -43,4 +43,16 @@ RSpec.describe 'Admin merchant index page' do
       end
     end
   end
+
+  describe 'as a non admin' do
+    it 'I cannot see a disable button on merchants index' do
+      default_user = create(:user, role: 0)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
+
+      visit '/merchants'
+
+      expect(page).to_not have_button('Disable')
+    end
+  end
 end
