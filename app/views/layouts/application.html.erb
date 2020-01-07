@@ -5,12 +5,13 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <link href="https://fonts.googleapis.com/css?family=IM+Fell+English|Princess+Sofia&display=swap" rel="stylesheet">
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
     <nav class = "topnav">
-      <%= link_to "Treasure Trove", "/" %>
+      <%= link_to "Treasure Trove", "/", id: 'site-title' %>
       <%= link_to "All Merchants", "/merchants"%>
       <%= link_to "All Items", "/items"%>
 
@@ -19,20 +20,20 @@
         <%= link_to "Dashboard", "/admin" %>
         <%= link_to "Profile", "/profile" %>
         <%= link_to "Logout", "/logout", method: :delete %>
-        <div>Logged in as <%= current_user.name %></div>
+        <div id='login-message'>Logged in as<br /> <%= current_user.name %></div>
 
       <% elsif current_merchant? %>
         <%= link_to "Dashboard", "/merchant" %>
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
         <%= link_to "Profile", "/profile" %>
         <%= link_to "Logout", "/logout", method: :delete %>
-        <div>Logged in as <%= current_user.name %></div>
+        <div id='login-message'>Logged in as<br /> <%= current_user.name %></div>
 
       <% elsif current_user %>
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
         <%= link_to "Profile", "/profile" %>
         <%= link_to "Logout", "/logout", method: :delete %>
-        <div>Logged in as <%= current_user.name %></div>
+        <div id='login-message'>Logged in as<br /> <%= current_user.name %></div>
 
       <% else %>
         <%= link_to "Cart: #{cart.total_items}", "/cart" %>
