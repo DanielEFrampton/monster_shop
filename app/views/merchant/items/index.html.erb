@@ -12,10 +12,10 @@
     <p>Inventory: <%= item.inventory %> </p>
     <% if item.active? %>
       <p>Active</p>
-      <p><%= button_to 'Deactivate', "/merchant/items/#{item.id}/deactivate", method: :patch %></p>
+      <p><%= button_to 'Deactivate', "/merchant/items/#{item.id}/activation", method: :patch %></p>
     <% else %>
       <p>Inactive</p>
-      <p><%= button_to 'Activate', "/merchant/items/#{item.id}/activate", method: :patch %></p>
+      <p><%= button_to 'Activate', "/merchant/items/#{item.id}/activation", method: :patch %></p>
     <% end %>
   </section>
 <% end %>
