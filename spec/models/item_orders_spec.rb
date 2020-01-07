@@ -23,6 +23,21 @@ describe ItemOrder, type: :model do
 
       expect(item_order_1.subtotal).to eq(200)
     end
+
+    it 'not_enough' do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      order = create(:order)
+      item_order = ItemOrder.create!(price: 1, quantity: 5001, item: item, order: order)
+
+      expect(item_order.not_enough).to eq(true)
+
+      item_2 = create(:item, merchant_id: merchant.id)
+      order_2 = create(:order)
+      item_order_2 = ItemOrder.create!(price: 1, quantity: 4999, item: item_2, order: order_2)
+
+      expect(item_order_2.not_enough).to eq(false)
+    end
   end
 
   describe 'after_update' do
