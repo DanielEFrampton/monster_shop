@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   post "/merchants", to: "merchants#create"
   get "/merchants/:id/edit", to: "merchants#edit"
   patch "/merchants/:id", to: "merchants#update"
-  patch "/merchants/:id/disable", to: "merchants#update_disabled"
   delete "/merchants/:id", to: "merchants#destroy"
 
   get "/items", to: "items#index"
@@ -62,5 +61,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'dashboard#index'
     get '/merchants/:id', to: 'merchants#show'
+    patch '/merchants/:id/disable', to: 'merchants#disable'
+    patch '/merchants/:id/enable', to: 'merchants#enable'
   end
 end
