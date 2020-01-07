@@ -28,13 +28,13 @@ RSpec.describe 'As an admin user', type: :feature do
       visit '/admin'
 
       within "#order-#{@order_1.id}" do
-        expect(page).to have_content(@order_1.id)
+        expect(page).to have_content("#{@order_1.id}")
         expect(page).to have_content(@order_1.created_at)
         expect(page).to have_link(@order_1.user.name, href: "/admin/users/#{@user_1.id}")
       end
 
       within "#order-#{@order_2.id}" do
-        expect(page).to have_content(@order_2.id)
+        expect(page).to have_content("#{@order_2.id}")
         expect(page).to have_content(@order_2.created_at)
         expect(page).to have_link(@order_2.user.name, href: "/admin/users/#{@user_2.id}")
       end
@@ -51,10 +51,10 @@ RSpec.describe 'As an admin user', type: :feature do
       visit '/admin'
 
       within "#all-orders" do
-        expect(page.find('tr:nth-of-type(2)')).to have_content(@order_2.id)
-        expect(page.find('tr:nth-of-type(3)')).to have_content(@order_1.id)
-        expect(page.find('tr:nth-of-type(4)')).to have_content(@order_3.id)
-        expect(page.find('tr:nth-of-type(5)')).to have_content(@order_4.id)
+        expect(page.find('tr:nth-of-type(2)')).to have_content("#{@order_2.id}")
+        expect(page.find('tr:nth-of-type(3)')).to have_content("#{@order_1.id}")
+        expect(page.find('tr:nth-of-type(4)')).to have_content("#{@order_3.id}")
+        expect(page.find('tr:nth-of-type(5)')).to have_content("#{@order_4.id}")
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe 'As an admin user', type: :feature do
       visit '/admin'
 
       within '#packaged-orders' do
-        expect(page).to have_content(@order_1.id)
+        expect(page).to have_content("#{@order_1.id}")
         expect(page).to have_button('Ship', count: 1)
       end
     end

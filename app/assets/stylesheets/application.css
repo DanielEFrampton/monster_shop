@@ -14,32 +14,70 @@
  *= require_self
  */
 
- body {
- background-color: white;
- }
+body {
+  background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)),
+              url('https://cdn.hipwallpaper.com/i/78/81/xokycY.jpg');
+  font-family: 'IM Fell English', serif;
+}
 
- h1 {
+nav {
+  background-color: #002244;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+nav * {
+  color: #f2f2f2;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+#site-title {
+  font-family: 'Princess Sofia', cursive;
+  font-size: 1.5em;
+}
+
+#login-message {
+  font-size: .7em;
+  justify-content: flex-end;
+  border-left: 1px solid white;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+nav a:hover {
+  background-color: white;
+  color: #002244;
+}
+
+h1 {
+  font-family: 'Princess Sofia', cursive;
   text-align: center;
- 	font-size: 40px;
- 	color: #002244;
- 	font-family: "Marker Felt", fantasy;
- }
+  font-size: 2em;
+  color: #002244;
+}
 
-ul{
+ul {
   padding: 0px;
   text-align: center;
 }
-img{
+
+img {
   width: 50%;
 }
 
-#cart-image{
+#cart-image {
   width:50px;
 }
 
 section[id*='review'] {
   background-color: #DCDCDC;
 }
+
 .list-reviews {
   display: grid;
   width: 50%;
@@ -48,64 +86,39 @@ section[id*='review'] {
   grid-gap: 30px;
 }
 
- .grid-container{
+.grid-container {
  	display: grid;
- 	grid-template-columns: repeat(5,1fr);
+ 	grid-template-columns: repeat(4,1fr);
  	grid-template-rows: auto;
- 	grid-gap: 30px;
- }
+ 	grid-gap: 40px;
+}
 
- .grid-item{
- 	background-color: #17BEBB;
+.grid-item {
+ 	background-color: white;
  	padding: 20px;
   border: solid;
  	border-radius: 12px;
   border-color: #002244;
  	text-align: center
- }
- .item-show-grid{
+}
+
+.item-show-grid {
   width: 60%;
- 	display: grid;
+  display: grid;
   border: solid;
   border-radius: 12px;
- 	grid-template-columns: repeat(2,1fr);
- }
+  grid-template-columns: repeat(2,1fr);
+}
 
- .item-show-item{
- 	padding: 20px;
- 	text-align: right;
- }
+.item-show-item {
+  padding: 20px;
+  text-align: right;
+}
 
- .topnav {
-   overflow: hidden;
-   background-color: #002244;
- }
 
- .topnav a {
-   float: left;
-   color: #f2f2f2;
-   text-align: center;
-   padding: 14px 16px;
-   text-decoration: none;
-   font-size: 17px;
- }
-
- .topnav a:hover {
-   background-color: #17BEBB;
-   color: black;
- }
-
- .topnav div {
-   float: right;
-   color: white;
-   text-align: center;
-   padding: 14px 16px;
-   font-size: 17px;
- }
-
- .address{
-   text-align: center;
- }
+.address {
+  text-align: center;
+}
 
  input[type=text], select {
   width: 100%;
@@ -131,6 +144,7 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #45a049;
 }
+
 form {
   align-content: center;
   background-color: #f2f2f2;
@@ -143,6 +157,7 @@ form {
   background-color: red;
   color: white;
 }
+
 .success-flash {
   padding: 10px;
   background-color: green;
