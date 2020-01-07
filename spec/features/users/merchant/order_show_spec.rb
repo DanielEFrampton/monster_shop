@@ -25,7 +25,7 @@ RSpec.describe 'As a merchant', type: :feature do
     @item_7 = create(:item, name: 'Used Pirate Hat', merchant_id: @merchant.id)
     @item_8 = create(:item, merchant_id: @merchant_2.id)
 
-    @order_1 = create(:order, status: 2)
+    @order_1 = create(:order)
     @order_2 = create(:order)
     @order_3 = create(:order)
     @order_4 = create(:order)
@@ -33,7 +33,7 @@ RSpec.describe 'As a merchant', type: :feature do
     @order_6 = create(:order)
     @order_7 = create(:order)
 
-    @item_order_1 = ItemOrder.create!(price: 1, quantity: 1, item: @item_1, order: @order_1)
+    @item_order_1 = ItemOrder.create!(price: 1, quantity: 1, item: @item_1, order: @order_1, fulfilled: true)
     @item_order_2 = ItemOrder.create!(price: 1, quantity: 5001, item: @item_2, order: @order_2)
     @item_order_3 = ItemOrder.create!(price: 1, quantity: 1, item: @item_3, order: @order_3)
     @item_order_4 = ItemOrder.create!(price: 1, quantity: 1, item: @item_4, order: @order_4)
@@ -103,7 +103,7 @@ RSpec.describe 'As a merchant', type: :feature do
         end
       end
 
-      xit "If I have already fulfilled this item I see text indicating such" do
+      it "If I have already fulfilled this item I see text indicating such" do
         visit "/merchant/orders/#{@order_1.id}"
 
         within "#item-#{@item_1.id}" do
@@ -118,13 +118,13 @@ RSpec.describe 'As a merchant', type: :feature do
         visit "/merchant/orders/#{@order_2.id}"
       end
 
-      xit 'Then I do not see a "fulfill" button or link' do
+      it 'Then I do not see a "fulfill" button or link' do
         within "#item-#{@item_2.id}" do
           expect(page).to_not have_button("Fulfill Order")
         end
       end
 
-      xit 'Instead I see a notice next to the item indicating I cannot fulfill this item' do
+      it 'Instead I see a notice next to the item indicating I cannot fulfill this item' do
         within "#item-#{@item_2.id}" do
           expect(page).to have_content("Insufficient Inventory - Cannot Fulfill")
         end
