@@ -1,0 +1,21 @@
+<h1><%= link_to @merchant.name, "/merchants/#{@merchant.id}"%><span> Items</span></h1>
+<p align="center"><%= link_to "Add New Item", "/merchants/#{@merchant.id}/items/new" %></p>
+
+<h2>Items</h2>
+<% @merchant.items.each do |item| %>
+  <section class = "grid-item" id= 'item-<%=item.id%>'>
+    <h2> <%=link_to item.name, "/items/#{item.id}" %> </h2>
+    <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
+    <%= link_to image_tag("#{item.image}"), "/items/#{item.id}", id: "img-#{item.id}" %>
+    <p> <%= item.description unless @merchant%> </p>
+    <p>Price: <%=number_to_currency(item.price) %> </p>
+    <p>Inventory: <%= item.inventory %> </p>
+    <% if item.active? %>
+      <p>Active</p>
+      <p><%= button_to 'Deactivate', "/merchant/items/#{item.id}/deactivate", method: :patch %></p>
+    <% else %>
+      <p>Inactive</p>
+      <p><%= button_to 'Activate', "/merchant/items/#{item.id}/activate", method: :patch %></p>
+    <% end %>
+  </section>
+<% end %>
