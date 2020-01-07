@@ -8,7 +8,7 @@ class User < ApplicationRecord
                         :zip,
                         :password,
                         :password_confirmation
-                        
+
   has_many :orders
   has_secure_password
   enum role: %w(default merchant admin)
@@ -16,5 +16,9 @@ class User < ApplicationRecord
   def duplicate_email?
     # Refactor this to be pure ActiveRecord
     User.pluck(:email).include?(email)
+  end
+
+  def created_date
+    created_at.strftime('%B %d, %Y')
   end
 end
