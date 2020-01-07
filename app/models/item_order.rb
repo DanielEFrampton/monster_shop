@@ -19,8 +19,12 @@ class ItemOrder <ApplicationRecord
   end
 
   def change_to_unfulfilled
-    if self.fulfilled?
+    if !self.fulfilled?
       item.update(inventory: (item.inventory + quantity))
     end
+  end
+
+  def not_enough
+    item.inventory < quantity
   end
 end
