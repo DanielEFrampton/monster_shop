@@ -120,7 +120,7 @@ RSpec.describe 'Admin merchant index page' do
     end
   end
 
-  describe 'as a non admin' do
+  describe 'as a default user' do
     it 'I cannot see a disable button on merchants index' do
       default_user = create(:user, role: 0)
 
@@ -133,6 +133,28 @@ RSpec.describe 'Admin merchant index page' do
 
     it 'I cannot see an enable button on merchants index' do
       default_user = create(:user, role: 0)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
+
+      visit '/merchants'
+
+      expect(page).to_not have_button('Enable')
+    end
+  end
+
+  describe 'as a merchant user' do
+    it 'I cannot see a disable button on merchants index' do
+      default_user = create(:user, role: 1)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
+
+      visit '/merchants'
+
+      expect(page).to_not have_button('Disable')
+    end
+
+    it 'I cannot see an enable button on merchants index' do
+      default_user = create(:user, role: 1)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
 
