@@ -40,7 +40,7 @@ RSpec.describe "Merchant Items Index Page" do
 
     end
 
-    it "i can activate any active items" do
+    it "i can activate any inactive items" do
       visit "/merchant/items"
 
       within "#item-#{@chain.id}" do
@@ -55,21 +55,3 @@ RSpec.describe "Merchant Items Index Page" do
     end
   end
 end
-
-
-# User Story 42, Merchant deactivates an item
-#
-# As a merchant
-# When I visit my items page
-# I see all of my items with the following info:
-#  - name
-# - description
-# - price
-# - image
-# - active/inactive status
-# - inventory
-# I see a link or button to deactivate the item next to each item that is active
-# And I click on the "deactivate" button or link for an item
-# I am returned to my items page
-# I see a flash message indicating this item is no longer for sale
-# I see the item is now inactive
