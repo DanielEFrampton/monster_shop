@@ -8,6 +8,7 @@
 
 Merchant.destroy_all
 Item.destroy_all
+User.destroy_all
 
 # ready-made admin account for testing
 admin = User.create(name: "Captain Redbeard",
@@ -19,6 +20,16 @@ admin = User.create(name: "Captain Redbeard",
   password: "admin",
   password_confirmation: "admin",
   role: 2)
+
+merchant_user = User.create(name: "Admiral Redbeard",
+  address: "123 Ocean Breeze",
+  city: "Bootytown",
+  state: "Turks & Caicos",
+  zip: "13375",
+  email: 'merchant@treasuretrove.com',
+  password: "merchant",
+  password_confirmation: "merchant",
+  role: 1)
 
 #merchants
 bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
