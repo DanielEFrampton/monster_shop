@@ -9,11 +9,10 @@ class Admin::MerchantsController < Admin::BaseController
     if params[:enable_disable] == 'enable'
       @merchant.enable
       flash[:notice] = 'Ahoy! This merchant has re-joined the ranks.'
-      redirect_to "/merchants"
     else
       @merchant.disable
       flash[:notice] = 'This merchant has walked the plank.'
-      redirect_to "/merchants"
     end
+    redirect_to "/merchants"
   end
 end
