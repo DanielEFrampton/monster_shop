@@ -39,14 +39,6 @@ class MerchantsController < ApplicationController
     end
   end
 
-  def update_disabled
-    @merchant = Merchant.find(params[:id])
-    @merchant.toggle(:disabled).save
-    @merchant.items.update_all(disabled: true)
-    flash[:notice] = 'This merchant has walked the plank.'
-    redirect_to "/merchants"
-  end
-
   def destroy
     Merchant.destroy(params[:id])
     redirect_to '/merchants'
@@ -55,7 +47,7 @@ class MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.permit(:name,:address,:city,:state,:zip,:disabled)
+    params.permit(:name,:address,:city,:state,:zip)
   end
 
 end
