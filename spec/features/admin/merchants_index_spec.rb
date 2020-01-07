@@ -17,7 +17,33 @@ RSpec.describe 'Admin merchant index page' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
   end
 
-  describe 'as an Admin' do
+  describe 'as an Admin user' do
+    it 'I see all merchants listed with city state and link to merchant dashboard' do
+      visit '/merchants'
+
+      within "#merchant-#{@merchant_1.id}" do
+        expect(page).to have_link(@merchant_1.name)
+        expect(page).to have_content(@merchant_1.city)
+        expect(page).to have_content(@merchant_1.state)
+
+        click_link(@merchant_1.name)
+      end
+
+      expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+
+      visit '/merchants'
+
+      within "#merchant-#{@merchant_2.id}" do
+        expect(page).to have_link(@merchant_2.name)
+        expect(page).to have_content(@merchant_2.city)
+        expect(page).to have_content(@merchant_2.state)
+
+        click_link(@merchant_2.name)
+      end
+
+      expect(current_path).to eq("/admin/merchants/#{@merchant_2.id}")
+    end
+
     it 'I see a disable button next to merchants who are not yet disabled' do
       visit '/merchants'
 
@@ -139,6 +165,21 @@ RSpec.describe 'Admin merchant index page' do
       visit '/merchants'
 
       expect(page).to_not have_button('Enable')
+    end
+
+    it 'I cannot link to the admin/merchant dashboard' do
+      default_user = create(:user, role: 0)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(default_user)
+
+      visit '/merchants'
+
+      within "#merchant-#{@merchant_2.id}" do
+        click_link(@merchant_2.name)
+      end
+
+      expect(current_path).to_not eq("/admin/merchants/#{@merchant_2.id}")
+      expect(current_path).to eq("/merchants/#{@merchant_2.id}")
     end
   end
 
