@@ -14,7 +14,7 @@
         <% if !item_order.fulfilled && item_order.not_enough %>
           <p>Insufficient Inventory - Cannot Fulfill</p>
         <% elsif !item_order.fulfilled %>
-          <%= button_to 'Fulfill Order', "/item_orders/#{item_order.id}", method: :patch %>
+          <%= button_to 'Fulfill Order', "/merchant/item_orders/#{item_order.id}", method: :patch %>
         <% else %>
           <p>Order Fulfilled</p>
         <% end %>
