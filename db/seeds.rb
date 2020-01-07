@@ -32,12 +32,14 @@ merchant_user = User.create(name: "Admiral Redbeard",
   role: 1)
 
 #merchants
-bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
-dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
+pollys_exotic_pets = Merchant.create(name: "Polly's Exotic Pets", address: '342 Ocean Breeze', city: 'Bootytown', state: 'Arrrrrkansas', zip: 80203)
+peglegs_pirate_supply = Merchant.create(name: "Pegleg's Pirate Supply", address: '763 Blazing Way', city: 'Ember', state: 'Volcano Island', zip: 80210)
 
-#bike_shop items
-tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+#pollys_exotic_pets items
+marcel = pollys_exotic_pets.items.create(name: "Marcel", description: "Young and well-behaved capuchin monkey. Skilled at thievary and creating distraction. Looking for a loyal companion and adventurous partner-in-crime.", price: 250, image: "https://www.rainforest-alliance.org/sites/default/files/styles/750w_585h/public/2016-09/capuchin-monkey-baby.jpg?itok=4uOxFicS", inventory: 1)
+iago = pollys_exotic_pets.items.create(name: "Iago", description: "Middle-aged scarlet macaw. Fairly well-trained. Speaks 3 languages and familiar with 2 pirate-based dialects. Best suited for ship life.", price: 350, image: "https://featuredcreature.com/wp-content/uploads/2013/03/scarlet-macaw.jpg", inventory: 1)
+plague_infected_rats = pollys_exotic_pets.items.create(name: "Assorted Rats", description: "Assorted 1-yr-old rats infected with pneumonic plague bacteria. Perfect for creating filthy and hazardous conditions within an enemy's home or ship.", price: 100, image: "https://thumbs-prod.si-cdn.com/DHoIyetxnJy2qJzmPSBiCIxclAw=/420x240/https://public-media.si-cdn.com/filer/d9/5c/d95cb167-c04e-4687-9b1b-12344c2adb46/27053881679_75c7cd5fcd_k.jpg", inventory: 13)
 
-#dog_shop items
-pull_toy = dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
-dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
+#peglegs_pirate_supply items
+classic_pirate_hooks = peglegs_pirate_supply.items.create(name: "Classic Pirate Hooks", description: "Detailed iron hooks with leather detail and excellent quality. One size fits all. Suitable for the left or right.", price: 55, image: "https://i.etsystatic.com/18476426/c/2078/1651/79/0/il/25e48f/2041284127/il_340x270.2041284127_ix7b.jpg", inventory: 32)
+sill_eye_patches = peglegs_pirate_supply.items.create(name: "Silk Eye Patches", description: "Superb feel. The ladies love 'em. You'll forget you even lost an eye.", price: 21, image: "https://cdn2.bigcommerce.com/server2700/obcuok9/products/338/images/8859/362xl__85092.1403126477.1280.1280.jpg?c=2", inventory: 21)
