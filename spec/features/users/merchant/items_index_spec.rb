@@ -36,6 +36,8 @@ RSpec.describe "Merchant Items Index Page" do
         expect(current_path).to eq("/merchant/items")
         expect(page).to have_content("Inactive")
       end
+      expect(page).to have_content("Yer item has scurvy. Inactive!")
+
     end
 
     it "i can activate any active items" do
@@ -48,6 +50,8 @@ RSpec.describe "Merchant Items Index Page" do
         expect(current_path).to eq("/merchant/items")
         expect(page).to have_content("Active")
       end
+      expect(page).to have_content("Yer item is active! Now go get the booty..")
+
     end
   end
 end
