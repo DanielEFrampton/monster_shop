@@ -11,7 +11,9 @@
         <%= image_tag item_order.item.image %>
         <p>Price: <%= number_to_currency(item_order.item.price) %></p>
         <p>Quantity: <%= item_order.quantity %></p>
-        <% if !item_order.fulfilled %>
+        <% if !item_order.fulfilled && item_order.not_enough %>
+          <p>Insufficient Inventory - Cannot Fulfill</p>
+        <% elsif !item_order.fulfilled %>
           <%= button_to 'Fulfill Order', "/item_orders/#{item_order.id}", method: :patch %>
         <% else %>
           <p>Order Fulfilled</p>
