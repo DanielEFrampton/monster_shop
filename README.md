@@ -1,3 +1,12 @@
+## Resources Used
+
+Wallpaper:
+- https://hipwallpaper.com/treasure-backgrounds/
+
+Fonts:
+- IM Fell - https://fonts.google.com/specimen/IM+Fell+English
+- Princess Sofia - https://fonts.google.com/specimen/Princess+Sofia
+
 # Monster Shop
 BE Mod 2 Week 4/5 Group Project (Part 1)
 
