@@ -21,7 +21,7 @@ RSpec.describe "As a merchant user" do
         expect(page).to have_content("Price: $#{@tire.price}")
         expect(page).to have_css("img[src*='#{@tire.image}']")
         expect(page).to have_content("Active")
-        expect(page).to_not have_content(@tire.description)
+        expect(page).to have_content(@tire.description)
         expect(page).to have_content("Inventory: #{@tire.inventory}")
       end
     end
