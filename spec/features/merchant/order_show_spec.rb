@@ -47,7 +47,7 @@ RSpec.describe 'As a merchant', type: :feature do
     before(:each) do
       visit '/merchant'
 
-      click_on @order_7.id
+      click_on "#{@order_7.id}"
     end
 
     it "I see the customer's name and address" do
