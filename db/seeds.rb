@@ -8,6 +8,7 @@
 
 Merchant.destroy_all
 Item.destroy_all
+User.destroy_all
 
 # ready-made admin account for testing
 admin = User.create(name: "Captain Redbeard",
@@ -20,7 +21,7 @@ admin = User.create(name: "Captain Redbeard",
   password_confirmation: "admin",
   role: 2)
 
-merchant = User.create(name: "Admiral Redbeard",
+merchant_user = User.create(name: "Admiral Redbeard",
   address: "123 Ocean Breeze",
   city: "Bootytown",
   state: "Turks & Caicos",
