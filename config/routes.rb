@@ -49,12 +49,12 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :item_orders, only: [:update]
 
   namespace :merchant do
     get '/', to: 'dashboard#index'
     get '/items', to: 'items#index'
 
+    resources :item_orders, only: [:update]
     resources :orders, only: [:show]
   end
 
