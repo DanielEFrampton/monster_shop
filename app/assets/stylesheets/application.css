@@ -26,6 +26,7 @@ nav {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 nav * {
@@ -69,7 +70,7 @@ img {
   width: 50%;
 }
 
-#cart-image{
+#cart-image {
   width:50px;
 }
 
