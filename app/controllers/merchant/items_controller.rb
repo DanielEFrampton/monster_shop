@@ -46,6 +46,13 @@ class Merchant::ItemsController < Merchant::BaseController
     redirect_to '/merchant/items'
   end
 
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    flash[:success] = "Yer item walked the plank fer good!"
+    redirect_to '/merchant/items'
+  end
+
   private
 
   def item_params
