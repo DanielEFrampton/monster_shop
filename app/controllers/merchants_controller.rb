@@ -5,9 +5,6 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    if current_admin?
-      redirect_to "/admin/merchants/#{params[:id]}"
-    end
     @merchant = Merchant.find(params[:id])
   end
 
