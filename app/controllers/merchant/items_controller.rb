@@ -52,7 +52,7 @@ class Merchant::ItemsController < Merchant::BaseController
       item.destroy
       flash[:success] = "Yer item walked the plank fer good!"
     else
-      flash[:failure] = "ARGH! Ye shan't be deletin booty that's already been plundered!"
+      flash[:error] = "ARGH! Ye shan't be deletin booty that's already been plundered!"
     end
     redirect_to '/merchant/items'
   end
