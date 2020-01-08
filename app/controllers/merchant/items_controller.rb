@@ -41,7 +41,7 @@ class Merchant::ItemsController < Merchant::BaseController
     if item.active?
       flash[:success] = "Yer item is active! Now go get the booty.."
     else
-      flash[:error] = "Yer item has scurvy. Inactive!"
+      flash[:success] = "Yer item has scurvy. Inactive!"
     end
     redirect_to '/merchant/items'
   end
