@@ -20,16 +20,30 @@
 
 - Visitor - this type of user is anonymously browsing our site and is not logged in
 Regular User - this user is registered and logged in to the application while performing their work; can place items in a cart and create an order
-- Merchant Employee - this user works for a merchant. They can fulfill orders on behalf of their merchant. They also have the same permissions as a regular user (adding items to a cart and checking out)
-- Merchant Admin - this user works for a merchant, and has additional capabilities than regular employees, such as changing merchant info.
+- Merchant - this user works for a merchant and can fulfill orders, create/update/delete items, and update merchant information. They also have the same permissions as a regular user (adding items to a cart and checking out)
 - Admin User - a registered user who has "superuser" access to all areas of the application; user is logged in to perform their work
+
+### User Example Accounts
+
+- Admin
+```
+  Email: admin@treasuretrove.com
+  Password: admin
+```
+- Merchant
+```
+  Email: merchant@treasuretrove.com
+  Password: merchant
+```
+- Default User
+    - Click on Register and follow instructions to create an account
 
 ## Local Deployment
 Follow these instructions in your -nix command line terminal:
 
 Clone this repo:
 ```
-  git clone git@github.com:DanielEFrampton/adopt_dont_shop_paired.git
+  git clone git@github.com:philjdelong/monster_shop_part_1.git
 ```
 Install required gems:
 ```
