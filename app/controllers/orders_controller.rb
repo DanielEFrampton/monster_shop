@@ -25,10 +25,10 @@ class OrdersController <ApplicationController
           })
       end
       session.delete(:cart)
-      flash[:order_created] = 'Order ho! Ye successfully placed yer order. Make way in yer hold for loot!'
+      flash[:success] = 'Order ho! Ye successfully placed yer order. Make way in yer hold for loot!'
       redirect_to "/profile/orders"
     else
-      flash[:notice] = "Please complete address form to create an order."
+      flash[:error] = "Please complete address form to create an order."
       render :new
     end
   end
@@ -38,7 +38,7 @@ class OrdersController <ApplicationController
     order.update(update_params)
     if order.save
       if order.cancelled?
-        flash[:notice] = "Your Order has been Cancelled"
+        flash[:success] = "Your Order has been Cancelled"
         redirect_to "/profile"
       elsif current_user.admin?
         redirect_to "/admin"
