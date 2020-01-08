@@ -39,9 +39,9 @@ class Merchant::ItemsController < Merchant::BaseController
     item = Item.find(params[:id])
     item.toggle(:active?).save
     if item.active?
-      flash[:notice] = "Yer item is active! Now go get the booty.."
+      flash[:success] = "Yer item is active! Now go get the booty.."
     else
-      flash[:notice] = "Yer item has scurvy. Inactive!"
+      flash[:success] = "Yer item has scurvy. Inactive!"
     end
     redirect_to '/merchant/items'
   end
