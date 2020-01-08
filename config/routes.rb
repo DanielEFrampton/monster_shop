@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "/", to: "home#index"
 
   get "/merchants", to: "merchants#index"
@@ -49,11 +48,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-
   namespace :merchant do
     get '/', to: 'dashboard#index'
 
-    # get '/items/:id', to: 'items#edit'
     patch '/items/:id/activation', to: 'items#activate'
 
     resources :items, only: [:index, :new, :create, :edit, :update]
