@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = current_user
     render file: "/public/404" unless current_user
   end
 
@@ -27,12 +28,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = current_user
-    user.update(user_params)
-    if user.save
+    @user = current_user
+    @user.update(user_params)
+    if @user.save
       flash[:notice] = "Your information has been updated."
       render :show
-    elsif user.errors.full_messages == ["Email has already been taken"]
+    elsif @user.errors.full_messages == ["Email has already been taken"]
       flash[:notice] = "Scupper that! That email do be in use by another scallywag!"
       redirect_to '/profile/edit'
     else
