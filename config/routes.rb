@@ -52,11 +52,10 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: 'dashboard#index'
-    get '/items', to: 'items#index'
-    get '/items/:id/edit', to: 'items#edit'
-    patch '/items/:id', to: 'items#update'
-    patch '/items/:id/activation', to: 'items#activate'
 
+    patch '/items/:id/activation', to: 'items#update'
+
+    resources :items, only: [:index, :new, :create]
     resources :item_orders, only: [:update]
     resources :orders, only: [:show]
   end
@@ -65,5 +64,6 @@ Rails.application.routes.draw do
     resources :merchants, only: [:show]
     get '/', to: 'dashboard#index'
     patch '/merchants/:id/:enable_disable', to: 'merchants#update'
+    resources :users, only: [:index, :show]
   end
 end

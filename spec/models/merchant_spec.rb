@@ -66,5 +66,35 @@ describe Merchant, type: :model do
 
       expect(@meg.pending_orders.sort).to eq([order_2, order_3])
     end
+
+    it 'enable' do
+      merchant_1 = create(:merchant, name: 'Funny Pirate Name 1', disabled: true)
+
+      tire = merchant_1.items.create(name: "Tire", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12, disabled: true)
+      pull_toy = merchant_1.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32, disabled: true)
+
+      merchant_1.enable
+
+      enabled_items = Merchant.find(merchant_1.id).items.select(:disabled)
+
+      expect(merchant_1.disabled).to eq(false)
+
+      expect(enabled_items.count).to eq(2)
+    end
+
+    it 'disable' do
+      merchant_1 = create(:merchant, name: 'Funny Pirate Name 1', disabled: false)
+
+      tire = merchant_1.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12, disabled: false)
+      pull_toy = merchant_1.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32, disabled: false)
+
+      merchant_1.disable
+
+      disabled_items = Merchant.find(merchant_1.id).items.select(:disabled)
+
+      expect(merchant_1.disabled).to eq(true)
+
+      expect(disabled_items.count).to eq(2)
+    end
   end
 end

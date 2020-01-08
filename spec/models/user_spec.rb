@@ -34,6 +34,7 @@ RSpec.describe User, type: :model do
 
   describe 'relationships' do
     it {should have_many :orders}
+    it {should belong_to(:merchant).optional}
   end
 
   describe 'instance methods' do
@@ -66,6 +67,20 @@ RSpec.describe User, type: :model do
 
         expect(user_2.duplicate_email?).to eq(true)
         expect(user_3.duplicate_email?).to eq(false)
+      end
+
+      it 'created_date' do
+        user_1 = User.create!(name: "Captain Daniel",
+                              address: "7 Seas Drive",
+                              city: "Port Saint Kitts",
+                              state: "Arrrkansas",
+                              zip: "13375",
+                              email: "parrotcollector@avast.net",
+                              password: "landlubberssuck",
+                              password_confirmation: "landlubberssuck",
+                              created_at: "2020-01-07 21:40:13 UTC")
+
+        expect(user_1.created_date).to eq('January 07, 2020')
       end
     end
   end

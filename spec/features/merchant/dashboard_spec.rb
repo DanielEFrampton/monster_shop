@@ -48,21 +48,21 @@ RSpec.describe 'the merchant dashboard' do
       visit '/merchant'
 
       within "#order-#{@order_1.id}" do
-       expect(page).to have_link(@order_1.id)
+       expect(page).to have_link("#{@order_1.id}")
        expect(page).to have_content(@order_1.created_at)
        expect(page).to have_content(@order_1.item_count_for_merchant(@merchant_1.id))
        expect(page).to have_content(@order_1.grand_total_for_merchant(@merchant_1.id))
       end
 
       within "#order-#{@order_3.id}" do
-       expect(page).to have_link(@order_3.id)
+       expect(page).to have_link("#{@order_3.id}")
        expect(page).to have_content(@order_3.created_at)
        expect(page).to have_content(@order_3.item_count_for_merchant(@merchant_1.id))
        expect(page).to have_content(@order_3.grand_total_for_merchant(@merchant_1.id))
       end
 
       within "#pending-orders" do
-       expect(page).to_not have_link(@order_2.id)
+       expect(page).to_not have_link("#{@order_2.id}")
       end
     end
 
