@@ -1,14 +1,14 @@
 class SessionsController < ApplicationController
   def new
     if !session[:user_id].nil?
-      flash[:already_registered] = "Arr. Ye be already logged in."
+      flash[:error] = "Arr. Ye be already logged in."
       redirect(current_user)
     end
   end
 
   def create
     unless login_attempt(params)
-      flash[:bad_credentials] = 'Avast! Thar be problems with the credentials ye input!'
+      flash[:error] = 'Avast! Thar be problems with the credentials ye input!'
       redirect_to '/login'
     end
   end
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   def destroy
     session.delete(:user_id)
     session.delete(:cart)
-    flash[:logout] = 'Ye done walked the plank! Er, that is, ye logged out.'
+    flash[:success] = 'Ye done walked the plank! Er, that is, ye logged out.'
     redirect_to '/'
   end
 

@@ -5,7 +5,10 @@ RSpec.describe 'As a merchant', type: :feature do
     before(:each) do
       merchant = create(:merchant)
       merchant_user = create(:user, role: 1, merchant_id: merchant.id)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_user)
+      visit '/login'
+      fill_in 'Email Address', with: merchant_user.email
+      fill_in 'Password', with: 'landlubberssuck'
+      click_button 'Login'
 
       visit "/merchant/items"
     end
@@ -48,6 +51,7 @@ RSpec.describe 'As a merchant', type: :feature do
           fill_in 'Thumbnail Image URL', with: 'https://lafeber.com/pet-birds/wp-content/uploads/OrangeWing_Rio-241x300.jpg'
           fill_in 'Price', with: '20'
           fill_in 'Current Inventory Count', with: '1'
+
           click_on 'Create Item'
         end
 
@@ -82,6 +86,31 @@ RSpec.describe 'As a merchant', type: :feature do
           within "#item-#{Item.last.id}" do
             expect(page).to have_css("img[src*='https://res.cloudinary.com/teepublic/image/private/s--jAfsTCc0--/t_Preview/b_rgb:42332c,c_limit,f_jpg,h_630,q_90,w_630/v1472219144/production/designs/651797_1.jpg']")
           end
+        end
+      end
+
+      describe 'When I try to add a new item and any data is incorrect or missing (except image)' do
+        before(:each) do
+          fill_in 'Name', with: 'Used Parrot'
+          fill_in 'Description', with: 'Lightly used parrot, knows 4 sea shanties and only mild profanity.'
+          fill_in 'Price', with: '20'
+          # Inventory not filled in
+
+          click_on 'Create Item'
+        end
+
+        it 'Then I am returned to the form' do
+          expect(page).to have_content('Create New Item')
+        end
+
+        it 'I see one or more flash messages indicating each error I caused' do
+          expect(page).to have_content("Avast! There do be fields missing or incorrect. Inventory can't be blank. Ye scallywag.")
+        end
+
+        it 'All fields are re-populated with my previous data' do
+          expect(find_field('Name').value).to eq('Used Parrot')
+          expect(find_field('Description').value).to eq('Lightly used parrot, knows 4 sea shanties and only mild profanity.')
+          expect(find_field('Price').value).to eq('20')
         end
       end
     end

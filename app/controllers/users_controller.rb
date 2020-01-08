@@ -7,13 +7,13 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Avast! Ye be registered and logged in!"
+      flash[:success] = "Avast! Ye be registered and logged in!"
       redirect_to '/profile'
     elsif @user.duplicate_email?
-      flash[:notice] = "Scupper that! Yer email already exists in system!"
+      flash[:error] = "Scupper that! Yer email already exists in system!"
       render :new
     else
-      flash[:notice] = "Scupper that! Ye be missing required fields!"
+      flash[:error] = "Scupper that! Ye be missing required fields!"
       @user = nil
       redirect_to '/register'
     end
@@ -30,13 +30,13 @@ class UsersController < ApplicationController
     user = current_user
     user.update(user_params)
     if user.save
-      flash[:notice] = "Your information has been updated."
+      flash[:success] = "Your information has been updated."
       render :show
     elsif user.errors.full_messages == ["Email has already been taken"]
-      flash[:notice] = "Scupper that! That email do be in use by another scallywag!"
+      flash[:error] = "Scupper that! That email do be in use by another scallywag!"
       redirect_to '/profile/edit'
     else
-      flash[:notice] = "Scupper that! Ye be missing required fields!"
+      flash[:error] = "Scupper that! Ye be missing required fields!"
       redirect_to '/profile/edit'
     end
   end
@@ -45,10 +45,10 @@ class UsersController < ApplicationController
     user = current_user
     user.update(user_params)
     if user.save
-      flash[:notice] = "Your password has been updated."
+      flash[:success] = "Your password has been updated."
       redirect_to '/profile'
     else
-      flash[:notice] = "Scupper that! Ye should fill both fields with the same password!"
+      flash[:error] = "Scupper that! Ye should fill both fields with the same password!"
       redirect_to '/profile/edit_password'
     end
   end
