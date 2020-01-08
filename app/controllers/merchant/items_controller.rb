@@ -19,7 +19,23 @@ class Merchant::ItemsController < Merchant::BaseController
     end
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
   def update
+    item = Item.find(params[:id])
+    item.update(item_params)
+    if item.save
+      flash[:success] = "Yer booty has been corrected!"
+      redirect_to '/merchant/items'
+    else
+      flash[:error] = item.errors.full_messages.to_sentence
+      redirect_to "/merchant/items/#{item.id}/edit"
+    end
+  end
+
+  def activate
     item = Item.find(params[:id])
     item.toggle(:active?).save
     if item.active?

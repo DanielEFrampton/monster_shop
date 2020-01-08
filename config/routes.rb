@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: 'dashboard#index'
+
     patch '/items/:id/activation', to: 'items#update'
 
     resources :items, only: [:index, :new, :create]

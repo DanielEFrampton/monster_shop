@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant Items Index Page" do
+RSpec.describe "As a merchant user" do
   describe "When I visit the merchant items page" do
     before(:each) do
       @merchant = Merchant.create(name: "Ye' Old Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
