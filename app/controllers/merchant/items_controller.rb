@@ -5,17 +5,17 @@ class Merchant::ItemsController < Merchant::BaseController
   end
 
   def new
-    @item = current_user.merchant.items.new
+    @item = Merchant.find(current_user.merchant_id).items.new
   end
 
   def create
-    item = current_user.merchant.items.new(item_params)
-    if item.save
+    @item = Merchant.find(current_user.merchant_id).items.new(item_params)
+    if @item.save
       flash[:success] = "Yer hold be brimming with booty! Er, yer item do be created."
       redirect_to '/merchant/items'
     else
-      flash[:error] = 'No'
-      redirect_to '/merchant/items/new'
+      flash[:error] = "Avast! There do be fields missing or incorrect. #{@item.errors.full_messages.to_sentence}. Ye scallywag."
+      render :new
     end
   end
 
