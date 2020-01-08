@@ -5,7 +5,7 @@
 ## Dev Team
 
 ### [Daniel Frampton](https://github.com/DanielEFrampton)
-### [Melissa Robnins](https://github.com/mel-rob)
+### [Melissa Robbins](https://github.com/mel-rob)
 ### [Phillip DeLong](https://github.com/philjdelong)
 ### [De'Marcus Kirby](https://github.com/DanielEFrampton)
 
