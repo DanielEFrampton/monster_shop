@@ -49,9 +49,9 @@ RSpec.describe "As a merchant user" do
 
         expect(current_path).to eq("/merchant/items")
         expect(page).to have_content("Active")
+
       end
       expect(page).to have_content("Yer item is active! Now go get the booty..")
-
     end
   end
 end
