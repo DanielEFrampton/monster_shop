@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     patch '/items/:id/activation', to: 'items#update'
 
-    resources :items, only: [:index, :new]
+    resources :items, only: [:index, :new, :create]
     resources :item_orders, only: [:update]
     resources :orders, only: [:show]
   end
