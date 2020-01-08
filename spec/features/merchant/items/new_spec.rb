@@ -46,7 +46,7 @@ RSpec.describe 'As a merchant', type: :feature do
           fill_in 'Name', with: 'Used Parrot'
           fill_in 'Description', with: 'Lightly used parrot, knows 4 sea shanties and only mild profanity.'
           fill_in 'Thumbnail Image URL', with: 'https://lafeber.com/pet-birds/wp-content/uploads/OrangeWing_Rio-241x300.jpg'
-          fill_in 'Price', with: '$20'
+          fill_in 'Price', with: '20'
           fill_in 'Current Inventory Count', with: '1'
           click_on 'Create Item'
         end
@@ -74,7 +74,7 @@ RSpec.describe 'As a merchant', type: :feature do
 
           fill_in 'Name', with: 'Used Parrot'
           fill_in 'Description', with: 'Lightly used parrot, knows 4 sea shanties and only mild profanity.'
-          fill_in 'Price', with: '$20'
+          fill_in 'Price', with: '20'
           fill_in 'Current Inventory Count', with: '1'
 
           click_on 'Create Item'
