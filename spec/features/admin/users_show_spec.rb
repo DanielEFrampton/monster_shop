@@ -20,6 +20,7 @@ RSpec.describe 'admin users show page' do
     expect(page).to have_content(@default_user_1.email)
 
     expect(page).to_not have_link("Update Profile")
+    expect(page).to_not have_link("Update Password")
 
     visit "/admin/users/#{@default_user_2.id}"
 
@@ -31,5 +32,6 @@ RSpec.describe 'admin users show page' do
     expect(page).to have_content(@default_user_2.email)
 
     expect(page).to_not have_link("Update Profile")
+    expect(page).to_not have_link("Update Password")
   end
 end
