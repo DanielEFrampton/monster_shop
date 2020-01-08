@@ -10,6 +10,7 @@ class User < ApplicationRecord
                         :password_confirmation
 
   has_many :orders
+  belongs_to :merchant, optional: true
   has_secure_password
   enum role: %w(default merchant admin)
 
