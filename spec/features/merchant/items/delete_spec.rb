@@ -11,47 +11,30 @@ RSpec.describe "As a merchant user" do
       @employee = create(:user, role: 1, merchant_id: @merchant.id)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@employee)
 
-    end
+      @order = @employee.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      @order.item_orders.create!(item: @chain, price: @chain.price, quantity: 2)
 
-    it 'shows me a list of that merchants items' do
       visit "merchant/items"
-
-      within "#item-#{@tire.id}" do
-        expect(page).to have_content(@tire.name)
-        expect(page).to have_content("Price: $#{@tire.price}")
-        expect(page).to have_css("img[src*='#{@tire.image}']")
-        expect(page).to have_content("Active")
-        expect(page).to have_content(@tire.description)
-        expect(page).to have_content("Inventory: #{@tire.inventory}")
-      end
     end
 
-    it "i can deactivate any active items" do
-      visit "/merchant/items"
+    it 'i click button to delete an item and see flash message' do
 
       within "#item-#{@tire.id}" do
-        expect(page).to have_content("Active")
-        click_button 'Deactivate'
-
-        expect(current_path).to eq("/merchant/items")
-        expect(page).to have_content("Inactive")
+        click_button 'Delete Item'
+        expect(current_path).to eq('/merchant/items')
       end
-      expect(page).to have_content("Yer item has scurvy. Inactive!")
-
+      expect(page).to_not have_content(@tire.name)
+      expect(page).to have_content("Yer item walked the plank fer good!")
     end
 
-    it "i can activate any inactive items" do
-      visit "/merchant/items"
-
+    it "i cannot delete an item that has been ordered" do
       within "#item-#{@chain.id}" do
-        expect(page).to have_content("Inactive")
-        click_button 'Activate'
-
-        expect(current_path).to eq("/merchant/items")
-        expect(page).to have_content("Active")
-
+        click_button 'Delete Item'
+        expect(current_path).to eq('/merchant/items')
       end
-      expect(page).to have_content("Yer item is active! Now go get the booty..")
+
+      expect(page).to have_content(@chain.name)
+      expect(page).to have_content("ARGH! Ye shan't be deletin booty that's already been plundered!")
     end
   end
 end
