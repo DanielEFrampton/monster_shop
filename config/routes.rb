@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :merchants
   resources :reviews, only: [:edit, :update, :destroy]
   resources :orders, only: [:new, :update]
-  resources :items do
+  resources :items, except: [:new, :create] do
     resources :reviews, only: [:new, :create]
   end
+  resources :merchants 
 
   get "/", to: "home#index"
   get "/merchants/:merchant_id/items", to: "items#index"
