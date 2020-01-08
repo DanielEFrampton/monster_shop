@@ -26,11 +26,3 @@ RSpec.describe "As a merchant user" do
     end
   end
 end
-
-# As a merchant
-# When I visit my items page
-# I see a button or link to delete the item next to each item that has never been ordered
-# When I click on the "delete" button or link for an item
-# I am returned to my items page
-# I see a flash message indicating this item is now deleted
-# I no longer see this item on the page
