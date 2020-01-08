@@ -1,12 +1,11 @@
 <section>
-  <p>E-mail: <%= locals[:user].email%></p>
-  <p><%= "Address: #{locals[:user].address} #{locals[:user].city}, #{locals[:user].state} #{locals[:user].zip}"%></p>
+  <p>E-mail: <%= @user.email%></p>
+  <p><%= "Address: #{@user.address} #{@user.city}, #{@user.state} #{@user.zip}"%></p>
 
   <% unless current_admin? %>
     <%= link_to "Update Profile", "/profile/edit" %>
     <%= link_to "Update Password", "/profile/edit_password" %>
   <% end %>
 
-  <br>
   <p><%= link_to 'Orders', "/profile/orders" %></p>
 </section>
