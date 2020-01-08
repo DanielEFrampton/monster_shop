@@ -11,6 +11,9 @@ RSpec.describe "As a merchant user" do
       @employee = create(:user, role: 1, merchant_id: @merchant.id)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@employee)
 
+      @order = @employee.orders.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      @order.item_orders.create!(item: @chain, price: @chain.price, quantity: 2)
+
       visit "merchant/items"
     end
 
@@ -20,9 +23,18 @@ RSpec.describe "As a merchant user" do
         click_button 'Delete Item'
         expect(current_path).to eq('/merchant/items')
       end
-
       expect(page).to_not have_content(@tire.name)
       expect(page).to have_content("Yer item walked the plank fer good!")
+    end
+
+    it "i cannot delete an item that has been ordered" do
+      within "#item-#{@chain.id}" do
+        click_button 'Delete Item'
+        expect(current_path).to eq('/merchant/items')
+      end
+
+      expect(page).to have_content(@chain.name)
+      expect(page).to have_content("ARGH! Ye shan't be deletin booty that's already been plundered!")
     end
   end
 end
