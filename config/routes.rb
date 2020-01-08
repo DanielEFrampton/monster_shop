@@ -53,7 +53,7 @@ Rails.application.routes.draw do
 
     patch '/items/:id/activation', to: 'items#activate'
 
-    resources :items, only: [:index, :new, :create, :edit, :update]
+    resources :items, except: [:show]
     resources :item_orders, only: [:update]
     resources :orders, only: [:show]
   end
