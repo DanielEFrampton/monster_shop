@@ -2,7 +2,11 @@
   <p>E-mail: <%= @user.email%></p>
   <p><%= "Address: #{@user.address} #{@user.city}, #{@user.state} #{@user.zip}"%></p>
 
-  <% unless current_admin? %>
+  <% if current_admin? %>
+    <%= link_to "Update Profile", "/admin/users/#{@user.id}/edit" %>
+    <%= link_to "Update Password", "/admin/users/#{@user.id}/edit_password" %>
+
+  <% else %>
     <%= link_to "Update Profile", "/profile/edit" %>
     <%= link_to "Update Password", "/profile/edit_password" %>
   <% end %>
