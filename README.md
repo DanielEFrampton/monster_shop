@@ -94,6 +94,18 @@ Fonts:
 
 ## Screenshots
 
+### Homepage
+<img width="1440" alt="Screen Shot 2020-01-08 at 11 35 57 AM" src="https://user-images.githubusercontent.com/36940278/72099493-a218fe00-3318-11ea-97ac-658a3f9b93b9.png">
+
+### Item Show Page
+<img width="1437" alt="Screen Shot 2020-01-09 at 11 11 50 AM" src="https://user-images.githubusercontent.com/36940278/72099696-09cf4900-3319-11ea-8612-faa37349fb7e.png">
+
+### Cart Confirmation 
+<img width="1440" alt="Screen Shot 2020-01-09 at 12 47 41 PM" src="https://user-images.githubusercontent.com/36940278/72099639-ec01e400-3318-11ea-8cd4-efad5c2ac1d1.png">
+
+### Mechant Show Page
+<img width="1439" alt="Screen Shot 2020-01-09 at 11 17 37 AM" src="https://user-images.githubusercontent.com/36940278/72099717-1bb0ec00-3319-11ea-84d8-cf0af5992085.png">
+
 ## Order Status
 
 1. 'pending' means a user has placed items in a cart and "checked out" to create an order, merchants may or may not have fulfilled any items yet
