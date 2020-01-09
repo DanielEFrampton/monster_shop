@@ -17,6 +17,7 @@
 <img width="702" alt="Screen Shot 2020-01-08 at 11 51 20 AM" src="https://user-images.githubusercontent.com/36940278/72007001-ad9cf400-3248-11ea-9f22-cc9f790f3d3a.png">
 
 ## User Roles
+<img width="368" alt="Screen Shot 2020-01-09 at 12 56 08 PM" src="https://user-images.githubusercontent.com/36940278/72100203-1902c680-331a-11ea-84de-18d284cdefda.png">
 
 - Visitor - this type of user is anonymously browsing our site and is not logged in
 Regular User - this user is registered and logged in to the application while performing their work; can place items in a cart and create an order
@@ -24,7 +25,6 @@ Regular User - this user is registered and logged in to the application while pe
 - Admin User - a registered user who has "superuser" access to all areas of the application; user is logged in to perform their work
 
 ### User Example Accounts
-<img width="368" alt="Screen Shot 2020-01-09 at 12 56 08 PM" src="https://user-images.githubusercontent.com/36940278/72100203-1902c680-331a-11ea-84de-18d284cdefda.png">
 
 - Admin
 ```
