@@ -106,7 +106,8 @@ RSpec.describe 'As an admin user', type: :feature do
         expect(page).to_not have_link('Cancel Order')
       end
 
-      it "i can click a link to view order show" do
+    describe "when i visit a user show page "
+      it "i can click a link to view an order show page" do
         visit '/admin'
 
         within "#order-#{@order_1.id}" do
@@ -116,3 +117,17 @@ RSpec.describe 'As an admin user', type: :feature do
     end
   end
 end
+
+# As an admin user
+# When I visit a user's profile
+# And I click on a link for order's show page
+# My URL route is now something like "/admin/users/5/orders/15"
+# I see all information about the order, including the following information:
+#
+# the ID of the order
+# the date the order was made
+# the date the order was last updated
+# the current status of the order
+# each item the user ordered, including name, description, thumbnail, quantity, price and subtotal
+# the total quantity of items in the whole order
+# the grand total of all items for that order
