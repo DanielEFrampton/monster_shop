@@ -1,25 +1,3 @@
 <h2>Update Profile Information</h2>
 
-<%= form_for @user, url: admin_user_path(@user), method: :patch do |form| %>
-
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-
-  <%= form.label :address %>
-  <%= form.text_field :address %>
-
-  <%= form.label :city %>
-  <%= form.text_field :city %>
-
-  <%= form.label :state %>
-  <%= form.text_field :state %>
-
-  <%= form.label :zip %>
-  <%= form.text_field :zip %>
-
-  <%= form.label :email %>
-  <%= form.text_field :email %>
-
-  <%= form.submit "Update Info" %>
-
-<% end %>
+<%= render partial: '/partials/users_edit', locals: { path: admin_user_path(@user) } %>
