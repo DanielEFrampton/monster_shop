@@ -21,10 +21,10 @@ RSpec.describe 'admin users show page' do
       expect(current_path).to eq("/admin/users/#{@default_user_1.id}/edit")
       expect(page).to have_content("Update Profile Information")
 
-      fill_in :user_address, with: "7 Seas Drive"
-      fill_in :user_city, with: "Port Saint Kitts"
-      fill_in :user_state, with: "Arrrkansas"
-      fill_in :user_zip, with: "13376"
+      fill_in :address, with: "7 Seas Drive"
+      fill_in :city, with: "Port Saint Kitts"
+      fill_in :state, with: "Arrrkansas"
+      fill_in :zip, with: "13376"
 
       click_on "Update Info"
 
@@ -48,10 +48,10 @@ RSpec.describe 'admin users show page' do
 
       visit "/admin/users/#{@default_user_1.id}/edit"
 
-      fill_in :user_address, with: "7 Seas Drive"
-      fill_in :user_city, with: "Port Saint Kitts"
-      fill_in :user_state, with: "Arrrkansas"
-      fill_in :user_zip, with: ""
+      fill_in :address, with: "7 Seas Drive"
+      fill_in :city, with: "Port Saint Kitts"
+      fill_in :state, with: "Arrrkansas"
+      fill_in :zip, with: ""
 
       click_on "Update Info"
 
@@ -63,7 +63,7 @@ RSpec.describe 'admin users show page' do
 
       visit "/admin/users/#{@default_user_1.id}/edit"
 
-      fill_in :user_email, with: 'fake@faketown.com'
+      fill_in :email, with: 'fake@faketown.com'
 
       click_on "Update Info"
 
