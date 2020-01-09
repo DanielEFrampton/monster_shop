@@ -5,5 +5,6 @@ RSpec.describe 'Home Page' do
     visit '/'
 
     expect(page).to have_content('Ahoy, me hearties! Be ye welcome to Treasure Trove.')
+    expect(page).to have_css(".audio")
   end
 end
