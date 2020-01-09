@@ -45,10 +45,10 @@ class Admin::UsersController < Admin::BaseController
 
   private
     def user_params
-      params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
+      params.permit(:name, :address, :city, :state, :zip, :email)
     end
 
     def update_pass_params
-      params.require(:user).permit(:password, :password_confirmation)
+      params.permit(:password, :password_confirmation)
     end
 end
