@@ -18,7 +18,9 @@
         <p style= "color:red">Inactive</p>
       <% end %>
       <%= link_to "Add Review", "/items/#{@item.id}/reviews/new" %>
-      <%= button_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
+      <% unless cart.limit_reached?(@item.id) %>
+        <%= button_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
+      <% end %>
     </section>
   </section>
 </center>
