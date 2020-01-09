@@ -6,8 +6,8 @@ class User < ApplicationRecord
                         :city,
                         :state,
                         :zip,
-                        :password,
-                        :password_confirmation
+                        :password_digest
+
 
   has_many :orders
   belongs_to :merchant, optional: true
