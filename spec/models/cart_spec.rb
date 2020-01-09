@@ -27,15 +27,15 @@ RSpec.describe Cart, type: :model do
     describe 'limit_reached?' do
       it 'checks if item quantity in cart is equal to item inventory' do
         item = create(:item, inventory: 5)
-        cart = Cart.new({item.id => 4})
+        cart = Cart.new({item.id.to_s => 4})
 
-        expect(cart.contents[item.id]).to eq(4)
-        expect(cart.limit_reached?(item.id)).to eq(false)
+        expect(cart.contents[item.id.to_s]).to eq(4)
+        expect(cart.limit_reached?(item.id.to_s)).to eq(false)
 
-        cart.add_quantity(item.id)
+        cart.add_quantity(item.id.to_s)
 
-        expect(cart.contents[item.id]).to eq(5)
-        expect(cart.limit_reached?(item.id)).to eq(true)
+        expect(cart.contents[item.id.to_s]).to eq(5)
+        expect(cart.limit_reached?(item.id.to_s)).to eq(true)
       end
     end
 
