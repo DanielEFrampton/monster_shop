@@ -105,6 +105,14 @@ RSpec.describe 'As an admin user', type: :feature do
         visit "profile/orders/#{order_4.id}"
         expect(page).to_not have_link('Cancel Order')
       end
+
+      it "i can click a link to view order show" do
+        visit '/admin'
+
+        within "#order-#{@order_1.id}" do
+          expect(page).to have_link("#{@order_1.id}", href: "/admin/users/#{@order_1.user.id}/orders/#{@order_1.id}")
+        end
+      end
     end
   end
 end
