@@ -24,6 +24,7 @@ Regular User - this user is registered and logged in to the application while pe
 - Admin User - a registered user who has "superuser" access to all areas of the application; user is logged in to perform their work
 
 ### User Example Accounts
+<img width="368" alt="Screen Shot 2020-01-09 at 12 56 08 PM" src="https://user-images.githubusercontent.com/36940278/72100203-1902c680-331a-11ea-84de-18d284cdefda.png">
 
 - Admin
 ```
@@ -102,6 +103,9 @@ Fonts:
 
 ### Cart Confirmation 
 <img width="1440" alt="Screen Shot 2020-01-09 at 12 47 41 PM" src="https://user-images.githubusercontent.com/36940278/72099639-ec01e400-3318-11ea-8cd4-efad5c2ac1d1.png">
+
+### Cart
+<img width="1438" alt="Screen Shot 2020-01-09 at 12 59 51 PM" src="https://user-images.githubusercontent.com/36940278/72100485-a0e8d080-331a-11ea-9bad-bc3de3c48e5b.png">
 
 ### Mechant Show Page
 <img width="1439" alt="Screen Shot 2020-01-09 at 11 17 37 AM" src="https://user-images.githubusercontent.com/36940278/72099717-1bb0ec00-3319-11ea-84d8-cf0af5992085.png">
