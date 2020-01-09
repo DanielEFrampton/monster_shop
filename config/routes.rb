@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :items, except: [:new, :create] do
     resources :reviews, only: [:new, :create]
   end
-  resources :merchants 
+  resources :merchants
 
   get "/", to: "home#index"
   get "/merchants/:merchant_id/items", to: "items#index"
@@ -46,6 +46,9 @@ Rails.application.routes.draw do
     resources :merchants, only: [:show]
     get '/', to: 'dashboard#index'
     patch '/merchants/:id/:enable_disable', to: 'merchants#update'
-    resources :users, only: [:index, :show]
+
+    resources :users, only: [:index, :show] do
+      resources :orders, only: [:index, :show]
+    end
   end
 end
