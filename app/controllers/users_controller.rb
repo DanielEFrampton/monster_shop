@@ -30,10 +30,10 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.update(user_params)
+    @user.update(update_user_params)
     if @user.save
       flash[:success] = "Your information has been updated."
-      render :show
+      redirect_to '/profile'
     elsif @user.errors.full_messages == ["Email has already been taken"]
       flash[:error] = "Scupper that! That email do be in use by another scallywag!"
       redirect_to '/profile/edit'
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   def update_password
     user = current_user
-    user.update(user_params)
+    user.update(update_pass_params)
     if user.save
       flash[:success] = "Your password has been updated."
       redirect_to '/profile'
@@ -63,4 +63,13 @@ private
   def user_params
     params.permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
   end
+
+  def update_user_params
+    params.permit(:name, :address, :city, :state, :zip, :email)
+  end
+
+  def update_pass_params
+    params.permit(:password, :password_confirmation)
+  end
+
 end

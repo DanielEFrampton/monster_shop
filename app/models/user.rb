@@ -8,7 +8,6 @@ class User < ApplicationRecord
                         :zip,
                         :password_digest
 
-
   has_many :orders
   belongs_to :merchant, optional: true
   has_secure_password
