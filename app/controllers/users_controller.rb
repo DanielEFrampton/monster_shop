@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(current_user.id)
   end
 
   def update
@@ -42,6 +43,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_password
+  end
+
   def update_password
     user = current_user
     user.update(update_pass_params)
@@ -52,9 +56,6 @@ class UsersController < ApplicationController
       flash[:error] = "Scupper that! Ye should fill both fields with the same password!"
       redirect_to '/profile/edit_password'
     end
-  end
-
-  def edit_password
   end
 
 private

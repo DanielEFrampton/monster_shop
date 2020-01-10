@@ -3,6 +3,8 @@
   <p><%= "Address: #{@user.address} #{@user.city}, #{@user.state} #{@user.zip}"%></p>
 
   <% if current_admin? %>
+    <p><%= link_to "Update Profile", "/admin/users/#{@user.id}/edit" %></p>
+    <p><%= link_to "Update Password", "/admin/users/#{@user.id}/edit_password" %></p>
     <p><%= link_to 'Orders', "/admin/users/#{@user.id}/orders" %></p>
   <% else %>
     <p><%= link_to "Update Profile", "/profile/edit" %></p>
