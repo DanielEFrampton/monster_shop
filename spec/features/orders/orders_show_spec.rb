@@ -35,14 +35,14 @@ RSpec.describe "As a Registered User" do
 
       expect(page).to have_content(@tire.name)
       expect(page).to have_content(@tire.description)
-      expect(page).to have_content(@tire.image)
+      expect(page).to have_css("img[src*='#{@tire.image}']")
       expect(page).to have_content(@tire.quantity_ordered)
       expect(page).to have_content(@tire.price)
       expect(page).to have_content("$200.00")
 
       expect(page).to have_content(@pull_toy.name)
       expect(page).to have_content(@pull_toy.description)
-      expect(page).to have_content(@pull_toy.image)
+      expect(page).to have_css("img[src*='#{@pull_toy.image}']")
       expect(page).to have_content(@pull_toy.quantity_ordered)
       expect(page).to have_content(@pull_toy.price)
       expect(page).to have_content("$30.00")

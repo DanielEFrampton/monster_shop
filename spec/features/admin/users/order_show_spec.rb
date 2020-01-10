@@ -35,7 +35,6 @@ RSpec.describe 'As an admin user', type: :feature do
       expect(page).to have_content(@item_1.description)
       expect(page).to have_css("img[src*='#{@item_1.image}']")
 
-
       expect(page).to have_content(@item_2.name)
       expect(page).to have_content(@item_2.description)
       expect(page).to have_css("img[src*='#{@item_2.image}']")
