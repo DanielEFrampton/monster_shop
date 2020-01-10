@@ -3,13 +3,12 @@
   <p><%= "Address: #{@user.address} #{@user.city}, #{@user.state} #{@user.zip}"%></p>
 
   <% if current_admin? %>
-    <%= link_to "Update Profile", "/admin/users/#{@user.id}/edit" %>
-    <%= link_to "Update Password", "/admin/users/#{@user.id}/edit_password" %>
-
+    <p><%= link_to "Update Profile", "/admin/users/#{@user.id}/edit" %></p>
+    <p><%= link_to "Update Password", "/admin/users/#{@user.id}/edit_password" %></p>
+    <p><%= link_to 'Orders', "/admin/users/#{@user.id}/orders" %></p>
   <% else %>
-    <%= link_to "Update Profile", "/profile/edit" %>
-    <%= link_to "Update Password", "/profile/edit_password" %>
+    <p><%= link_to "Update Profile", "/profile/edit" %></p>
+    <p><%= link_to "Update Password", "/profile/edit_password" %></p>
+    <p><%= link_to 'Orders', "/profile/orders" %></p>
   <% end %>
-
-  <p><%= link_to 'Orders', "/profile/orders" %></p>
 </section>

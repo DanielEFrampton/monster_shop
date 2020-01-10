@@ -46,7 +46,9 @@ Rails.application.routes.draw do
     resources :merchants, only: [:show]
     get '/', to: 'dashboard#index'
     patch '/merchants/:id/:enable_disable', to: 'merchants#update'
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update] do
+      resources :orders, only: [:index, :show]
+    end
     get '/users/:id/edit_password', to: 'users#edit_password'
     patch '/users/:id/edit_password', to: 'users#update_password'
   end

@@ -41,9 +41,9 @@ class Cart
   end
 
   def limit_reached?(item_id)
-    @contents[item_id] == Item.find(item_id).inventory
+    @contents[item_id.to_s] == Item.find(item_id).inventory
   end
-  
+
   def quantity_zero?(item_id)
     @contents[item_id] == 0
   end
