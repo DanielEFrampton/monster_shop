@@ -29,8 +29,8 @@ RSpec.describe 'admin users show page' do
 
       click_on "Update Password"
 
-      fill_in :user_password, with: "testingpassword"
-      fill_in :user_password_confirmation, with: "testingpassword"
+      fill_in :password, with: "testingpassword"
+      fill_in :password_confirmation, with: "testingpassword"
 
       click_on "Update Info"
 
@@ -53,16 +53,16 @@ RSpec.describe 'admin users show page' do
 
       visit "/admin/users/#{@default_user_1.id}/edit_password"
 
-      fill_in :user_password, with: 'newpassword'
-      fill_in :user_password_confirmation, with: ''
+      fill_in :password, with: 'newpassword'
+      fill_in :password_confirmation, with: ''
 
       click_on "Update Info"
 
       expect(current_path).to eq("/admin/users/#{@default_user_1.id}/edit_password")
       expect(page).to have_content("Scupper that! Ye should fill both fields with the same password!")
 
-      fill_in :user_password, with: 'newpassword'
-      fill_in :user_password_confirmation, with: 'newpurseword'
+      fill_in :password, with: 'newpassword'
+      fill_in :password_confirmation, with: 'newpurseword'
 
       expect(current_path).to eq("/admin/users/#{@default_user_1.id}/edit_password")
       expect(page).to have_content("Scupper that! Ye should fill both fields with the same password!")
