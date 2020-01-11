@@ -5,9 +5,9 @@ RSpec.describe Coupon, type: :model do
     it { should validate_presence_of :name }
     it { should validate_uniqueness_of :name }
     it { should validate_presence_of :code }
+    it { should validate_inclusion_of(:code).in_range(0..100) }
     it { should validate_uniqueness_of :code }
     it { should validate_presence_of :percent_off }
-    it { should validate_presence_of :enabled }
   end
 
   describe 'initalization' do
@@ -26,8 +26,8 @@ RSpec.describe Coupon, type: :model do
     end
   end
 
-  desribe 'relationships' do
-    it { should belong_to }
+  describe 'relationships' do
+    # it { should belong_to }
   end
 
   describe 'methods' do
