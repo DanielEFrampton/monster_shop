@@ -4,4 +4,12 @@ class Coupon < ApplicationRecord
   validates_inclusion_of :percent_off, in: (0.0..1.0)
 
   belongs_to :merchant
+
+  def enabled_status
+    if enabled
+      "Enabled"
+    else
+      "Disabled"
+    end
+  end
 end
