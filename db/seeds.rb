@@ -21,9 +21,9 @@ admin = User.create(name: "Captain Redbeard",
   password_confirmation: "admin",
   role: 2)
 
-  #merchants
-  bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
-  dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
+#merchants
+pollys_exotic_pets = Merchant.create(name: "Polly's Exotic Pets", address: '342 Ocean Breeze', city: 'Bootytown', state: 'Arrrrrkansas', zip: 80203)
+peglegs_pirate_supply = Merchant.create(name: "Pegleg's Pirate Supply", address: '763 Blazing Way', city: 'Ember', state: 'Volcano Island', zip: 80210)
 
 merchant_user = User.create(name: "Admiral Redbeard",
   address: "123 Ocean Breeze",
@@ -33,12 +33,8 @@ merchant_user = User.create(name: "Admiral Redbeard",
   email: 'merchant@treasuretrove.com',
   password: "merchant",
   password_confirmation: "merchant",
-  merchant_id: bike_shop.id,
+  merchant_id: peglegs_pirate_supply.id,
   role: 1)
-
-#merchants
-pollys_exotic_pets = Merchant.create(name: "Polly's Exotic Pets", address: '342 Ocean Breeze', city: 'Bootytown', state: 'Arrrrrkansas', zip: 80203)
-peglegs_pirate_supply = Merchant.create(name: "Pegleg's Pirate Supply", address: '763 Blazing Way', city: 'Ember', state: 'Volcano Island', zip: 80210)
 
 #pollys_exotic_pets items
 marcel = pollys_exotic_pets.items.create(name: "Marcel", description: "Young and well-behaved capuchin monkey. Skilled at thievary and creating distraction. Looking for a loyal companion and adventurous partner-in-crime.", price: 250, image: "https://www.rainforest-alliance.org/sites/default/files/styles/750w_585h/public/2016-09/capuchin-monkey-baby.jpg?itok=4uOxFicS", inventory: 1)
