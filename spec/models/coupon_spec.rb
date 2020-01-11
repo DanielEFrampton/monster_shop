@@ -31,5 +31,14 @@ RSpec.describe Coupon, type: :model do
   end
 
   describe 'methods' do
+    describe 'instance methods' do
+      it 'enabled_status' do
+        coupon_1 = Coupon.new(name: "50%-off Coupon", code: "ABC123", percent_off: 0.5)
+        coupon_2 = Coupon.new(name: "50%-off Coupon", code: "ABC123", percent_off: 0.5, enabled: false)
+
+        expect(coupon_1.enabled_status).to eq('Enabled')
+        expect(coupon_2.enabled_status).to eq('Disabled')
+      end
+    end
   end
 end
