@@ -15,8 +15,8 @@ RSpec.describe 'As a merchant user', type: :feature do
                                 merchant_id: @merchant.id,
                                 role: 1)
 
-    @coupon_1 = Coupon.new(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 0.50)
-    @coupon_2 = Coupon.new(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 0.75)
+    @coupon_1 = @merchant.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 0.50)
+    @coupon_2 = @merchant.coupons.create!(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 0.75)
 
     visit '/'
     click_on 'Login'
@@ -36,16 +36,16 @@ RSpec.describe 'As a merchant user', type: :feature do
 
     it 'I see the id, name, code, percentage off, and enabled status of all my coupons' do
       within "#coupon-#{@coupon_1.id}" do
-        expect(page).to have_link("#{@coupon_1.id}", href: "/coupons/#{@coupon_1.id}")
-        expect(page).to have_link("#{@coupon_1.name}", href: "/coupons/#{@coupon_1.id}")
+        expect(page).to have_link("#{@coupon_1.id}", href: "/merchant/coupons/#{@coupon_1.id}")
+        expect(page).to have_link("#{@coupon_1.name}", href: "/merchant/coupons/#{@coupon_1.id}")
         expect(page).to have_content("#{@coupon_1.code}")
         expect(page).to have_content("#{@coupon_1.percent_off}")
         expect(page).to have_content("#{@coupon_1.enabled_status}")
       end
 
       within "#coupon-#{@coupon_2.id}" do
-        expect(page).to have_link("#{@coupon_2.id}", href: "/coupons/#{@coupon_2.id}")
-        expect(page).to have_link("#{@coupon_2.name}", href: "/coupons/#{@coupon_2.id}")
+        expect(page).to have_link("#{@coupon_2.id}", href: "/merchant/coupons/#{@coupon_2.id}")
+        expect(page).to have_link("#{@coupon_2.name}", href: "/merchant/coupons/#{@coupon_2.id}")
         expect(page).to have_content("#{@coupon_2.code}")
         expect(page).to have_content("#{@coupon_2.percent_off}")
         expect(page).to have_content("#{@coupon_2.enabled_status}")
