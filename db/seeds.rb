@@ -21,9 +21,9 @@ admin = User.create(name: "Captain Redbeard",
   password_confirmation: "admin",
   role: 2)
 
-  #merchants
-  bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
-  dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
+#merchants
+pollys_exotic_pets = Merchant.create(name: "Polly's Exotic Pets", address: '342 Ocean Breeze', city: 'Bootytown', state: 'Arrrrrkansas', zip: 80203)
+peglegs_pirate_supply = Merchant.create(name: "Pegleg's Pirate Supply", address: '763 Blazing Way', city: 'Ember', state: 'Volcano Island', zip: 80210)
 
 merchant_user = User.create(name: "Admiral Redbeard",
   address: "123 Ocean Breeze",
@@ -33,12 +33,8 @@ merchant_user = User.create(name: "Admiral Redbeard",
   email: 'merchant@treasuretrove.com',
   password: "merchant",
   password_confirmation: "merchant",
-  merchant_id: bike_shop.id,
+  merchant_id: peglegs_pirate_supply.id,
   role: 1)
-
-#merchants
-pollys_exotic_pets = Merchant.create(name: "Polly's Exotic Pets", address: '342 Ocean Breeze', city: 'Bootytown', state: 'Arrrrrkansas', zip: 80203)
-peglegs_pirate_supply = Merchant.create(name: "Pegleg's Pirate Supply", address: '763 Blazing Way', city: 'Ember', state: 'Volcano Island', zip: 80210)
 
 #pollys_exotic_pets items
 marcel = pollys_exotic_pets.items.create(name: "Marcel", description: "Young and well-behaved capuchin monkey. Skilled at thievary and creating distraction. Looking for a loyal companion and adventurous partner-in-crime.", price: 250, image: "https://www.rainforest-alliance.org/sites/default/files/styles/750w_585h/public/2016-09/capuchin-monkey-baby.jpg?itok=4uOxFicS", inventory: 1)
@@ -48,3 +44,7 @@ plague_infected_rats = pollys_exotic_pets.items.create(name: "Assorted Rats", de
 #peglegs_pirate_supply items
 classic_pirate_hooks = peglegs_pirate_supply.items.create(name: "Classic Pirate Hooks", description: "Detailed iron hooks with leather detail and excellent quality. One size fits all. Suitable for the left or right.", price: 55, image: "https://i.etsystatic.com/18476426/c/2078/1651/79/0/il/25e48f/2041284127/il_340x270.2041284127_ix7b.jpg", inventory: 32)
 sill_eye_patches = peglegs_pirate_supply.items.create(name: "Silk Eye Patches", description: "Superb feel. The ladies love 'em. You'll forget you even lost an eye.", price: 21, image: "https://cdn2.bigcommerce.com/server2700/obcuok9/products/338/images/8859/362xl__85092.1403126477.1280.1280.jpg?c=2", inventory: 21)
+
+# peglegs_pirate_supply coupons
+coupon_1 = peglegs_pirate_supply.coupons.create(name: "50%-off Coupon", code: "ABC123", percent_off: 0.5)
+coupon_2 = peglegs_pirate_supply.coupons.create(name: "50%-off Coupon", code: "ABC123", percent_off: 0.5, enabled: false)

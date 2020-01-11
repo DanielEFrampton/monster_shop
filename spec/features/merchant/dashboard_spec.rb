@@ -72,5 +72,11 @@ RSpec.describe 'the merchant dashboard' do
 
       expect(page).to have_link "View My Items"
     end
+
+    it "can see a link to manage their merchant's coupons" do
+      visit '/merchant'
+
+      expect(page).to have_link("Manage My Coupons", href: "/merchant/coupons")
+    end
   end
 end

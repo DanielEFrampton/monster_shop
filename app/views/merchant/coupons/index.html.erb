@@ -1,0 +1,28 @@
+<h1>Manage My Coupons</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Code</th>
+    <th>Percent Off</th>
+    <th>Status</th>
+    <th>Modify</th>
+  </tr>
+  <% @coupons.each do |coupon| %>
+    <tr id="coupon-<%= coupon.id %>">
+      <td><%= link_to coupon.id, "/merchant/coupons/#{coupon.id}" %></td>
+      <td><%= link_to coupon.name, "/merchant/coupons/#{coupon.id}" %></td>
+      <td><%= coupon.code %></td>
+      <td><%= coupon.percent_off %></td>
+      <td><%= coupon.enabled_status %></td>
+      <td>
+        <% if coupon.enabled %>
+          <%= button_tag 'Disable' %>
+        <% else %>
+          <%= button_tag 'Enable' %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
