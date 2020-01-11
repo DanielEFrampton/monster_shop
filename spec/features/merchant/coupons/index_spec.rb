@@ -40,7 +40,7 @@ RSpec.describe 'As a merchant user', type: :feature do
         expect(page).to have_link("#{@coupon_1.name}", href: "/coupons/#{@coupon_1.id}")
         expect(page).to have_content("#{@coupon_1.code}")
         expect(page).to have_content("#{@coupon_1.percent_off}")
-        expect(page).to have_content("#{@coupon_1.enabled}")
+        expect(page).to have_content("#{@coupon_1.enabled_status}")
       end
 
       within "#coupon-#{@coupon_2.id}" do
@@ -48,7 +48,7 @@ RSpec.describe 'As a merchant user', type: :feature do
         expect(page).to have_link("#{@coupon_2.name}", href: "/coupons/#{@coupon_2.id}")
         expect(page).to have_content("#{@coupon_2.code}")
         expect(page).to have_content("#{@coupon_2.percent_off}")
-        expect(page).to have_content("#{@coupon_2.enabled}")
+        expect(page).to have_content("#{@coupon_2.enabled_status}")
       end
     end
 
