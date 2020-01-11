@@ -17,6 +17,14 @@ RSpec.describe 'As a merchant user', type: :feature do
 
     @coupon_1 = Coupon.new(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 0.50)
     @coupon_2 = Coupon.new(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 0.75)
+
+    visit '/'
+    click_on 'Login'
+
+    fill_in 'Email Address', with: @merchant_user.email
+    fill_in 'Password', with: 'merchant'
+
+    click_button 'Login'
   end
 
   describe "when I visit my coupons index view" do
