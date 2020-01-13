@@ -53,9 +53,9 @@ RSpec.describe 'As a logged-in Merchant user', type: :feature do
 
       it 'I see fields for name, code, and percent off with existing values' do
         expect(page).to have_content("Edit Coupon")
-        expect(page).to have_field('Name', value: @coupon_1.name)
-        expect(page).to have_field('Code', value: @coupon_1.code)
-        expect(page).to have_field('Percent Off', value: '50%')
+        expect(page).to have_field('Name', with: @coupon_1.name)
+        expect(page).to have_field('Code', with: @coupon_1.code)
+        expect(page).to have_field('Percent Off', with: '50%')
       end
 
       describe 'and I enter new or changed valid values and click "Update Coupon"' do
