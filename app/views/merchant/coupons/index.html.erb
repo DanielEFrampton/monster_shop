@@ -18,7 +18,7 @@
       <td><%= link_to coupon.id, "/merchant/coupons/#{coupon.id}" %></td>
       <td><%= link_to coupon.name, "/merchant/coupons/#{coupon.id}" %></td>
       <td><%= coupon.code %></td>
-      <td><%= coupon.percent_off %></td>
+      <td><%= number_to_percentage(coupon.percent_off, strip_insignificant_zeros: true) %></td>
       <td><%= coupon.enabled_status %></td>
       <td>
         <% if coupon.enabled %>
