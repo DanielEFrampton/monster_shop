@@ -15,8 +15,8 @@ RSpec.describe 'As a merchant user', type: :feature do
                                 merchant_id: @merchant.id,
                                 role: 1)
 
-    @coupon_1 = @merchant.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 0.50)
-    @coupon_2 = @merchant.coupons.create!(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 0.75)
+    @coupon_1 = @merchant.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 50)
+    @coupon_2 = @merchant.coupons.create!(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 75, enabled: false)
 
     visit '/'
     click_on 'Login'
@@ -39,7 +39,7 @@ RSpec.describe 'As a merchant user', type: :feature do
         expect(page).to have_link("#{@coupon_1.id}", href: "/merchant/coupons/#{@coupon_1.id}")
         expect(page).to have_link("#{@coupon_1.name}", href: "/merchant/coupons/#{@coupon_1.id}")
         expect(page).to have_content("#{@coupon_1.code}")
-        expect(page).to have_content("#{@coupon_1.percent_off}")
+        expect(page).to have_content("#{@coupon_1.percent_off}%")
         expect(page).to have_content("#{@coupon_1.enabled_status}")
       end
 
@@ -47,18 +47,41 @@ RSpec.describe 'As a merchant user', type: :feature do
         expect(page).to have_link("#{@coupon_2.id}", href: "/merchant/coupons/#{@coupon_2.id}")
         expect(page).to have_link("#{@coupon_2.name}", href: "/merchant/coupons/#{@coupon_2.id}")
         expect(page).to have_content("#{@coupon_2.code}")
-        expect(page).to have_content("#{@coupon_2.percent_off}")
+        expect(page).to have_content("#{@coupon_2.percent_off}%")
         expect(page).to have_content("#{@coupon_2.enabled_status}")
       end
     end
 
     it "the id and name are both links to that coupon's show page" do
+      within "#coupon-#{@coupon_1.id}" do
+        expect(page).to have_link("#{@coupon_1.id}", href: "/merchant/coupons/#{@coupon_1.id}")
+        expect(page).to have_link("#{@coupon_1.name}", href: "/merchant/coupons/#{@coupon_1.id}")
+      end
+
+      within "#coupon-#{@coupon_2.id}" do
+        expect(page).to have_link("#{@coupon_2.id}", href: "/merchant/coupons/#{@coupon_2.id}")
+        expect(page).to have_link("#{@coupon_2.name}", href: "/merchant/coupons/#{@coupon_2.id}")
+      end
     end
 
     it "I see a button next to each coupon to delete that coupon" do
+      within "#coupon-#{@coupon_1.id}" do
+        expect(page).to have_button('Delete')
+      end
+
+      within "#coupon-#{@coupon_2.id}" do
+        expect(page).to have_button('Delete')
+      end
     end
 
     it "I see a button to enable or disable the coupon depending on its status" do
+      within "#coupon-#{@coupon_1.id}" do
+        expect(page).to have_button('Disable')
+      end
+
+      within "#coupon-#{@coupon_2.id}" do
+        expect(page).to have_button('Enable')
+      end
     end
   end
 end
