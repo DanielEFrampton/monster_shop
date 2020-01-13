@@ -51,9 +51,9 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
 
       describe "and I fill out each field with valid info and click 'Create Coupon'" do
         before(:each) do
-          fill_field 'Name', with: "Summer Deal"
-          fill_field 'Code', with: 'SUMMERBLAST'
-          fill_field 'Percent Off', with: '50%'
+          fill_in 'Name', with: "Summer Deal"
+          fill_in 'Code', with: 'SUMMERBLAST'
+          fill_in 'Percent Off', with: '50%'
 
           click_button 'Create Coupon'
         end
@@ -73,9 +73,9 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
 
       describe 'and I fail to fill in all fields' do
         it 'I see an error message and return to the form which shows previously entered data' do
-          fill_field 'Name', with: "Summer Deal"
+          fill_in 'Name', with: "Summer Deal"
           # Code field empty
-          fill_field 'Percent Off', with: '50%'
+          fill_in 'Percent Off', with: '50%'
 
           click_button 'Create Coupon'
 
@@ -84,8 +84,8 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
           expect(page.find_field('Name')).to eq("Summer Deal")
           expect(page.find_field('Percent Off')).to eq("50%")
 
-          fill_field 'Name', with: ''
-          fill_field 'Code', with: 'ACODE'
+          fill_in 'Name', with: ''
+          fill_in 'Code', with: 'ACODE'
 
           click_button 'Create Coupon'
 
@@ -99,9 +99,9 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
 
       describe 'and I enter a name or code that already exists in the db' do
         it 'I see an error message and return to the form which shows previously entered data' do
-          fill_field 'Name', with: @coupon_1.name
-          fill_field 'Code', with: 'SUMMERBLAST'
-          fill_field 'Percent Off', with: '50%'
+          fill_in 'Name', with: @coupon_1.name
+          fill_in 'Code', with: 'SUMMERBLAST'
+          fill_in 'Percent Off', with: '50%'
 
           click_button 'Create Coupon'
 
@@ -111,8 +111,8 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
           expect(page.find_field('Code')).to eq('SUMMERBLAST')
           expect(page.find_field('Percent Off')).to eq("50%")
 
-          fill_field 'Name', with: 'Unique Name'
-          fill_field 'Code', with: @coupon_1.code
+          fill_in 'Name', with: 'Unique Name'
+          fill_in 'Code', with: @coupon_1.code
 
           click_button 'Create Coupon'
 
@@ -126,9 +126,9 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
 
       describe 'and I enter a percent off value outside of 0-100' do
         before(:each) do
-          fill_field 'Name', with: "Summer Deal"
-          fill_field 'Code', with: 'SUMMERBLAST'
-          fill_field 'Percent Off', with: '50%'
+          fill_in 'Name', with: "Summer Deal"
+          fill_in 'Code', with: 'SUMMERBLAST'
+          fill_in 'Percent Off', with: '50%'
 
           click_button 'Create Coupon'
         end
