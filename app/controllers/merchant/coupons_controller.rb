@@ -4,6 +4,7 @@ class Merchant::CouponsController < Merchant::BaseController
   end
 
   def new
+    @coupon = Coupon.new
   end
 
   def create
