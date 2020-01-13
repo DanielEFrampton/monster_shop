@@ -22,6 +22,14 @@ class Merchant::CouponsController < Merchant::BaseController
   end
 
   def update
+    @coupon = Coupon.find(params[:id])
+    @coupon.update(coupon_params)
+    if @coupon.save
+      redirect_to '/merchant/coupons'
+    else
+      flash[:error] = @coupon.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   private
