@@ -1,22 +1,29 @@
-<% if !@merchant.nil? %>
+<% if @merchant %>
+  <nav id="page-actions">
+    <%= link_to "View My Items", "/merchant/items" %>
+  </nav>
 
   <section id="merchant-info">
     <h3>Dashboard for <%= @merchant.name %></h3>
-      <p><%= @merchant.address %><br>
+
+    <p>
+      <%= @merchant.address %><br>
       <%= @merchant.city %><br>
       <%= @merchant.state %><br>
-      <%= @merchant.zip %><br>
+      <%= @merchant.zip %>
+    </p>
   </section>
 
-  <section id="pending-orders"
+  <section id="pending-orders">
     <h3>Pending Orders</h3>
-      <table>
-        <tr>
-          <th>Order ID</th>
-          <th>Date</th>
-          <th>Item Quantity</th>
-          <th>Grand Total</th>
-        </tr>
+
+    <table>
+      <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Item Quantity</th>
+        <th>Grand Total</th>
+      </tr>
       <% @merchant.pending_orders.each do |order| %>
         <tr id="order-<%= order.id %>">
           <td><%= link_to order.id, "/merchant/orders/#{order.id}" %></td>
@@ -24,9 +31,7 @@
           <td><%= order.item_count_for_merchant(@merchant.id) %></td>
           <td><%= number_to_currency(order.grand_total_for_merchant(@merchant.id)) %></td>
         </tr>
-        <% end %>
-    </section><br>
-
-     <%= link_to "View My Items", "/merchant/items" %>
-     
+      <% end %>
+    </table>
+  </section>
 <% end %>

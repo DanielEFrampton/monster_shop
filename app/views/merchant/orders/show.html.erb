@@ -1,9 +1,12 @@
 <h1>Order Details for Order #<%= @order.id %></h1>
 
-<h2>Customer Name: <%= @order.name %></h2>
-<p>Address: <%= @order.address %> <%= @order.city %>, <%= @order.state %> <%= @order.zip %></p>
+<section>
+  <h2>Customer Name: <%= @order.name %></h2>
+  <p>Address: <%= @order.address %> <%= @order.city %>, <%= @order.state %> <%= @order.zip %></p>
+</section>
 
-<h2>Items Ordered</h2>
+<section>
+  <h2>Items Ordered</h2>
   <% @order.item_orders.each do |item_order| %>
     <% unless item_order.item.merchant_id != current_user.merchant_id %>
       <section id="item-<%= item_order.item.id %>">
@@ -21,3 +24,4 @@
       </section>
     <% end %>
   <% end %>
+</section>

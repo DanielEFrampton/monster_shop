@@ -1,30 +1,29 @@
 <h1><%= link_to @item.name, "/items/#{@item.id}" %></h1>
+
 <p align="center">Sold by: <%=link_to @item.merchant.name, "/merchants/#{@item.merchant.id}" %> </p>
+
 <section align = "center" id = "average-rating">
   <p>Average Rating: <%= @item.average_review %></p>
 </section>
-<center>
-  <section class = "item-show-grid">
-    <section class = "item-show-item">
-      <img src= <%= @item.image %>>
-    </section>
-    <section style="text-align:left" class = "item-show-item">
-      <p><%= @item.description %></p>
-      <p>Price: <%= number_to_currency(@item.price )%> </p>
-      <p>Inventory: <%= @item.inventory %> </p>
-      <% if @item.active? %>
-        <p style= "color:green">Active</p>
-      <% else %>
-        <p style= "color:red">Inactive</p>
-      <% end %>
-      <%= link_to "Add Review", "/items/#{@item.id}/reviews/new" %>
-      <% unless cart.limit_reached?(@item.id) || current_admin? %>
-        <%= button_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
-      <% end %>
-    </section>
+
+<section class = "item-show-grid">
+  <%= image_tag @item.image, class: "item-show-item" %>
+  <section class="item-show-item">
+    <p><%= @item.description %></p>
+    <p>Price: <%= number_to_currency(@item.price )%> </p>
+    <p>Inventory: <%= @item.inventory %> </p>
+    <% if @item.active? %>
+      <p style= "color:green">Active</p>
+    <% else %>
+      <p style= "color:red">Inactive</p>
+    <% end %>
+    <%= link_to "Add Review", "/items/#{@item.id}/reviews/new" %>
+    <% unless cart.limit_reached?(@item.id) || current_admin? %>
+      <%= button_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
+    <% end %>
   </section>
-</center>
-<center>
+</section>
+
 <section class = "review-stats">
   <%if @item.reviews.empty? %>
     <h3>This item has not yet been reviewed.</h3>
@@ -42,6 +41,7 @@
       <% end %>
     </section>
   </section>
+
   <section class = "list-reviews">
     <h2>All Reviews</h2>
     <% @item.reviews.each do |review| %>
@@ -55,4 +55,3 @@
     <% end %>
   <% end %>
 </section>
-</center>

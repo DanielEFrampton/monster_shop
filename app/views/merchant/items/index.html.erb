@@ -1,5 +1,8 @@
 <h1><%= link_to @merchant.name, "/merchants/#{@merchant.id}"%><span> Items</span></h1>
-<p><%= link_to "Add New Item", "/merchant/items/new" %></p>
+
+<nav id="page-actions">
+  <%= link_to "Add New Item", "/merchant/items/new" %>
+</nav>
 
 <h2>Items</h2>
 <% @merchant.items.each do |item| %>

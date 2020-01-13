@@ -6,29 +6,29 @@ RSpec.describe 'Site Navigation' do
     it "I see a nav bar with links to all pages" do
       visit '/merchants'
 
-      within 'nav' do
+      within '.topnav' do
         click_link 'All Items'
       end
 
       expect(current_path).to eq('/items')
 
-      within 'nav' do
+      within '.topnav' do
         click_link 'All Merchants'
       end
 
       expect(current_path).to eq('/merchants')
 
-      within 'nav' do
+      within '.topnav' do
         click_link 'Treasure Trove'
       end
 
       expect(current_path).to eq("/")
 
-      within 'nav' do
+      within '.topnav' do
         expect(page).to have_link('Login')
       end
 
-      within 'nav' do
+      within '.topnav' do
         expect(page).to have_link('Register')
       end
 
@@ -37,13 +37,13 @@ RSpec.describe 'Site Navigation' do
     it "I can see a cart indicator on all pages" do
       visit '/merchants'
 
-      within 'nav' do
+      within '.topnav' do
         expect(page).to have_content("Cart: 0")
       end
 
       visit '/items'
 
-      within 'nav' do
+      within '.topnav' do
         expect(page).to have_content("Cart: 0")
       end
 

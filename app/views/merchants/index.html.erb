@@ -1,5 +1,9 @@
 <h1 align = "center">Merchants</h1>
-<p align="center"><%= link_to "New Merchant", "/merchants/new" %></p>
+
+<nav id="page-actions">
+  <%= link_to "New Merchant", "/merchants/new" %>
+</nav>
+
 <section class = "grid-container">
   <% @merchants.each do |merchant|%>
     <section class = "grid-item" id="merchant-<%= merchant.id %>">

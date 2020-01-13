@@ -1,6 +1,6 @@
 <h1>Manage My Coupons</h1>
 
-<nav>
+<nav id="page-actions">
   <%= link_to 'Create New Coupon', '/merchant/coupons/new' %>
 </nav>
 
@@ -26,7 +26,7 @@
         <% else %>
           <%= button_tag 'Enable' %>
         <% end %>
-        <%= button_to 'Edit', "/merchant/coupons/#{coupon.id}/edit", method: :get %>
+        <%= button_to 'Edit', "/merchant/coupons/#{coupon.id}/edit", method: :get, id: 'inline-button', form: { id: 'inline-form' } %>
         <%= button_tag 'Delete' %>
       </td>
     </tr>
