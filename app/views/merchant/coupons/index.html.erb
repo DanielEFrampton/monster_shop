@@ -20,7 +20,7 @@
       <td><%= coupon.code %></td>
       <td><%= number_to_percentage(coupon.percent_off, strip_insignificant_zeros: true) %></td>
       <td><%= coupon.enabled_status %></td>
-      <td>
+      <td id="modify-buttons">
         <% if coupon.enabled %>
           <%= button_tag 'Disable' %>
         <% else %>
