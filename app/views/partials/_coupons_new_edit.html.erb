@@ -1,0 +1,11 @@
+<%= form_for [:merchant, @coupon] do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :code %>
+  <%= f.text_field :code %>
+  <%= f.label :percent_off, 'Percent Off'%>
+  <%= f.text_field :percent_off,
+                   value: number_to_percentage(@coupon.percent_off,
+                   strip_insignificant_zeros: true) %>
+  <%= f.submit %>
+<% end %>
