@@ -15,7 +15,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
                                 merchant_id: @merchant.id,
                                 role: 1)
 
-    @coupon_1 = @merchant.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 0.50)
+    @coupon_1 = @merchant.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 50)
 
     visit '/'
     click_on 'Login'
