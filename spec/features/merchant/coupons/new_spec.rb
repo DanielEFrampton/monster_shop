@@ -59,7 +59,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
         end
 
         it 'I am returned to my coupons index page and see that coupon listed with all the info I input as well as its ID and enabled status as Enabled' do
-          expect(current_path).to be('/merchant/coupons')
+          expect(current_path).to eq('/merchant/coupons')
 
           within "#coupon-#{Coupon.last.id}" do
             expect(page).to have_content("#{Coupon.last.id}")
