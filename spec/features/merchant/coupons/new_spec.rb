@@ -78,7 +78,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
 
           click_button 'Create Coupon'
 
-          expect(page).to have_content("Code field cannot be empty")
+          expect(page).to have_content("Code can't be blank")
           expect(page).to have_css('h1', text: 'Create New Coupon')
           expect(page.find_field('Name').value).to eq("Summer Deal")
           expect(page.find_field('Percent Off').value).to eq("50%")
@@ -88,7 +88,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
 
           click_button 'Create Coupon'
 
-          expect(page).to have_content("Name field cannot be empty")
+          expect(page).to have_content("Name can't be blank")
           expect(page).to have_css('h1', text: 'Create New Coupon')
           expect(page.find_field('Name').value).to eq('')
           expect(page.find_field('Code').value).to eq('ACODE')
@@ -127,7 +127,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
         before(:each) do
           fill_in 'Name', with: "Summer Deal"
           fill_in 'Code', with: 'SUMMERBLAST'
-          fill_in 'Percent Off', with: '50%'
+          fill_in 'Percent Off', with: '110%'
 
           click_button 'Create Coupon'
         end
@@ -137,7 +137,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
           expect(page.find('h1').text).to eq('Create New Coupon')
           expect(page.find_field('Name').value).to eq('Summer Deal')
           expect(page.find_field('Code').value).to eq('SUMMERBLAST')
-          expect(page.find_field('Percent Off').value).to eq("50%")
+          expect(page.find_field('Percent Off').value).to eq("110%")
         end
       end
     end
