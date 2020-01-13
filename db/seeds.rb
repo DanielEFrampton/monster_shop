@@ -46,5 +46,5 @@ classic_pirate_hooks = peglegs_pirate_supply.items.create(name: "Classic Pirate 
 sill_eye_patches = peglegs_pirate_supply.items.create(name: "Silk Eye Patches", description: "Superb feel. The ladies love 'em. You'll forget you even lost an eye.", price: 21, image: "https://cdn2.bigcommerce.com/server2700/obcuok9/products/338/images/8859/362xl__85092.1403126477.1280.1280.jpg?c=2", inventory: 21)
 
 # peglegs_pirate_supply coupons
-coupon_1 = peglegs_pirate_supply.coupons.create(name: "50%-off Coupon", code: "ABC123", percent_off: 0.5)
-coupon_2 = peglegs_pirate_supply.coupons.create(name: "50%-off Coupon", code: "ABC123", percent_off: 0.5, enabled: false)
+coupon_1 = peglegs_pirate_supply.coupons.create(name: "50%-off Coupon", code: "ABC123", percent_off: 50)
+coupon_2 = peglegs_pirate_supply.coupons.create(name: "50%-off Coupon", code: "ABC123", percent_off: 50, enabled: false)
