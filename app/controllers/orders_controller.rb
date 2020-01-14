@@ -2,6 +2,11 @@ class OrdersController <ApplicationController
   before_action :format_params
 
   def new
+    if session[:coupon_id]
+      @coupon = Coupon.find(session[:coupon_id])
+    else
+      @coupon = nil
+    end
   end
 
   def index
