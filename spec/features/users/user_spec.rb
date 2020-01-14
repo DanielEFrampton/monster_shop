@@ -15,7 +15,7 @@ RSpec.describe "a registered regular user" do
 
     visit "/merchants"
 
-    within 'nav' do
+    within '.topnav' do
       expect(page).to have_link("Profile")
       expect(page).to have_link("Logout")
       expect(page).to_not have_link("Login")

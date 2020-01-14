@@ -1,22 +1,21 @@
 <h1 align= "center">Create Merchant</h1>
-<center>
-  <%= form_tag '/merchants', method: :post do |f| %>
 
-    <%= label_tag :name %>
-    <%= text_field_tag :name %>
+<%= form_tag '/merchants', method: :post do |f| %>
 
-    <%= label_tag :address %>
-    <%= text_field_tag :address %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
 
-    <%= label_tag :city %>
-    <%= text_field_tag :city %>
+  <%= label_tag :address %>
+  <%= text_field_tag :address %>
 
-    <%= label_tag :state %>
-    <%= text_field_tag :state %>
+  <%= label_tag :city %>
+  <%= text_field_tag :city %>
 
-    <%= label_tag :zip %>
-    <%= text_field_tag :zip %>
+  <%= label_tag :state %>
+  <%= text_field_tag :state %>
 
-    <%= submit_tag 'Create Merchant' %>
-  <% end %>
-</center>
+  <%= label_tag :zip %>
+  <%= text_field_tag :zip %>
+
+  <%= submit_tag 'Create Merchant' %>
+<% end %>

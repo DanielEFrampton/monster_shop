@@ -1,11 +1,11 @@
 <h1>Order: <%= @order.id %></h1>
+
 <p>Status: <%= @order.status %></p>
 <p>Order for: <%= @order.name %></p>
 <p>Date Created: <%= @order.created_at %></p>
 <p>Date Updated: <%= @order.updated_at %></p>
-  <br>
 
-<h1>Items:</h1>
+<h2>Items:</h2>
 <ol>
   <% @order.item_orders.each do |item_order| %>
     <li>

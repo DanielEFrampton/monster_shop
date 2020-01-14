@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <nav class = "topnav">
+    <nav class="topnav">
       <%= link_to "Treasure Trove", "/", id: 'site-title' %>
       <%= link_to "All Merchants", "/merchants"%>
       <%= link_to "All Items", "/items"%>
@@ -47,6 +47,11 @@
         <p><%= msg %></p>
       </div>
     <% end %>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+    <!-- <footer> -->
+      <!-- <p>Recommended Listening:</p><%= audio_tag("003 Deep in the Caribbean.ogg", controls: true, autoplay: false, class: "audio") %> -->
+    <!-- </footer> -->
   </body>
 </html>

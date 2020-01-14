@@ -1,0 +1,30 @@
+<main id="item-gallery">
+  <% items.each do |item| %>
+    <section class="item-box" id='item-<%=item.id%>'>
+      <%= link_to image_tag("#{item.image}"), "/items/#{item.id}", id: "img-#{item.id}", class: "item-image-link" %>
+      <div class="item-content">
+        <h2> <%=link_to item.name, "/items/#{item.id}" %> </h2>
+        <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
+        <p><%= item.description %></p>
+        <p>Price: <%=number_to_currency(item.price) %></p>
+        <p>Inventory: <%= item.inventory %></p>
+        <% if item.active? %>
+          <p>Active</p>
+        <% else %>
+          <p>Inactive</p>
+        <% end %>
+        <% if merchant_view %>
+          <div class="item-controls">
+            <% if item.active? %>
+              <%= button_to 'Deactivate', "/merchant/items/#{item.id}/activation", form: {id: "inline-form"}, method: :patch %>
+            <% else %>
+              <%= button_to 'Activate', "/merchant/items/#{item.id}/activation", form: {id: "inline-form"}, method: :patch %>
+            <% end %>
+            <%= button_to 'Edit Item', "/merchant/items/#{item.id}/edit", form: {id: "inline-form"}, method: :get%>
+            <%= button_to 'Delete Item', "/merchant/items/#{item.id}", form: {id: "inline-form"}, method: :delete %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</main>

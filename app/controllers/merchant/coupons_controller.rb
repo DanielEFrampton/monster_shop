@@ -17,6 +17,21 @@ class Merchant::CouponsController < Merchant::BaseController
     end
   end
 
+  def edit
+    @coupon = Coupon.find(params[:id])
+  end
+
+  def update
+    @coupon = Coupon.find(params[:id])
+    @coupon.update(coupon_params)
+    if @coupon.save
+      redirect_to '/merchant/coupons'
+    else
+      flash[:error] = @coupon.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   private
     def coupon_params
       params.require('coupon').permit(:name, :code, :percent_off)
