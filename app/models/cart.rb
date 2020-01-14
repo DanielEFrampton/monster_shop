@@ -1,8 +1,9 @@
 class Cart
-  attr_reader :contents
+  attr_reader :contents, :coupon
 
-  def initialize(contents)
+  def initialize(contents, coupon_id=nil)
     @contents = contents
+    @coupon = Coupon.find(coupon_id) if coupon_id
   end
 
   def add_item(item)
@@ -22,13 +23,36 @@ class Cart
     item_quantity
   end
 
+  def discounted_price(item)
+    if item.merchant_id == @coupon.merchant_id
+      item.discounted_price(@coupon.percent_off)
+    else
+      item.price
+    end
+  end
+
   def subtotal(item)
-    item.price * @contents[item.id.to_s]
+    if @coupon
+      discounted_price(item) * @contents[item.id.to_s]
+    else
+      item.price * @contents[item.id.to_s]
+    end
   end
 
   def total
     @contents.sum do |item_id,quantity|
       Item.find(item_id).price * quantity
+    end
+  end
+
+  def discounted_total
+    @contents.sum do |item_id, quantity|
+      item = Item.find(item_id)
+      if item.merchant_id == @coupon.merchant_id
+        (item.price * (coupon.percent_off / 100.0)) * quantity
+      else
+        item.price * quantity
+      end
     end
   end
 

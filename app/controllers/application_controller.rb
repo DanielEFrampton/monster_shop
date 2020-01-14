@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :cart, :current_user, :current_merchant?, :current_admin?
 
   def cart
-    @cart ||= Cart.new(session[:cart] ||= Hash.new(0))
+    @cart ||= Cart.new(session[:cart] ||= Hash.new(0), session[:coupon_id] || nil )
   end
 
   def current_user

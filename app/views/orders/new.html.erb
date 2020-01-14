@@ -1,4 +1,4 @@
-<h1 align = "center">Order</h1>
+<h1>Checkout</h1>
 
 <table>
   <tr>
@@ -10,35 +10,59 @@
     <th>Inventory</th>
   </tr>
   <% cart.items.each do |item, quantity| %>
-    <tr id='order-item-<%= item.id%>'>
-      <td><h2><%= link_to item.name, "/items/#{item.id}" %></h2></td>
-      <td><p><%= number_to_currency(item.price) %></p></td>
-      <td><p><%= quantity %></p></td>
-      <td><p><%= number_to_currency(cart.subtotal(item)) %></p><td>
-      <td><p><%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %></p></td>
-      <td><p><%= item.inventory %> in stock</p></td>
+    <tr id='item-<%= item.id%>'>
+      <td class='item-name'><%= link_to item.name, "/items/#{item.id}" %></td>
+      <% if @coupon && @coupon.merchant_id == item.merchant_id %>
+        <td class='item-price'>
+          <del><%= number_to_currency(item.price) %></del>
+          <%= number_to_currency(item.discounted_price(@coupon.percent_off)) %> (-<%= @coupon.percent_off %>%)
+        </td>
+      <% else %>
+        <td class='item-price'><%= number_to_currency(item.price) %></td>
+      <% end %>
+      <td class='item-quantity'><%= quantity %></td>
+      <td class='item-subtotal'><%= number_to_currency(cart.subtotal(item)) %></td>
+      <td class='item-merchant'><%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %></td>
+      <td class='item-inventory'><%= item.inventory %> in stock</td>
     </tr>
   <% end %>
 </table>
-<h3 align = "right">Total: <%= number_to_currency(cart.total)%></h3>
-<center>
-  <h2>Shipping Info:</h2>
-  <%= form_tag "/users/#{current_user.id}/orders", method: :post do %>
-    <%= label_tag :name %>
-    <%= text_field_tag :name %>
 
-    <%= label_tag :address %>
-    <%= text_field_tag :address %>
+<h2 id='total'>Total: <%= number_to_currency(cart.total)%></h2>
 
-    <%= label_tag :city %>
-    <%= text_field_tag :city %>
+<% if @coupon %>
+  <h2 id='discounted_total'>Discounted Total: <%= number_to_currency(cart.discounted_total) %></h2>
+  <section>
+    <p>
+      Applied Coupon: <%= @coupon.name %><br />
+      Discount: <%= @coupon.percent_off %>% off items from <%= @coupon.merchant.name %>
+    </p>
+  </section>
+<% end %>
 
-    <%= label_tag :state %>
-    <%= text_field_tag :state %>
+<%= form_tag '/coupon' do %>
+  <%= label_tag :code, 'Coupon Code' %>
+  <%= text_field_tag :code %>
+  <%= submit_tag 'Add Coupon' %>
+<% end %>
 
-    <%= label_tag :zip %>
-    <%= number_field_tag :zip %>
+<%= form_tag "/users/#{current_user.id}/orders", method: :post do %>
+  <h2>Enter Your Shipping Info:</h2>
 
-    <%= submit_tag 'Create Order' %>
-  <% end %>
-</center>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+
+  <%= label_tag :address %>
+  <%= text_field_tag :address %>
+
+  <%= label_tag :city %>
+  <%= text_field_tag :city %>
+
+  <%= label_tag :state %>
+  <%= text_field_tag :state %>
+
+  <%= label_tag :zip %>
+  <%= text_field_tag :zip %>
+
+  <%= submit_tag 'Create Order' %>
+<% end %>

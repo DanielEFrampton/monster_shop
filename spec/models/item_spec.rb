@@ -89,5 +89,16 @@ describe Item, type: :model do
       order.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
       expect(@chain.no_orders?).to eq(false)
     end
+
+    describe 'discounted_price' do
+      it 'returns price reduced by given number used as percentage off' do
+        item_2 = create(:item, price: 145)
+        item_3 = create(:item, price: 35)
+
+        expect(@chain.discounted_price(50)).to eq(25)
+        expect(item_2.discounted_price(100)).to eq(145)
+        expect(item_3.discounted_price(0)).to eq(35)
+      end
+    end
   end
 end

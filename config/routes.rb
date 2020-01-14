@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  post '/coupon', to: 'coupon#add'
+
   namespace :merchant do
     get '/', to: 'dashboard#index'
     patch '/items/:id/activation', to: 'items#activate'
