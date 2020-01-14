@@ -44,6 +44,25 @@ RSpec.describe Coupon, type: :model do
           expect(coupon_2.used?).to eq(true)
         end
       end
+
+      describe 'used_by?' do
+        it 'returns true if associated with at least one order by given user' do
+          merchant = create(:merchant)
+          coupon_1 = Coupon.create!(name: "50%-off Coupon", code: "ABC123", percent_off: 50, merchant: merchant)
+          coupon_2 = Coupon.create!(name: "75%-off Coupon", code: "ABC124", percent_off: 75, merchant: merchant)
+          order = create(:order, coupon_id: coupon_2.id)
+          user_1 = create(:user)
+          user_2 = create(:user)
+
+          user_1.orders << order
+
+          expect(coupon_1.used_by?(user_1)).to eq(false)
+          expect(coupon_1.used_by?(user_2)).to eq(false)
+          expect(coupon_2.used_by?(user_1)).to eq(true)
+          expect(coupon_2.used_by?(user_2)).to eq(false)
+        end
+      end
+
       describe 'enabled_status' do
         it 'prints enabled status as a string' do
           merchant = create(:merchant)
