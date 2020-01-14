@@ -57,7 +57,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
 
     describe 'and I click on the delete button next to a used coupon' do
       before(:each) do
-        within "#coupon-#{@coupon_1.id}" do
+        within "#coupon-#{@coupon_2.id}" do
           click_on 'Delete'
         end
       end
