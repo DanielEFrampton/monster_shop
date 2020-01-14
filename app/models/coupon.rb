@@ -10,6 +10,10 @@ class Coupon < ApplicationRecord
     orders.any?
   end
 
+  def used_by?(user)
+    orders.where(user: user).any?
+  end
+
   def enabled_status
     if enabled
       "Enabled"
