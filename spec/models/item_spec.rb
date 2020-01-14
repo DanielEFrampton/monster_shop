@@ -96,7 +96,7 @@ describe Item, type: :model do
         item_3 = create(:item, price: 35)
 
         expect(@chain.discounted_price(50)).to eq(25)
-        expect(item_2.discounted_price(100)).to eq(145)
+        expect(item_2.discounted_price(100)).to eq(0)
         expect(item_3.discounted_price(0)).to eq(35)
       end
     end

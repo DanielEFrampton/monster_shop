@@ -9,6 +9,7 @@ class CartController < ApplicationController
   def show
     render file: "/public/404" if current_admin?
     @items = cart.items
+    @coupon = cart.coupon
   end
 
   def empty

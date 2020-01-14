@@ -49,7 +49,7 @@ RSpec.describe 'As a registered user', type: :feature do
       end
 
       it "I see a discounted total with the coupon's percentage off applied" do
-        expect(page).to have_content('Discounted Total: $121')
+        expect(page).to have_content('Discounted Total: $121.00')
       end
 
       it 'I see the name and code of the currently applied coupon' do

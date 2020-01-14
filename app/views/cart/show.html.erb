@@ -5,7 +5,7 @@
     <%= link_to "Empty Cart", "/cart", method: :delete %>
   </nav>
 
-  <table class = "cart-items">
+  <table class="cart-items">
     <tr>
       <th>Item</th>
       <th>Sold By</th>
@@ -14,42 +14,42 @@
       <th>Subtotal</th>
     </tr>
     <% @items.each do |item,quantity| %>
-      <tr id= "cart-item-<%=item.id%>">
+      <tr id="item-<%=item.id%>">
         <td>
-          <p align = "center">
-            <span>
-              <img align = "center" id="cart-image" src= <%= item.image %>>
-              <%=link_to item.name, "/items/#{item.id}" %>
-            </span>
-          </p>
+          <%= image_tag item.image, id: 'cart-image' %>
+          <%= link_to item.name, "/items/#{item.id}" %>
         </td>
-        <td>
-          <p align = "center">
-            <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}"%>
-          </p>
-        </td>
-        <td>
-          <p><%=number_to_currency(item.price)%></p>
-        </td>
-        <td>
-          <span id="cart-item-<%=item.id%>-quantity">
+        <td><%=link_to item.merchant.name, "/merchants/#{item.merchant.id}"%></td>
+        <% if @coupon && @coupon.merchant_id == item.merchant_id %>
+          <td class='item-price'>
+            <del><%= number_to_currency(item.price) %></del>
+            <%= number_to_currency(item.discounted_price(@coupon.percent_off)) %> (-<%= @coupon.percent_off %>%)
+          </td>
+        <% else %>
+          <td class='item-price'><%= number_to_currency(item.price) %></td>
+        <% end %>
+        <td id="item-<%=item.id%>-quantity">
             <p>
               <%= link_to '-', "/cart?increment_decrement=decrement&item_id=#{item.id}", method: :patch %>
               <%= quantity %>
               <%= link_to '+', "/cart?increment_decrement=increment&item_id=#{item.id}", method: :patch %>
             </p>
-            <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
-          </span>
-          </td>
-        <td>
-          <p><%=number_to_currency(cart.subtotal(item))%></p>
-      </td>
+            <%= link_to "Remove", "/cart/#{item.id}",method: :delete %>
+        </td>
+        <td class="item-subtotal"><%= number_to_currency(cart.subtotal(item)) %></td>
       </tr>
     <% end %>
   </table>
 
   <section id="cart-controls">
-    <p>Total: <%= number_to_currency(cart.total) %></p>
+    <h2>Total: <%= number_to_currency(cart.total) %></h2>
+    <% if @coupon %>
+      <h2 id='discounted_total'>Discounted Total: <%= number_to_currency(cart.discounted_total) %></h2>
+      <p>
+        Applied Coupon: <%= @coupon.name %><br />
+        Discount: <%= @coupon.percent_off %>% off items from <%= @coupon.merchant.name %>
+      </p>
+    <% end %>
     <% if !current_user %>
       <p>Ye scurvy rascal! Surely ye must <%= link_to 'register', '/register' %> or <%= link_to 'log in', '/login' %> to finish the checkout process!</p>
     <% else %>

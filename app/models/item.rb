@@ -43,7 +43,7 @@ class Item <ApplicationRecord
 
   def discounted_price(percent_off)
     if percent_off > 0
-      price * (percent_off / 100.0)
+      price - (price * (percent_off / 100.0))
     else
       price
     end
