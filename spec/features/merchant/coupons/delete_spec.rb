@@ -17,7 +17,10 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
                                   role: 1)
 
       @coupon_1 = @merchant.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 50)
-      @coupon_2 = @merchant.coupons.create!(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 75, enabled: false)
+      @coupon_2 = @merchant.coupons.create!(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 75)
+
+      @user = create(:user)
+      @order = create(:order, coupon: @coupon_2)
 
       visit '/'
       click_on 'Login'
@@ -32,23 +35,43 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
 
     describe "and I click on the delete button next to a coupon that's never been used" do
       before(:each) do
+        within "#coupon-#{@coupon_1.id}" do
+          click_on 'Delete'
+        end
+      end
+
+      it 'I remain on the coupons index' do
+        expect(current_path).to eq('/merchant/coupons')
       end
 
       it "I see a flash message confirming it was deleted" do
+        expect(page).to have_content "Ye sent that blasted coupon into the briny deep! Aye, 'twas deleted."
       end
 
       it 'and it no longer appears on the coupon index' do
+        expect(page).not_to have_css("#coupon-#{@coupon_1.id}")
+        expect(page).not_to have_content("#{@coupon_1.id}")
+        expect(page).not_to have_content("#{@coupon_1.name}")
+        expect(page).not_to have_content("#{@coupon_1.code}")
       end
     end
 
     describe 'and I click on the delete button next to a used coupon' do
       before(:each) do
+        within "#coupon-#{@coupon_1.id}" do
+          click_on 'Delete'
+        end
       end
 
       it "I see a flash message saying it couldn't be deleted" do
+        expect(page).to have_content("Scupper that! This here coupon been used on an order, ye can't delete it.")
       end
 
       it "and coupon remains on index" do
+        expect(page).to have_css("#coupon-#{@coupon_2.id}")
+        expect(page).to have_content("#{@coupon_2.id}")
+        expect(page).to have_content("#{@coupon_2.name}")
+        expect(page).to have_content("#{@coupon_2.code}")
       end
     end
   end
