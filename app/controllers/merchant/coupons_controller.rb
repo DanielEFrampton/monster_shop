@@ -32,6 +32,17 @@ class Merchant::CouponsController < Merchant::BaseController
     end
   end
 
+  def destroy
+    coupon = Coupon.find(params[:id])
+    if coupon.used?
+      flash[:error] = "Scupper that! This here coupon been used on an order, ye can't delete it."
+    else
+      coupon.delete
+      flash[:success] = "Ye sent that blasted coupon into the briny deep! Aye, 'twas deleted."
+    end
+    redirect_to '/merchant/coupons'
+  end
+
   private
     def coupon_params
       params.require('coupon').permit(:name, :code, :percent_off)

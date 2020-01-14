@@ -28,14 +28,27 @@ RSpec.describe Coupon, type: :model do
 
   describe 'relationships' do
     it { should belong_to :merchant }
+    it { should have_many :orders }
   end
 
   describe 'methods' do
     describe 'instance methods' do
+      describe 'used?' do
+        it 'returns true if associated with at least on order or false if not' do
+          merchant = create(:merchant)
+          coupon_1 = Coupon.create!(name: "50%-off Coupon", code: "ABC123", percent_off: 50, merchant: merchant)
+          coupon_2 = Coupon.create!(name: "75%-off Coupon", code: "ABC124", percent_off: 75, merchant: merchant)
+          order = create(:order, coupon_id: coupon_2.id)
+
+          expect(coupon_1.used?).to eq(false)
+          expect(coupon_2.used?).to eq(true)
+        end
+      end
       describe 'enabled_status' do
         it 'prints enabled status as a string' do
-          coupon_1 = Coupon.new(name: "50%-off Coupon", code: "ABC123", percent_off: 50)
-          coupon_2 = Coupon.new(name: "50%-off Coupon", code: "ABC123", percent_off: 50, enabled: false)
+          merchant = create(:merchant)
+          coupon_1 = Coupon.create(name: "50%-off Coupon", code: "ABC123", percent_off: 50, merchant: merchant)
+          coupon_2 = Coupon.create(name: "75%-off Coupon", code: "ABC124", percent_off: 75, enabled: false, merchant: merchant)
 
           expect(coupon_1.enabled_status).to eq('Enabled')
           expect(coupon_2.enabled_status).to eq('Disabled')
