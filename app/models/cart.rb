@@ -49,7 +49,7 @@ class Cart
     @contents.sum do |item_id, quantity|
       item = Item.find(item_id)
       if item.merchant_id == @coupon.merchant_id
-        (item.price * (coupon.percent_off / 100.0)) * quantity
+        item.discounted_price(@coupon.percent_off) * quantity
       else
         item.price * quantity
       end
