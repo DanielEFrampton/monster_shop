@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resources :items, except: [:show]
     resources :item_orders, only: [:update]
     resources :orders, only: [:show]
-    resources :coupons, only: [:index, :new, :create, :edit, :update]
+    resources :coupons
   end
 
   namespace :admin do
