@@ -40,4 +40,12 @@ class Item <ApplicationRecord
   def quantity_ordered
     item_orders.sum(:quantity)
   end
+
+  def discounted_price(percent_off)
+    if percent_off > 0
+      price * (percent_off / 100.0)
+    else
+      price
+    end
+  end
 end
