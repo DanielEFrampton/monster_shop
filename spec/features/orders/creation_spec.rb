@@ -68,6 +68,87 @@ RSpec.describe 'As a registered user', type: :feature do
           expect(page.find('.item-subtotal')).to have_content("$1.00")
         end
       end
+
+      describe "and I enter valid shipping information and click 'Create Order'" do
+        before(:each) do
+          name = "Bert"
+          address = "123 Sesame St."
+          city = "NYC"
+          state = "New York"
+          zip = '10001'
+
+          fill_in :name, with: name
+          fill_in :address, with: address
+          fill_in :city, with: city
+          fill_in :state, with: state
+          fill_in :zip, with: zip
+
+          click_on 'Create Order'
+        end
+
+        describe 'and I click on the ID of the order I just created' do
+          before(:each) do
+            click_on "#{Order.last.id}"
+          end
+
+          it 'I see the coupon name and code I just used and the discounted total' do
+            expect(page).to have_content("Applied Coupon: #{@coupon_1.name}, Code: #{@coupon_1.code}")
+            within '#discounted-total' do
+              expect(page).to have_content("Discounted Total: $121.00")
+            end
+          end
+        end
+
+        describe 'and I add items to cart and return to my cart' do
+          before(:each) do
+            visit "/items/#{@paper.id}"
+            click_on "Add To Cart"
+            visit "/items/#{@paper.id}"
+            click_on "Add To Cart"
+            visit "/items/#{@tire.id}"
+            click_on "Add To Cart"
+            visit "/items/#{@pencil.id}"
+            click_on "Add To Cart"
+
+            visit "/cart"
+          end
+
+          it 'I should see no currently applied coupon' do
+            expect(page).not_to have_content('Applied Coupon')
+            expect(page).not_to have_content('Discount')
+            expect(page).not_to have_content('Discounted Total')
+          end
+
+          describe 'and I click Checkout again' do
+            before(:each) do
+              click_on 'Checkout'
+            end
+
+            it 'I should see no currently applied coupon' do
+              expect(page).not_to have_content('Applied Coupon')
+              expect(page).not_to have_content('Discount')
+              expect(page).not_to have_content('Discounted Total')
+            end
+
+            describe 'and I input the same coupon code and click Add Coupon' do
+              before(:each) do
+                fill_in 'Coupon Code', with: @coupon_1.code
+                click_on 'Add Coupon'
+              end
+
+              it "I should see a flash message saying I can't use it again" do
+                expect(page).to have_content "Ye been at the grog?! Ye can't use the same coupon twice!"
+              end
+
+              it "I should not see that coupon appear as currently applied" do
+                expect(page).not_to have_content("Applied Coupon: #{@coupon_1.name}")
+                expect(page).not_to have_content("Discount: #{@coupon_1.percent_off}% off items from #{@coupon_1.merchant.name}")
+              end
+            end
+          end
+        end
+
+      end
     end
 
     describe 'when I enter an invalid coupon code' do
