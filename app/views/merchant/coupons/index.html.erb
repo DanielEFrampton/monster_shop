@@ -27,7 +27,7 @@
           <%= button_tag 'Enable' %>
         <% end %>
         <%= button_to 'Edit', "/merchant/coupons/#{coupon.id}/edit", method: :get, id: 'inline-button', form: { id: 'inline-form' } %>
-        <%= button_to 'Delete', "/merchant/coupons/#{coupon.id}", method: :delete, id: 'inline-button', form: { id: 'inline-form' } %>
+        <%= button_to 'Delete', merchant_coupon_path(coupon), method: :delete, id: 'inline-button', form: { id: 'inline-form' } %>
       </td>
     </tr>
   <% end %>
