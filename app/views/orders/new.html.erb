@@ -34,7 +34,7 @@
   <h2 id='discounted_total'>Discounted Total: <%= number_to_currency(cart.discounted_total) %></h2>
   <section>
     <p>
-      Applied Coupon: <%= @coupon.name %>
+      Applied Coupon: <%= @coupon.name %><br />
       Discount: <%= @coupon.percent_off %>% off items from <%= @coupon.merchant.name %>
     </p>
   </section>
