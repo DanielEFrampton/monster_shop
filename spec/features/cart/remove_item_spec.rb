@@ -23,7 +23,7 @@ RSpec.describe 'Cart show' do
         visit "/cart"
 
         @items_in_cart.each do |item|
-          within "#cart-item-#{item.id}" do
+          within "#item-#{item.id}" do
             expect(page).to have_link("Remove")
           end
         end
@@ -32,14 +32,14 @@ RSpec.describe 'Cart show' do
       it 'I can delete individual items from my cart' do
         visit "/cart"
 
-        within "#cart-item-#{@tire.id}" do
+        within "#item-#{@tire.id}" do
           click_on "Remove"
         end
 
         expect(current_path).to eq("/cart")
-        expect(page).to_not have_css("#cart-item-#{@tire.id}")
-        expect(page).to have_css("#cart-item-#{@pencil.id}")
-        expect(page).to have_css("#cart-item-#{@paper.id}")
+        expect(page).to_not have_css("#item-#{@tire.id}")
+        expect(page).to have_css("#item-#{@pencil.id}")
+        expect(page).to have_css("#item-#{@paper.id}")
       end
     end
   end
