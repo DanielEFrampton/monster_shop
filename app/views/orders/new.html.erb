@@ -11,18 +11,18 @@
   </tr>
   <% cart.items.each do |item, quantity| %>
     <tr id='order-item-<%= item.id%>'>
-      <td><h2><%= link_to item.name, "/items/#{item.id}" %></h2></td>
-      <td><p><%= number_to_currency(item.price) %></p></td>
-      <td><p><%= quantity %></p></td>
-      <td><p><%= number_to_currency(cart.subtotal(item)) %></p><td>
-      <td><p><%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %></p></td>
-      <td><p><%= item.inventory %> in stock</p></td>
+      <td><%= link_to item.name, "/items/#{item.id}" %></td>
+      <td><%= number_to_currency(item.price) %></td>
+      <td><%= quantity %></td>
+      <td><%= number_to_currency(cart.subtotal(item)) %></td>
+      <td><%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %></td>
+      <td><%= item.inventory %> in stock</td>
     </tr>
   <% end %>
 </table>
-<h3 align = "right">Total: <%= number_to_currency(cart.total)%></h3>
+<h3 id='total'>Total: <%= number_to_currency(cart.total)%></h3>
 <center>
-  <h2>Shipping Info:</h2>
+  <h2>Enter Your Shipping Info</h2>
   <%= form_tag "/users/#{current_user.id}/orders", method: :post do %>
     <%= label_tag :name %>
     <%= text_field_tag :name %>
