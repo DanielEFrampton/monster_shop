@@ -53,5 +53,18 @@ RSpec.describe Cart, type: :model do
         expect(cart.quantity_zero?(item.id)).to eq(true)
       end
     end
+
+    describe 'discounted_total' do
+      it 'calculates total price of cart after applying current coupon' do
+        merchant_1 = create(:merchant)
+        merchant_2 = create(:merchant)
+        item_1 = create(:item, merchant_id: merchant_1.id, price: 20)
+        item_2 = create(:item, merchant_id: merchant_2.id, price: 10)
+        coupon = item_1.merchant.coupons.create(name: 'Test Coupon', code: 'ABC123', percent_off: 50)
+        cart = Cart.new({item_1.id => 1, item_2.id => 2}, coupon.id)
+
+        expect(cart.discounted_total).to eq(30)
+      end
+    end
   end
 end
