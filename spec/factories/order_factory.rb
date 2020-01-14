@@ -6,5 +6,6 @@ FactoryBot.define do
     state { "Turks & Caicos" }
     zip { "13375" }
     user
+    coupon_id { nil }
   end
 end
