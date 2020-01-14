@@ -13,8 +13,8 @@
         <% else %>
           <p>Inactive</p>
         <% end %>
-        <div class="item-controls">
-          <% if current_merchant? %>
+        <% if merchant_view %>
+          <div class="item-controls">
             <% if item.active? %>
               <%= button_to 'Deactivate', "/merchant/items/#{item.id}/activation", form: {id: "inline-form"}, method: :patch %>
             <% else %>
