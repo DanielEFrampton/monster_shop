@@ -1,4 +1,4 @@
-<h1 align = "center">Order</h1>
+<h1>Checkout</h1>
 
 <table>
   <tr>
@@ -12,7 +12,14 @@
   <% cart.items.each do |item, quantity| %>
     <tr id='item-<%= item.id%>'>
       <td class='item-name'><%= link_to item.name, "/items/#{item.id}" %></td>
-      <td class='item-price'><%= number_to_currency(item.price) %></td>
+      <% if @coupon && @coupon.merchant_id == item.merchant_id %>
+        <td class='item-price'>
+          <del><%= number_to_currency(item.price) %></del>
+          <%= number_to_currency(item.discounted_price(@coupon.percent_off)) %> (-<%= @coupon.percent_off %>%)
+        </td>
+      <% else %>
+        <td class='item-price'><%= number_to_currency(item.price) %></td>
+      <% end %>
       <td class='item-quantity'><%= quantity %></td>
       <td class='item-subtotal'><%= number_to_currency(cart.subtotal(item)) %></td>
       <td class='item-merchant'><%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %></td>
@@ -38,7 +45,6 @@
   <%= text_field_tag :code %>
   <%= submit_tag 'Add Coupon' %>
 <% end %>
-
 
 <%= form_tag "/users/#{current_user.id}/orders", method: :post do %>
   <h2>Enter Your Shipping Info:</h2>
