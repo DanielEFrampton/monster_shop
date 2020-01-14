@@ -17,6 +17,7 @@
 body {
   background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)),
               url('https://i.pinimg.com/originals/f3/80/92/f38092d2933f59ce7526d501493b22fb.jpg');
+  background-attachment: fixed;
   font-family: 'IM Fell English', serif;
   display: flex;
   flex-direction: column;
@@ -111,46 +112,55 @@ section {
   margin-bottom: 1em;
 }
 
-section[id*='review'] {
-  background-color: #DCDCDC;
+#most-least-popular-items {
+  min-width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 1em;
 }
 
-.list-reviews {
-  display: grid;
-  width: 50%;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  grid-gap: 30px;
+#item-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.grid-container {
- 	display: grid;
- 	grid-template-columns: repeat(4,1fr);
- 	grid-template-rows: auto;
- 	grid-gap: 40px;
+.item-box {
+  padding: 1.5em;
+  margin: 1em;
+  width: 90%;
+  height: 325px;
+  display: flex;
+  flex-direction: row;
 }
 
-.grid-item {
- 	background-color: white;
- 	padding: 20px;
-  border: solid;
- 	border-radius: 12px;
-  border-color: #002244;
- 	text-align: center
+.item-image-link a, img {
+  height: 100%;
+  width: 300px;
+  object-fit: cover;
 }
 
-.item-show-grid {
-  display: grid;
-  border: solid;
-  border-radius: 12px;
-  grid-template-columns: repeat(2,1fr);
+.item-box h2 {
+  margin-top: 0em;
 }
 
-.item-show-item {
-  padding: 20px;
-  text-align: right;
+.item-box a {
+  color: black;
 }
 
+.item-content {
+  margin-left: 1.5em;
+}
+
+.item-controls {
+  display: flex;
+  flex-direction: row;
+}
+
+.item-controls * {
+  margin-right: .75em;
+}
 
 .address {
   text-align: center;
