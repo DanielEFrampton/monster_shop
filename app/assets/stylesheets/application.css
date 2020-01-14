@@ -199,11 +199,14 @@ input[type=submit]:hover {
 }
 
 form:not(#inline-form) {
-  align-content: center;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border: 2px solid #002244;
   padding: 2em;
   margin-bottom: 1em;
+  min-width: 40%;
+  max-width: 90%;
 }
 
 .error-flash {
