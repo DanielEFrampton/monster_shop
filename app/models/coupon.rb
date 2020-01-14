@@ -4,6 +4,11 @@ class Coupon < ApplicationRecord
   validates_inclusion_of :percent_off, in: (0..100)
 
   belongs_to :merchant
+  has_many :orders
+
+  def used?
+    orders.any?
+  end
 
   def enabled_status
     if enabled
