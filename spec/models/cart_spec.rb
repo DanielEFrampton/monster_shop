@@ -79,5 +79,18 @@ RSpec.describe Cart, type: :model do
         expect(cart.discounted_price(item_1)).to eq(10)
       end
     end
+
+    describe 'discounted_subtotal' do
+      it 'calculates subtotal of individual item with coupon accounted for' do
+        merchant_1 = create(:merchant)
+        merchant_2 = create(:merchant)
+        item_1 = create(:item, merchant_id: merchant_1.id, price: 20)
+        item_2 = create(:item, merchant_id: merchant_2.id, price: 10)
+        coupon = item_1.merchant.coupons.create(name: 'Test Coupon', code: 'ABC123', percent_off: 50)
+        cart = Cart.new({item_1.id.to_s => 3, item_2.id.to_s => 2}, coupon.id)
+
+        expect(cart.discounted_subtotal(item_1)).to eq(30)
+      end
+    end
   end
 end

@@ -6,6 +6,14 @@ class Coupon < ApplicationRecord
   belongs_to :merchant
   has_many :orders
 
+  def self.reached_limit
+    count >= 5
+  end
+
+  def disabled
+    !enabled
+  end
+
   def used?
     orders.any?
   end

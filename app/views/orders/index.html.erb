@@ -1,15 +1,3 @@
-<h1>All orders for <%= "#{@user.name}" %>: </h1>
+<h1>Your Orders</h1>
 
-<% if @orders != [] %>
-  <% @orders.each do |order| %>
-    <p><%= order.name %>: <%= link_to "#{order.id}", "/profile/orders/#{order.id}" %></p>
-    <p><%= order.created_at %></p>
-    <p><%= order.updated_at %></p>
-    <p><%= order.status %></p>
-    <p><%= order.total_quantity %></p>
-    <p><%= order.grandtotal %></p>
-  <% end %>
-  <br>
-<% else %>
-  <p>No orders at this time</p>
-<% end %>
+<%= render partial: '/partials/orders_index', locals: { orders: @orders } %>

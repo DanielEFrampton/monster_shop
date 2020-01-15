@@ -1,7 +1,11 @@
 <h1>Manage My Coupons</h1>
 
 <nav id="page-actions">
-  <%= link_to 'Create New Coupon', '/merchant/coupons/new' %>
+  <% if @coupons.reached_limit %>
+    <p>You have reached the maximum # of coupons and cannot create more until some are deleted.</p>
+  <% else %>
+    <%= link_to 'Create New Coupon', '/merchant/coupons/new' %>
+  <% end %>
 </nav>
 
 <table>
@@ -22,9 +26,9 @@
       <td><%= coupon.enabled_status %></td>
       <td id="modify-buttons">
         <% if coupon.enabled %>
-          <%= button_tag 'Disable' %>
+          <%= button_to 'Disable', "/merchant/coupons/#{coupon.id}?enabled=false", method: :patch, id: 'inline-button', form: { id: 'inline-form' } %>
         <% else %>
-          <%= button_tag 'Enable' %>
+          <%= button_to 'Enable', "/merchant/coupons/#{coupon.id}?enabled=true", method: :patch, id: 'inline-button', form: { id: 'inline-form' } %>
         <% end %>
         <%= button_to 'Edit', "/merchant/coupons/#{coupon.id}/edit", method: :get, id: 'inline-button', form: { id: 'inline-form' } %>
         <%= button_to 'Delete', merchant_coupon_path(coupon), method: :delete, id: 'inline-button', form: { id: 'inline-form' } %>

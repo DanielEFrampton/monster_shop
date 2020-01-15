@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   post '/coupon', to: 'coupon#add'
+  delete '/coupon', to: 'coupon#remove'
 
   namespace :merchant do
     get '/', to: 'dashboard#index'

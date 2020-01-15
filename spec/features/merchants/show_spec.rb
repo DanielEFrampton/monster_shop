@@ -16,9 +16,9 @@ RSpec.describe 'merchant show page', type: :feature do
     it 'I can see a link to visit the merchant items' do
       visit "/merchants/#{@bike_shop.id}"
 
-      expect(page).to have_link("All #{@bike_shop.name} Items")
+      expect(page).to have_link("View This Merchant's Items")
 
-      click_on "All #{@bike_shop.name} Items"
+      click_on "View This Merchant's Items"
 
       expect(current_path).to eq("/merchants/#{@bike_shop.id}/items")
     end

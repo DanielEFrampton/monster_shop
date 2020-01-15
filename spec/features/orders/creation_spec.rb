@@ -15,6 +15,7 @@ RSpec.describe 'As a registered user', type: :feature do
 
       @coupon_1 = @mike.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 50)
       @coupon_2 = @meg.coupons.create!(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 75)
+      @coupon_3 = @meg.coupons.create!(name: "Disabled Test Coupon", code: "DONTWORK", percent_off: 100, enabled: false)
 
       visit "/items/#{@paper.id}"
       click_on "Add To Cart"
@@ -66,6 +67,22 @@ RSpec.describe 'As a registered user', type: :feature do
         within "#item-#{@pencil.id}" do
           expect(page.find('.item-price')).to have_content("$2.00 $1.00 (-50%)")
           expect(page.find('.item-subtotal')).to have_content("$1.00")
+        end
+      end
+
+      it 'I see a link to remove the coupon' do
+        expect(page).to have_link 'Remove Coupon'
+      end
+
+      describe 'and I click the link to remove the coupon' do
+        before(:each) do
+          click_on 'Remove Coupon'
+        end
+
+        it 'I no longer see that coupon applied or a discounted price' do
+          expect(page).not_to have_content("Applied Coupon: #{@coupon_1.name}")
+          expect(page).not_to have_content("Discount: 50% off items from #{@coupon_1.merchant.name}")
+          expect(page).not_to have_content('Discounted Total:')
         end
       end
 
@@ -151,7 +168,7 @@ RSpec.describe 'As a registered user', type: :feature do
       end
     end
 
-    describe 'when I enter an invalid coupon code' do
+    describe 'when I enter a non-existent coupon code' do
       before(:each) do
         fill_in 'Coupon Code', with: 'NOSUCHCODE'
         click_on 'Add Coupon'
@@ -163,6 +180,26 @@ RSpec.describe 'As a registered user', type: :feature do
 
       it 'I remain on the checkout page' do
         expect(current_path).to eq('/orders/new')
+      end
+    end
+
+    describe 'when I enter a disabled coupon code' do
+      before(:each) do
+        fill_in 'Coupon Code', with: @coupon_3.code
+        click_on 'Add Coupon'
+      end
+
+      it 'I see a flash message' do
+        expect(page).to have_content "Yarr. That coupon was disabled by its merchant. Keelhaul the blaggard!"
+      end
+
+      it 'I remain on the checkout page' do
+        expect(current_path).to eq('/orders/new')
+      end
+
+      it 'the coupon is not displayed as the active coupon' do
+        expect(page).not_to have_content("Applied Coupon: #{@coupon_3.name}")
+        expect(page).not_to have_content("Discount: #{@coupon_3.percent_off}% off items from #{@coupon_1.merchant.name}")
       end
     end
 

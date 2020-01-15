@@ -1,19 +1,26 @@
-<h1><%= link_to @merchant.name, "/merchants/#{@merchant.id}" %></h1>
+<h1><%= @merchant.name %></h1>
 
-<p class="address"><%= @merchant.address %></p>
-<p class="address"><%= @merchant.city %>, <%= @merchant.state %> <%= @merchant.zip %></p>
+<nav id='page-actions'>
+  <%= link_to "View This Merchant's Items", "/merchants/#{@merchant.id}/items" %>
+</nav>
 
-<ul><%= link_to "All #{@merchant.name} Items", "/merchants/#{@merchant.id}/items" %></ul>
-
-<section class = "merchant-stats">
-  <h2>Number of Items: <%=@merchant.item_count%></h2>
-  <% if @merchant.item_count > 0 %>
-    <h2>Average Price of Items: <%=number_to_currency( @merchant.average_item_price)%></h2>
-    <section class = "distinct-cities">
-      <h2>Cities that order these items:</h2>
-      <% @merchant.distinct_cities.each do |city| %>
-        <p><%= city %></p>
-      <% end %>
+<section class='flex-row'>
+  <div>
+    <h2>Merchant Details</h2>
+    <p><%= @merchant.address %></p>
+    <p><%= @merchant.city %>, <%= @merchant.state %> <%= @merchant.zip %></p>
+  </div>
+  <div class="merchant-stats">
+    <h2>Merchant Statistics</h2>
+    <p>Number of Items: <%=@merchant.item_count%></p>
+    <% if @merchant.item_count > 0 %>
+      <p>Average Price of Items: <%=number_to_currency( @merchant.average_item_price)%></p>
     <% end %>
-  </section>
+  </div>
+  <div class="distinct-cities">
+    <h2>Cities Ordering From This Merchant</h2>
+    <% @merchant.distinct_cities.each do |city| %>
+      <p><%= city %></p>
+    <% end %>
+  </div>
 </section>

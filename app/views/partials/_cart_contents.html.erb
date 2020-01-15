@@ -1,0 +1,56 @@
+<table class="cart-items">
+  <tr>
+    <th>Item</th>
+    <th>Sold By</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Subtotal</th>
+    <th>Inventory</th>
+  </tr>
+  <% cart.items.each do |item, quantity| %>
+    <tr id='item-<%= item.id%>'>
+      <td class='item-name' id='item-<%= item.id %>-name'>
+        <%= image_tag item.image, id: 'cart-image' if cart_view %>
+        <%= link_to item.name, "/items/#{item.id}" %>
+      </td>
+      <td class='item-merchant' id='item-<%= item.id %>-merchant'><%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %></td>
+      <% if @coupon && @coupon.merchant_id == item.merchant_id %>
+        <td class='item-price' id='item-<%= item.id %>-price'>
+          <del><%= number_to_currency(item.price) %></del>
+          <span class="discounted"><%= number_to_currency(item.discounted_price(@coupon.percent_off)) %></span> (-<%= @coupon.percent_off %>%)
+        </td>
+      <% else %>
+        <td class='item-price' id='item-<%= item.id %>-price'><%= number_to_currency(item.price) %></td>
+      <% end %>
+      <td class='item-quantity' id='item-<%= item.id %>-quantity'>
+        <p>
+          <%= link_to '-', "/cart?increment_decrement=decrement&item_id=#{item.id}", method: :patch if cart_view %>
+          <%= quantity %>
+          <%= link_to '+', "/cart?increment_decrement=increment&item_id=#{item.id}", method: :patch if cart_view %>
+        </p>
+        <%= link_to "Remove", "/cart/#{item.id}",method: :delete if cart_view %>
+      </td>
+      <td class='item-subtotal' id='item-<%= item.id %>-subtotal'>
+        <% if @coupon && @coupon.merchant_id == item.merchant_id %>
+          <del><%= number_to_currency(cart.subtotal(item)) %></del>
+          <span class='discounted'><%= number_to_currency(cart.discounted_subtotal(item)) %></span>
+        <% else %>
+          <%= number_to_currency(cart.subtotal(item)) %>
+        <% end %>
+      </td>
+      <td class='item-inventory' id='item-<%= item.id %>-inventory'><%= item.inventory %> in stock</td>
+    </tr>
+  <% end %>
+</table>
+
+<section>
+  <h2 id="total">Total: <%= number_to_currency(cart.total) %></h2>
+  <% if @coupon %>
+    <h2 id='discounted_total'>Discounted Total: <span class='discounted'><%= number_to_currency(cart.discounted_total) %></span></h2>
+    <p>
+      Applied Coupon: <%= @coupon.name %><br />
+      Discount: <%= @coupon.percent_off %>% off items from <%= @coupon.merchant.name %>
+    </p>
+    <%= link_to 'Remove Coupon', '/coupon', method: :delete %>
+  <% end %>
+</section>
