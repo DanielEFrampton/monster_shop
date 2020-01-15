@@ -24,19 +24,15 @@ class Cart
   end
 
   def discounted_price(item)
-    if item.merchant_id == @coupon.merchant_id
-      item.discounted_price(@coupon.percent_off)
-    else
-      item.price
-    end
+    item.discounted_price(@coupon.percent_off)
+  end
+
+  def discounted_subtotal(item)
+    discounted_price(item) * @contents[item.id.to_s]
   end
 
   def subtotal(item)
-    if @coupon
-      discounted_price(item) * @contents[item.id.to_s]
-    else
-      item.price * @contents[item.id.to_s]
-    end
+    item.price * @contents[item.id.to_s]
   end
 
   def total
