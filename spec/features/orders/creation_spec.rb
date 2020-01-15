@@ -70,6 +70,22 @@ RSpec.describe 'As a registered user', type: :feature do
         end
       end
 
+      it 'I see a link to remove the coupon' do
+        expect(page).to have_link 'Remove Coupon'
+      end
+
+      describe 'and I click the link to remove the coupon' do
+        before(:each) do
+          click_on 'Remove Coupon'
+        end
+
+        it 'I no longer see that coupon applied or a discounted price' do
+          expect(page).not_to have_content("Applied Coupon: #{@coupon_1.name}")
+          expect(page).not_to have_content("Discount: 50% off items from #{@coupon_1.merchant.name}")
+          expect(page).not_to have_content('Discounted Total:')
+        end
+      end
+
       describe "and I enter valid shipping information and click 'Create Order'" do
         before(:each) do
           name = "Bert"
