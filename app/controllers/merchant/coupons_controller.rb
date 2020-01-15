@@ -27,12 +27,22 @@ class Merchant::CouponsController < Merchant::BaseController
 
   def update
     @coupon = Coupon.find(params[:id])
-    @coupon.update(coupon_params)
-    if @coupon.save
+    if params[:coupon]
+      @coupon.update(coupon_params)
+      if @coupon.save
+        redirect_to '/merchant/coupons'
+      else
+        flash[:error] = @coupon.errors.full_messages.to_sentence
+        render :edit
+      end
+    elsif params[:enabled]
+      @coupon.update(enabled_param)
+      if @coupon.enabled
+        flash[:success] = "The coupon rises from the depths like a monstrous kraken! That is, it's enabled."
+      else
+        flash[:success] = "Yarr, ye keelhauled the coupon. It do be disabled."
+      end
       redirect_to '/merchant/coupons'
-    else
-      flash[:error] = @coupon.errors.full_messages.to_sentence
-      render :edit
     end
   end
 
@@ -50,5 +60,9 @@ class Merchant::CouponsController < Merchant::BaseController
   private
     def coupon_params
       params.require('coupon').permit(:name, :code, :percent_off)
+    end
+
+    def enabled_param
+      params.permit(:enabled)
     end
 end
