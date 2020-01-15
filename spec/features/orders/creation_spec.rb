@@ -180,6 +180,11 @@ RSpec.describe 'As a registered user', type: :feature do
       it 'I remain on the checkout page' do
         expect(current_path).to eq('/orders/new')
       end
+
+      it 'the coupon is not displayed as the active coupon' do
+        expect(page).not_to have_content("Applied Coupon: #{@coupon_3.name}")
+        expect(page).not_to have_content("Discount: #{@coupon_3.percent_off}% off items from #{@coupon_1.merchant.name}")
+      end
     end
 
     it 'I can fill in my info, create a new order, am taken to orders page, see flash message, cart is empty' do
