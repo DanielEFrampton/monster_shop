@@ -1,9 +1,18 @@
-<h1>Admin User Dashboard</h1>
+<h1>All Users</h1>
 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Date Created</th>
+    <th>Role</th>
+  </tr>
 <% @users.each do |user| %>
-  <section id="user-<%= user.id %>">
-    <%= link_to user.name, admin_user_path(user) %>
-    <p>User Created: <%= user.created_date %></p>
-    <p>User Role: <%= user.role %></p>
-  </section>
+  <tr id="user-<%= user.id %>">
+    <td><%= link_to user.name, admin_user_path(user) %></td>
+    <td><%= user.email %></td>
+    <td><%= user.created_date %></td>
+    <td><%= user.role.capitalize %></td>
+  </tr>
 <% end %>
+</table>
