@@ -174,9 +174,9 @@ RSpec.describe 'Cart Show Page', type: :feature do
         @item_1 = create(:item)
         @item_2 = create(:item)
         visit "/items/#{@item_1.id}"
-        click_button('Add To Cart')
+        click_on 'Add To Cart'
         visit "/items/#{@item_2.id}"
-        click_button('Add To Cart')
+        click_on 'Add To Cart'
         visit '/cart'
       end
 

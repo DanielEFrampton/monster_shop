@@ -14,7 +14,7 @@ RSpec.describe 'When I visit an items show page' do
     describe 'If the item inventory is greater than amount in my cart' do
       it "I see a link to add this item to my cart" do
         visit "/items/#{@paper.id}"
-        expect(page).to have_button("Add To Cart")
+        expect(page).to have_link('Add To Cart')
       end
 
       it "I can add this item to my cart" do
@@ -40,12 +40,12 @@ RSpec.describe 'When I visit an items show page' do
     describe 'if the item inventory is equal to or less than the amount of my cart' do
       it 'I do not see a link to add the item to my cart' do
         visit "/items/#{@hook.id}"
-        expect(page).to have_button('Add To Cart')
+        expect(page).to have_link('Add To Cart')
 
         click_on "Add To Cart"
 
         visit "/items/#{@hook.id}"
-        expect(page).to_not have_button('Add To Cart')
+        expect(page).to_not have_link('Add To Cart')
       end
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe 'When I visit an items show page' do
 
       visit "/items/#{@paper.id}"
 
-      expect(page).to_not have_button('Add To Cart')
+      expect(page).to_not have_link('Add To Cart')
     end
   end
 end
