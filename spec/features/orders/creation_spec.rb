@@ -15,6 +15,7 @@ RSpec.describe 'As a registered user', type: :feature do
 
       @coupon_1 = @mike.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 50)
       @coupon_2 = @meg.coupons.create!(name: "Holiday Weekend 75%-Off", code: "75OFF", percent_off: 75)
+      @coupon_3 = @meg.coupons.create!(name: "Disabled Test Coupon", code: "DONTWORK", percent_off: 100, enabled: false)
 
       visit "/items/#{@paper.id}"
       click_on "Add To Cart"
@@ -151,7 +152,7 @@ RSpec.describe 'As a registered user', type: :feature do
       end
     end
 
-    describe 'when I enter an invalid coupon code' do
+    describe 'when I enter a non-existent coupon code' do
       before(:each) do
         fill_in 'Coupon Code', with: 'NOSUCHCODE'
         click_on 'Add Coupon'
@@ -159,6 +160,21 @@ RSpec.describe 'As a registered user', type: :feature do
 
       it 'I see a flash message' do
         expect(page).to have_content "There no be such a coupon with such a code. Check yer spellin'."
+      end
+
+      it 'I remain on the checkout page' do
+        expect(current_path).to eq('/orders/new')
+      end
+    end
+
+    describe 'when I enter a disabled coupon code' do
+      before(:each) do
+        fill_in 'Coupon Code', with: @coupon_3.code
+        click_on 'Add Coupon'
+      end
+
+      it 'I see a flash message' do
+        expect(page).to have_content "Yarr. That coupon was disabled by its merchant. Keelhaul the blaggard!"
       end
 
       it 'I remain on the checkout page' do
