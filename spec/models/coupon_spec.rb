@@ -32,6 +32,24 @@ RSpec.describe Coupon, type: :model do
   end
 
   describe 'methods' do
+    describe 'class methods' do
+      describe 'reached_limit' do
+        it 'returns true if number of coupons meets or exceeds 5' do
+          merchant = create(:merchant)
+          coupon_1 = Coupon.create!(name: "50%-off Coupon", code: "ABC123", percent_off: 50, merchant: merchant)
+          coupon_2 = Coupon.create!(name: "75%-off Coupon", code: "ABC124", percent_off: 75, merchant: merchant, enabled: false)
+          coupon_3 = Coupon.create!(name: "25%-off Coupon", code: "ABC125", percent_off: 25, merchant: merchant)
+          coupon_4 = Coupon.create!(name: "40%-off Coupon", code: "ABC126", percent_off: 40, merchant: merchant, enabled: false)
+          
+          expect(merchant.coupons.reached_limit).to eq(false)
+
+          coupon_5 = Coupon.create!(name: "10%-off Coupon", code: "ABC127", percent_off: 10, merchant: merchant)
+
+          expect(merchant.coupons.reached_limit).to eq(true)
+        end
+      end
+    end
+
     describe 'instance methods' do
       describe 'disabled' do
         it 'returns true if enabled attribute is false, and vice versa' do
