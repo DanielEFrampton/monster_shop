@@ -121,6 +121,17 @@ section {
   min-width: 60%;
 }
 
+.invisible-flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-self: center;
+  justify-content: space-evenly;
+  min-width: 60%;
+  background: none;
+  border: none;
+}
+
 .flex-row div {
   margin-right: 3em;
 }
@@ -176,10 +187,6 @@ section {
   margin-right: .75em;
 }
 
-.address {
-  text-align: center;
-}
-
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;
@@ -202,7 +209,7 @@ input[type=text], select {
 }
 
 input[type=submit] {
-  width: 100%;
+  max-width: 50%;
   background-color: #002244 ;
   color: white;
   padding: 1em;
