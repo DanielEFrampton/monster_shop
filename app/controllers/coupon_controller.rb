@@ -18,4 +18,9 @@ class CouponController < ApplicationController
       redirect_to '/orders/new'
     end
   end
+
+  def remove
+    session.delete(:coupon_id)
+    redirect_back(fallback_location: '/orders/new')
+  end
 end
