@@ -26,8 +26,9 @@ RSpec.describe 'admin user index page' do
 
     within "#user-#{@admin_user_2.id}" do
       expect(page).to have_link(@admin_user_2.name)
+      expect(page).to have_content(@admin_user_2.email)
       expect(page).to have_content(@admin_user_2.created_date)
-      expect(page).to have_content(@admin_user_2.role)
+      expect(page).to have_content('Admin')
       click_link(@admin_user_2.name)
     end
 
@@ -37,8 +38,9 @@ RSpec.describe 'admin user index page' do
 
     within "#user-#{@merchant_user_1.id}" do
       expect(page).to have_link(@merchant_user_1.name)
+      expect(page).to have_content(@merchant_user_1.email)
       expect(page).to have_content(@merchant_user_1.created_date)
-      expect(page).to have_content(@merchant_user_1.role)
+      expect(page).to have_content('Merchant')
       click_link(@merchant_user_1.name)
     end
 
@@ -48,8 +50,9 @@ RSpec.describe 'admin user index page' do
 
     within "#user-#{@default_user_1.id}" do
       expect(page).to have_link(@default_user_1.name)
+      expect(page).to have_content(@default_user_1.email)
       expect(page).to have_content(@default_user_1.created_date)
-      expect(page).to have_content(@default_user_1.role)
+      expect(page).to have_content('Default')
       click_link(@default_user_1.name)
     end
 
