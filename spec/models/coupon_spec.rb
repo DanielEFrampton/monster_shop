@@ -33,6 +33,17 @@ RSpec.describe Coupon, type: :model do
 
   describe 'methods' do
     describe 'instance methods' do
+      describe 'disabled' do
+        it 'returns true if enabled attribute is false, and vice versa' do
+          merchant = create(:merchant)
+          coupon_1 = Coupon.create!(name: "50%-off Coupon", code: "ABC123", percent_off: 50, merchant: merchant)
+          coupon_2 = Coupon.create!(name: "75%-off Coupon", code: "ABC124", percent_off: 75, merchant: merchant, enabled: false)
+
+          expect(coupon_1.disabled).to eq(false)
+          expect(coupon_2.disabled).to eq(true)
+        end
+      end
+
       describe 'used?' do
         it 'returns true if associated with at least on order or false if not' do
           merchant = create(:merchant)
