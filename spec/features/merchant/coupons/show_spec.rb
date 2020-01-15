@@ -56,7 +56,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
       end
 
       it 'my current path is "/merchant/coupons/:id"' do
-        expect(current_path).to eq("/merchant/coupons/:id")
+        expect(current_path).to eq("/merchant/coupons/#{@coupon_1.id}")
       end
 
       it "I see that coupon's id, name, code, and percent_off" do
@@ -64,6 +64,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
         expect(page).to have_content("ID: #{@coupon_1.id}")
         expect(page).to have_content("Name: #{@coupon_1.name}")
         expect(page).to have_content("Code: #{@coupon_1.code}")
+        expect(page).to have_content("Status: #{@coupon_1.enabled_status}")
         expect(page).to have_content("Percent Off: -#{@coupon_1.percent_off}%")
         expect(page).to have_content("Created: #{@coupon_1.created_at}")
         expect(page).to have_content("Last Updated: #{@coupon_1.updated_at}")
