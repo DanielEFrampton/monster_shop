@@ -139,7 +139,7 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
     end
   end
 
-  describe 'and I click "Manage My Couopons" while I have five coupons' do
+  describe 'and I click "Manage My Coupons" while I have five coupons' do
     before(:each) do
       @coupon_5 = Coupon.create!(name: "50%-off Coupon", code: "ABC123", percent_off: 50, merchant: @merchant)
       @coupon_6 = Coupon.create!(name: "75%-off Coupon", code: "ABC124", percent_off: 75, merchant: @merchant, enabled: false)
