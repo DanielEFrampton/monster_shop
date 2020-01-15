@@ -1,44 +1,6 @@
 <h1>Checkout</h1>
 
-<table>
-  <tr>
-    <th>Item</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th>Subtotal</th>
-    <th>Sold By</th>
-    <th>Inventory</th>
-  </tr>
-  <% cart.items.each do |item, quantity| %>
-    <tr id='item-<%= item.id%>'>
-      <td class='item-name'><%= link_to item.name, "/items/#{item.id}" %></td>
-      <% if @coupon && @coupon.merchant_id == item.merchant_id %>
-        <td class='item-price'>
-          <del><%= number_to_currency(item.price) %></del>
-          <%= number_to_currency(item.discounted_price(@coupon.percent_off)) %> (-<%= @coupon.percent_off %>%)
-        </td>
-      <% else %>
-        <td class='item-price'><%= number_to_currency(item.price) %></td>
-      <% end %>
-      <td class='item-quantity'><%= quantity %></td>
-      <td class='item-subtotal'><%= number_to_currency(cart.subtotal(item)) %></td>
-      <td class='item-merchant'><%= link_to item.merchant.name, "/merchants/#{item.merchant_id}" %></td>
-      <td class='item-inventory'><%= item.inventory %> in stock</td>
-    </tr>
-  <% end %>
-</table>
-
-<h2 id='total'>Total: <%= number_to_currency(cart.total)%></h2>
-
-<% if @coupon %>
-  <h2 id='discounted_total'>Discounted Total: <%= number_to_currency(cart.discounted_total) %></h2>
-  <section>
-    <p>
-      Applied Coupon: <%= @coupon.name %><br />
-      Discount: <%= @coupon.percent_off %>% off items from <%= @coupon.merchant.name %>
-    </p>
-  </section>
-<% end %>
+<%= render partial: '/partials/cart_contents', locals: { cart_view: false } %>
 
 <%= form_tag '/coupon' do %>
   <%= label_tag :code, 'Coupon Code' %>
