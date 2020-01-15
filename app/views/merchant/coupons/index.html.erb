@@ -1,7 +1,11 @@
 <h1>Manage My Coupons</h1>
 
 <nav id="page-actions">
-  <%= link_to 'Create New Coupon', '/merchant/coupons/new' %>
+  <% if @coupons.reached_limit %>
+    <p>You have reached the maximum # of coupons and cannot create more until some are deleted.</p>
+  <% else %>
+    <%= link_to 'Create New Coupon', '/merchant/coupons/new' %>
+  <% end %>
 </nav>
 
 <table>
