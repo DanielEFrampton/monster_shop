@@ -14,9 +14,6 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
                                 password_confirmation: "merchant",
                                 merchant_id: @merchant.id,
                                 role: 1)
-
-    @coupon_1 = @merchant.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 50)
-
     visit '/'
     click_on 'Login'
 
@@ -26,10 +23,9 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
     click_button 'Login'
   end
 
-  describe 'when I visit my dashboard and click "Manage My Coupons"' do
+  describe 'and I click "Manage My Coupons with less than five coupons' do
     before(:each) do
-      visit '/merchant'
-
+      @coupon_1 = @merchant.coupons.create!(name: "Summer Deal 50%-Off", code: "50OFF", percent_off: 50)
       click_link 'Manage My Coupons'
     end
 
@@ -139,6 +135,38 @@ RSpec.describe 'As a logged-in merchant user', type: :feature do
           expect(page.find_field('Code').value).to eq('SUMMERBLAST')
           expect(page.find_field('Percent Off').value).to eq("110%")
         end
+      end
+    end
+  end
+
+  describe 'and I click "Manage My Couopons" while I have five coupons' do
+    before(:each) do
+      @coupon_5 = Coupon.create!(name: "50%-off Coupon", code: "ABC123", percent_off: 50, merchant: @merchant)
+      @coupon_6 = Coupon.create!(name: "75%-off Coupon", code: "ABC124", percent_off: 75, merchant: @merchant, enabled: false)
+      @coupon_7 = Coupon.create!(name: "25%-off Coupon", code: "ABC125", percent_off: 25, merchant: @merchant)
+      @coupon_8 = Coupon.create!(name: "40%-off Coupon", code: "ABC126", percent_off: 40, merchant: @merchant, enabled: false)
+      @coupon_9 = Coupon.create!(name: "10%-off Coupon", code: "ABC127", percent_off: 10, merchant: @merchant)
+      click_on 'Manage My Coupons'
+    end
+
+    it 'I do not see a link to create a new coupon' do
+      expect(page).not_to have_link('Create New Coupon')
+    end
+
+    it 'I see a notification that I must delete coupons before making more' do
+      expect(page).to have_content("You have reached the maximum # of coupons and cannot create more until some are deleted.")
+    end
+
+    describe 'and I delete one of my coupons' do
+      before(:each) do
+        within "#coupon-#{@coupon_5.id}" do
+          click_on 'Delete'
+        end
+      end
+
+      it 'I again see a link to create a new coupon and message goes away' do
+        expect(page).to have_link('Create New Coupon')
+        expect(page).not_to have_content("You have reached the maximum # of coupons and cannot create more until some are deleted.")
       end
     end
   end
