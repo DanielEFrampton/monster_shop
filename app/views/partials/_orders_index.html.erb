@@ -1,0 +1,34 @@
+<% unless orders.empty? %>
+  <table id="all-orders">
+    <tr>
+      <th>Order ID</th>
+      <th>Date</th>
+      <% if current_admin? %>
+        <th>User</th>
+      <% end %>
+      <th>Status</th>
+      <th>Total Quantity</th>
+      <th>Total Price</th>
+    </tr>
+    <% orders.each do |order| %>
+      <tr id="order-<%= order.id %>">
+        <td>
+          <% if current_admin? %>
+            <%= link_to order.id, "/admin/users/#{order.user.id}/orders/#{order.id}" %>
+          <% else %>
+            <%= link_to order.id, "/profile/orders/#{order.id}" %>
+          <% end %>
+        </td>
+        <td><%= order.created_at %></td>
+        <% if current_admin? %>
+          <td><%= link_to order.user.name, "/admin/users/#{order.user.id}" %></td>
+        <% end %>
+        <td><%= order.status %></td>
+        <td><%= order.total_quantity %></td>
+        <td><%= number_to_currency(order.grandtotal) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No orders at this time</p>
+<% end %>
