@@ -38,7 +38,7 @@ RSpec.describe 'Cart Show Page', type: :feature do
         it 'The word "register" in visitor message is a link to the registration page' do
           visit '/cart'
 
-          within '#cart-controls' do
+          within '#page-actions' do
             expect(page).to have_link('register', href: '/register')
           end
         end
@@ -46,7 +46,7 @@ RSpec.describe 'Cart Show Page', type: :feature do
         it 'The words "log in" in visitor message is a link to the login page' do
           visit '/cart'
 
-          within '#cart-controls' do
+          within '#page-actions' do
             expect(page).to have_link('log in', href: '/login')
           end
         end
@@ -181,7 +181,7 @@ RSpec.describe 'Cart Show Page', type: :feature do
       end
 
       it 'I see a button or link indicating that I can check out' do
-        within "#cart-controls" do
+        within "#page-actions" do
           expect(page).to have_link('Checkout')
         end
       end
