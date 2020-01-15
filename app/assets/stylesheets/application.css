@@ -94,7 +94,6 @@ h1 {
 
 ul {
   padding: 0px;
-  text-align: center;
 }
 
 img {
@@ -143,7 +142,8 @@ section {
 .item-box {
   padding: 1.5em;
   margin: 1em;
-  width: 90%;
+  min-width: 60%;
+  width: 80%;
   height: 325px;
   display: flex;
   flex-direction: row;

@@ -1,57 +1,47 @@
-<h1><%= link_to @item.name, "/items/#{@item.id}" %></h1>
+<h1><%= @item.name %></h1>
 
-<p align="center">Sold by: <%=link_to @item.merchant.name, "/merchants/#{@item.merchant.id}" %> </p>
+<nav id="page-actions">
+  <%= link_to "Add Review", "/items/#{@item.id}/reviews/new" %>
+  <% unless cart.limit_reached?(@item.id) || current_admin? %>
+    <%= link_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
+  <% end %>
+</nav>
 
-<section align = "center" id = "average-rating">
-  <p>Average Rating: <%= @item.average_review %></p>
-</section>
+<%= render partial: '/partials/items_index', locals: { items: [@item], merchant_view: false } %>
 
-<section class = "item-show-grid">
-  <%= image_tag @item.image, class: "item-show-item" %>
-  <section class="item-show-item">
-    <p><%= @item.description %></p>
-    <p>Price: <%= number_to_currency(@item.price )%> </p>
-    <p>Inventory: <%= @item.inventory %> </p>
-    <% if @item.active? %>
-      <p style= "color:green">Active</p>
-    <% else %>
-      <p style= "color:red">Inactive</p>
-    <% end %>
-    <%= link_to "Add Review", "/items/#{@item.id}/reviews/new" %>
-    <% unless cart.limit_reached?(@item.id) || current_admin? %>
-      <%= button_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
-    <% end %>
-  </section>
-</section>
-
-<section class = "review-stats">
+<section class="review-stats flex-row">
   <%if @item.reviews.empty? %>
-    <h3>This item has not yet been reviewed.</h3>
+    <h2>This item has not yet been reviewed.</h2>
   <% else %>
-    <section class = "top-three-reviews">
-      <h2>Top 3 Reviews</h2>
-      <% @item.sorted_reviews(3, :desc).each do |review| %>
-        <h3><%= "#{review.rating}-#{review.title}" %></h3>
-      <% end %>
-    </section>
-    <section class = "bottom-three-reviews">
-      <h2>Bottom 3 Reviews</h2>
-      <% @item.sorted_reviews(3, :asc).each do |review| %>
-        <h3><%= "#{review.rating}-#{review.title}" %></h3>
-      <% end %>
-    </section>
-  </section>
+  <div id="average-rating">
+    <h2>Average Rating: <%= @item.average_review %></h2>
+  </div>
+  <div class="top-three-reviews">
+    <h2>Top 3 Reviews</h2>
+    <% @item.sorted_reviews(3, :desc).each do |review| %>
+      <p><%= "#{review.rating}/5--#{review.title}" %></p>
+    <% end %>
+  </div>
+  <div class="bottom-three-reviews">
+    <h2>Bottom 3 Reviews</h2>
+    <% @item.sorted_reviews(3, :asc).each do |review| %>
+      <p><%= "#{review.rating}/5--#{review.title}" %></p>
+    <% end %>
+  </div>
+  <% end %>
+</section>
 
-  <section class = "list-reviews">
-    <h2>All Reviews</h2>
-    <% @item.reviews.each do |review| %>
-      <section id= 'review-<%=review.id%>'>
-        <%= review.title %>
-        <%= review.content %>
-        Rating: <%= review.rating %>/5
+<h2>All Reviews</h2>
+<section class="list-reviews flex-row">
+  <% @item.reviews.each do |review| %>
+    <div id= 'review-<%=review.id%>'>
+      <p>Title: <%= review.title %></p>
+      <p>"<%= review.content %>"<br /></p>
+      <p>Rating: <%= review.rating %>/5</p>
+      <p>
         <%= link_to "Edit", "/reviews/#{review.id}/edit" %>
         <%= link_to "Delete", "/reviews/#{review.id}", method: :delete %>
-      </section>
-    <% end %>
+      </p>
+    </div>
   <% end %>
 </section>
