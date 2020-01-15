@@ -20,22 +20,5 @@
   </table>
 <% end %>
 
-<% unless @orders.empty? %>
-  <h2>All Orders</h2>
-  <table id="all-orders">
-    <tr>
-      <th>Order ID</th>
-      <th>Date</th>
-      <th>User</th>
-      <th>Status</th>
-    </tr>
-    <% @orders.each do |order| %>
-      <tr id="order-<%= order.id %>">
-        <td><%= link_to order.id, "/admin/users/#{order.user.id}/orders/#{order.id}" %></td>
-        <td><%= order.created_at %></td>
-        <td><%= link_to order.user.name, "/admin/users/#{order.user.id}" %></td>
-        <td><%= order.status %></td>
-      </tr>
-    <% end %>
-  </table>
-<% end %>
+<h2>All Orders</h2>
+<%= render partial: '/partials/orders_index', locals: { orders: @orders } %>
