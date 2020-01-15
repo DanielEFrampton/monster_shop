@@ -1,8 +1,53 @@
-# Monster Shop
+# Monster Shop Solo
 
-## [Live Site](http://monster-shop-ddmp.herokuapp.com/)
+## [Live Site (Heroku Deployment)](http://monster-shop-solo.herokuapp.com/)
 
-## Dev Team
+## Solo Project Description
+
+Monster Shop Solo is a single-developer extension by Daniel Frampton of the previous [Monster Shop group project](https://github.com/philjdelong/monster_shop_part_1) he contributed toward. The extension focused primarily on implementing coupon codes, which can be managed by users with Merchant-level authorization and then input by default-level users at checkout.
+
+### Project Requirements (100% Complete)
+
+#### General Goals
+
+Merchant users can generate coupon codes within the system.
+
+#### Completion Criteria
+
+1. Merchant users have a link on their dashboard to manage their coupons.
+1. Merchant users have full CRUD functionality over their coupons with exceptions mentioned below:
+   - merchant users cannot delete a coupon that has been used in an order
+   - Note: Coupons cannot be for greater than 100% off.
+
+1. A coupon will have a coupon name, a coupon code, and a percent-off value. The name and coupon code must be unique in the whole database.
+1. Users need a way to add a coupon code when checking out. Only one coupon may be used per order.
+1. A coupon code from a merchant only applies to items sold by that merchant.
+
+#### Implementation Guidelines
+
+1. If a user adds a coupon code, they can continue shopping. The coupon code is still remembered when returning to the cart page. (This information should not be stored in the database until after checkout. )
+1. The cart show page should calculate subtotals and the grand total as usual, but also show a "discounted total".
+1. Users can enter different coupon codes until they finish checking out, then the last code entered before clicking checkout is final.
+1. Order show pages should display which coupon was used, as well as the discounted price.
+
+#### Extensions (Completed)
+1. Coupons can be used by multiple users, but may only be used one time per user.
+1. Merchant users can enable/disable coupon codes
+1. Merchant users can have a maximum of 5 coupons in the system
+
+#### Learning Goals Reflected:
+
+- Database relationships and migrations
+- ActiveRecord
+- Software Testing
+- HTML/CSS layout and styling
+
+# Original Monster Shop Group Project
+
+## [Heroku Deployment](http://monster-shop-solo.herokuapp.com/)
+## [Github Repo](https://github.com/philjdelong/monster_shop_part_1)
+
+## Original Dev Team
 
 ### [Daniel Frampton](https://github.com/DanielEFrampton)
 ### [Melissa Robbins](https://github.com/mel-rob)
@@ -101,7 +146,7 @@ Fonts:
 ### Item Show Page
 <img width="1437" alt="Screen Shot 2020-01-09 at 11 11 50 AM" src="https://user-images.githubusercontent.com/36940278/72099696-09cf4900-3319-11ea-8612-faa37349fb7e.png">
 
-### Cart Confirmation 
+### Cart Confirmation
 <img width="1440" alt="Screen Shot 2020-01-09 at 12 47 41 PM" src="https://user-images.githubusercontent.com/36940278/72099639-ec01e400-3318-11ea-8cd4-efad5c2ac1d1.png">
 
 ### Cart
