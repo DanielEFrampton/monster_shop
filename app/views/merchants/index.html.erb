@@ -4,20 +4,16 @@
   <%= link_to "New Merchant", "/merchants/new" %>
 </nav>
 
-<section class = "grid-container">
+<section class="invisible-flex-row">
   <% @merchants.each do |merchant|%>
-    <section class = "grid-item" id="merchant-<%= merchant.id %>">
-      <% if current_admin? %>
+    <section id="merchant-<%= merchant.id %>">
       <h2><%= link_to merchant.name, "admin/merchants/#{merchant.id}" %></h2>
       <p><%= merchant.city %>, <%= merchant.state %></p>
         <% if merchant.disabled %>
-          <%= button_to 'Enable', "/admin/merchants/#{merchant.id}/enable", method: :patch %>
+          <%= button_to 'Enable', "/admin/merchants/#{merchant.id}/enable", method: :patch, id: 'inline-form', form: { id: 'inline-form' } %>
         <% else %>
-          <%= button_to 'Disable', "/admin/merchants/#{merchant.id}/disable", method: :patch %>
+          <%= button_to 'Disable', "/admin/merchants/#{merchant.id}/disable", method: :patch, id: 'inline-form', form: { id: 'inline-form' } %>
         <% end %>
-      <% else %>
-        <h2><%=link_to merchant.name, "/merchants/#{merchant.id}"%></h2>
-      <% end %>
     </section>
   <% end %>
 </section>
