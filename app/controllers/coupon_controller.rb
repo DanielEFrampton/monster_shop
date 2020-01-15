@@ -5,6 +5,9 @@ class CouponController < ApplicationController
       if coupon.used_by?(current_user)
         flash[:error] = "Ye been at the grog?! Ye can't use the same coupon twice!"
         redirect_to '/orders/new'
+      elsif coupon.disabled
+        flash[:error] = "Yarr. That coupon was disabled by its merchant. Keelhaul the blaggard!"
+        redirect_to '/orders/new'
       else
         session[:coupon_id] = coupon.id
         flash[:success] = "Aye, ye be bilking us good, but yer coupon has been added."
