@@ -1,0 +1,64 @@
+<h1>Order #<%= @order.id %></h1>
+
+<% unless @order.shipped? || current_admin? %>
+  <nav id="page-actions">
+    <%= link_to 'Cancel Order', "/orders/#{@order.id}?status=3", method: :patch %>
+  </nav>
+<% end %>
+
+<section class="flex-row">
+  <div id="order-details">
+    <h2>Order Details</h2>
+
+    <p>Status: <%= @order.status %></p>
+    <p>Date Created: <%= @order.created_at %></p>
+    <p>Last Updated: <%= @order.updated_at %></p>
+    <p>Total Item Qty: <%= @order.total_quantity %></p>
+  </div>
+  <div class="shipping-address">
+    <h2>Shipping Info</h2>
+    <p>Name: <%= @order.name %></p>
+    <p>Address: <%= @order.address %></p>
+    <p>City: <%= @order.city %></p>
+    <p>State: <%= @order.state %></p>
+    <p>Zip: <%= @order.zip %></p>
+  </div>
+  <div id="grandtotal">
+    <h2>Pricing Details</h2>
+    <p id="<%= 'discounted-total' if @order.coupon %>">
+      <%= 'Discounted ' if @order.coupon %>Total: <%= number_to_currency(@order.grandtotal) %>
+    </p>
+  <% if @order.coupon %>
+    <p>
+      Applied Coupon: <%= @order.coupon.name %>, Code: <%= @order.coupon.code %><br />
+      Discount: <%= @order.coupon.percent_off %>% off items from <%= @order.coupon.merchant.name %>
+    </p>
+  <% end %>
+  </div>
+</section>
+
+
+<h2>Order Items</h2>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Sold By</th>
+    <th>Image</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Subtotal</th>
+  </tr>
+  <% @order.item_orders.each do |item_order|%>
+    <tr id="item-<%=item_order.item_id%>">
+      <td><%= link_to item_order.item.name, "/items/#{item_order.item_id}"%></td>
+      <td><%= link_to item_order.item.merchant.name, "/merchants/#{item_order.item.merchant.id}"%></td>
+      <td><%= image_tag item_order.item.image, id: 'cart-image' %></td>
+      <td><%= item_order.item.description %></td>
+      <td><%= number_to_currency(item_order.price)%></td>
+      <td><%= item_order.item.quantity_ordered%></td>
+      <td><%= number_to_currency(item_order.subtotal)%></td>
+    </tr>
+  <% end %>
+</table>
