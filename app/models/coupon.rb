@@ -6,6 +6,10 @@ class Coupon < ApplicationRecord
   belongs_to :merchant
   has_many :orders
 
+  def disabled
+    !enabled
+  end
+
   def used?
     orders.any?
   end
