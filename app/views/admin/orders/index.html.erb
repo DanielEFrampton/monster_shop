@@ -1,7 +1,14 @@
 <h1>Orders for <%= @user.name %></h1>
 
-<% @user.orders.each do |order| %>
-  <h3><%= order.id %></h3>
-
-  <h3><%= link_to "#{order.id}", "/admin/users/#{order.user.id}/orders/#{order.id}" %></h3>
-<% end %>
+<table>
+  <tr>
+    <th>Order ID</th>
+    <th>Date</th>
+  </tr>
+  <% @user.orders.each do |order| %>
+    <tr>
+      <td><%= link_to "#{order.id}", "/admin/users/#{order.user.id}/orders/#{order.id}" %></td>
+      <td><%= order.created_at %>
+    </tr>
+  <% end %>
+</table>
