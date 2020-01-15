@@ -202,6 +202,7 @@ input[type=text], select {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: baseline;
+  flex-wrap: wrap;
 }
 
 .discounted {
@@ -209,7 +210,6 @@ input[type=text], select {
 }
 
 input[type=submit] {
-  max-width: 50%;
   background-color: #002244 ;
   color: white;
   padding: 1em;
@@ -285,4 +285,55 @@ footer * {
 
 footer:last-child {
   padding-right: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: .75em;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  table {
+    font-size: .6em;
+    width: 100%;
+    align-self: center;
+  }
+
+  .flex-row {
+    width: 95%;
+  }
+
+  form {
+    width: 95%;
+  }
+
+  header {
+    font-size: .9em;
+  }
+
+  navbar {
+    font-size: .9em;
+  }
+
+  main {
+    width: 90%;
+  }
+
+  section {
+    width: 90%;
+  }
+
+  .item-box {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .item-image-link a, img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 1em;
+  }
 }
