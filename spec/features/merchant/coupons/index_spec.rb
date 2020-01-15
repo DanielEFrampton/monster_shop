@@ -83,5 +83,63 @@ RSpec.describe 'As a merchant user', type: :feature do
         expect(page).to have_button('Enable')
       end
     end
+
+    describe 'if I click disable next to an enabled coupon' do
+      before(:each) do
+        within "#coupon-#{@coupon_1.id}" do
+          click_on 'Disable'
+        end
+      end
+
+      it 'I am returned to the coupon index' do
+        expect(current_path).to eq('/merchant/coupons')
+      end
+
+      it 'I see a flash message' do
+        expect(page).to have_content("Yarr, ye keelhauled the coupon. It do be disabled.")
+      end
+
+      it 'I see the enabled status has changed to Disabled' do
+        within "#coupon-#{@coupon_1.id}" do
+          expect(page).to have_content('Disabled')
+        end
+      end
+
+      it 'I see the Disable button has been replaced with an Enable button' do
+        within "#coupon-#{@coupon_1.id}" do
+          expect(page).to have_button('Enable')
+          expect(page).not_to have_button('Disable')
+        end
+      end
+    end
+
+    describe 'if I click enable next to a disabled coupon' do
+      before(:each) do
+        within "#coupon-#{@coupon_2.id}" do
+          click_on 'Enable'
+        end
+      end
+
+      it 'I am returned to the coupon index' do
+        expect(current_path).to eq('/merchant/coupons')
+      end
+
+      it 'I see a flash message' do
+        expect(page).to have_content("The coupon rises from the depths like a monstrous kraken! That is, it's enabled.")
+      end
+
+      it 'I see the enabled status has changed to Enabled' do
+        within "#coupon-#{@coupon_2.id}" do
+          expect(page).to have_content('Enabled')
+        end
+      end
+
+      it 'I see the Enable button has been replaced with a Disable button' do
+        within "#coupon-#{@coupon_2.id}" do
+          expect(page).to have_button('Disable')
+          expect(page).not_to have_button('Enable')
+        end
+      end
+    end
   end
 end
