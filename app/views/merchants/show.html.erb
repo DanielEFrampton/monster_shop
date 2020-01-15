@@ -1,9 +1,8 @@
 <h1><%= @merchant.name %></h1>
 
 <nav id='page-actions'>
-  <%= link_to "All Items", "/merchants/#{@merchant.id}/items" %>
+  <%= link_to "View This Merchant's Items", "/merchants/#{@merchant.id}/items" %>
 </nav>
-
 
 <section class='flex-row'>
   <div>
@@ -18,7 +17,7 @@
       <p>Average Price of Items: <%=number_to_currency( @merchant.average_item_price)%></p>
     <% end %>
   </div>
-  <div class = "distinct-cities">
+  <div class="distinct-cities">
     <h2>Cities Ordering From This Merchant</h2>
     <% @merchant.distinct_cities.each do |city| %>
       <p><%= city %></p>

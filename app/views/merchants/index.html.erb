@@ -1,4 +1,4 @@
-<h1 align = "center">Merchants</h1>
+<h1>Merchants</h1>
 
 <nav id="page-actions">
   <%= link_to "New Merchant", "/merchants/new" %>
@@ -7,13 +7,21 @@
 <section class="invisible-flex-row">
   <% @merchants.each do |merchant|%>
     <section id="merchant-<%= merchant.id %>">
-      <h2><%= link_to merchant.name, "admin/merchants/#{merchant.id}" %></h2>
+      <h2>
+        <% if current_admin? %>
+          <%= link_to merchant.name, "admin/merchants/#{merchant.id}" %>
+        <% else %>
+          <%= link_to merchant.name, "merchants/#{merchant.id}" %>
+        <% end %>
+      </h2>
       <p><%= merchant.city %>, <%= merchant.state %></p>
+      <% if current_admin? %>
         <% if merchant.disabled %>
           <%= button_to 'Enable', "/admin/merchants/#{merchant.id}/enable", method: :patch, id: 'inline-form', form: { id: 'inline-form' } %>
         <% else %>
           <%= button_to 'Disable', "/admin/merchants/#{merchant.id}/disable", method: :patch, id: 'inline-form', form: { id: 'inline-form' } %>
         <% end %>
+      <% end %>
     </section>
   <% end %>
 </section>
