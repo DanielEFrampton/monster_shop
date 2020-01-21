@@ -15,11 +15,11 @@ class OrdersController <ApplicationController
   end
 
   def show
-    @order = Order.find(params[:order_id])
+    @order = Order.find(params[:id])
   end
 
   def create
-    user = User.find(params[:id])
+    user = User.find(params[:user_id])
     coupon = (if session[:coupon_id] then Coupon.find(session[:coupon_id]) else false end)
     if coupon
       order = user.orders.new(order_params.merge({coupon_id: coupon.id}))
