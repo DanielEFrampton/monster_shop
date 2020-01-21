@@ -1,4 +1,4 @@
-<%= form_for [:merchant, @coupon] do |f| %>
+<%= form_for @coupon, url: form_path do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :code %>
