@@ -1,6 +1,6 @@
 <h1>Edit <%=link_to @item.name, "/merchant/items" %></h1>
 
-<%= form_for [:merchant, @item] do |f| %>
+<%= form_for @item, url: merchant_item_edit_path(@item) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :description %>
