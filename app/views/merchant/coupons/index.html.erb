@@ -31,7 +31,7 @@
           <%= button_to 'Enable', "/merchant/coupons/#{coupon.id}?enabled=true", method: :patch, id: 'inline-button', form: { id: 'inline-form' } %>
         <% end %>
         <%= button_to 'Edit', "/merchant/coupons/#{coupon.id}/edit", method: :get, id: 'inline-button', form: { id: 'inline-form' } %>
-        <%= button_to 'Delete', merchant_coupon_path(coupon), method: :delete, id: 'inline-button', form: { id: 'inline-form' } %>
+        <%= button_to 'Delete', merchant_coupon_delete_path(coupon), method: :delete, id: 'inline-button', form: { id: 'inline-form' } %>
       </td>
     </tr>
   <% end %>
