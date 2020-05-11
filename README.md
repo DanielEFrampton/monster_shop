@@ -1,10 +1,10 @@
-# Monster Shop Solo
+# Treasure Trove
 
 ## [Live Site (Heroku Deployment)](http://monster-shop-solo.herokuapp.com/)
 
 ## Solo Project Description
 
-Monster Shop Solo is a single-developer extension by Daniel Frampton of the previous [Monster Shop group project](https://github.com/philjdelong/monster_shop_part_1) he contributed toward. The extension focused primarily on implementing coupon codes, which can be managed by users with Merchant-level authorization and then input by default-level users at checkout.
+Treasure Trove (a.k.a. Monster Shop Solo) is a single-developer extension by Daniel Frampton of the previous [Monster Shop group project](https://github.com/philjdelong/monster_shop_part_1) he contributed toward. The extension focused primarily on implementing coupon codes, which can be managed by users with Merchant-level authorization and then input by default-level users at checkout.
 
 ### Project Requirements (100% Complete)
 
